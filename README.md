@@ -2,7 +2,7 @@
 
 ### This is a 2-player monster game developed by HTML and Javascript.
 
-Developer:
+Developers:
 
 + WU Yongjin
 + DU Xiawei
