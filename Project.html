@@ -67,6 +67,7 @@
 <script src="bounding_box.js"></script>
 <script src="sprite.js"></script>
 <script src="player.js"></script>
+<script src="player2.js"></script>
 <script src="Attack.js"></script>
 <script src="Heart.js"></script>
 <script>
@@ -87,7 +88,7 @@
 
 
         /* Create the sprites in the game */
-        const player = Player1(context, 427, 240, gameArea); // The player
+        const player = Player2(context, 427, 240, gameArea); // The player
         const attack = Attack(context, 427, 350, "green");        // The gem
         [x,y]=gameArea.getPoints().topLeft;
         [a,b]=gameArea.getPoints().topRight;
