@@ -12,7 +12,7 @@ const Player1=function(ctx,x,y,gameArea){
     sprite.setSequence(sequences.idleRight)
         .setScale(2)
         .setShadowScale({ x: 0.75, y: 0.20 })
-        .useSheet("player1.png")
+        .useSheet("img/player1.png")
 
     let direction=0;
     let horizontal_direction=3;
