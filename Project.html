@@ -67,6 +67,7 @@
 <script src="sprite.js"></script>
 <script src="Character_Swordsman.js"></script>
 <script src="Character_Berserker.js"></script>
+<script src="Mob_Slime.js"></script>
 <script src="Attack.js"></script>
 <script src="Item_Heart.js"></script>
 <script src="Item_Chest.js"></script>
@@ -91,6 +92,9 @@
         [a,b]=gameArea.getPoints().topRight;
         [c,d]=gameArea.getPoints().bottomRight;
         [e,h]=gameArea.getPoints().bottomLeft;
+
+        /* create mob in the game */
+        const slime = Mob_Slime(context, 800, 300, gameArea); // The player
 
         /* create items in the game */
         const chest = Item_Chest(context, 427, 350, gameArea);
@@ -120,19 +124,30 @@
             //     sounds.background.pause();
             //     sounds.gameover.play();
             //     return;
-            //
             // }
 
             /* Update the sprites */
             //attack.update(now);
             player.update(now);
             chest.update(now);
+            slime.update(now);
             // heart[0].update(now);
             // heart[1].update(now);
             // heart[2].update(now);
             // heart[3].update(now);
 
-            /* Randomize the gem and collect the gem here */
+            /* Randomize the dir and move mob */
+            //const mobDir = Math.floor(Math.random() * 3)+1;
+            //slime.move(2);
+            //setTimeout(function(){ slime.move(0),2000);
+
+            // while(1){
+            //     const mobDir = Math.floor(Math.random() * 3)+1;
+            //     slime.move(mobDir);
+                //setTimeout(function(){ slime.move(0) ;setTimeout(function(){break}),1000},2000);
+            // }
+
+            /* Randomize the item and collect the item here */
             // if(gem.getAge(now)>gemMaxAge)
             // {
             //     gem.randomize(gameArea);
@@ -141,8 +156,6 @@
             // const box=player.getBoundingBox();
             // if(box.isPointInBox(x,y))
             // {
-            //
-            //
             //     gem.randomize(gameArea);
             // }
 
@@ -154,6 +167,7 @@
             //attack.draw();
             player.draw();
             chest.draw();
+            slime.draw();
             // heart[0].draw();
             // heart[1].draw();
             // heart[2].draw();
@@ -168,8 +182,6 @@
             /* Handle the keydown of arrow keys and spacebar */
             $(document).on("keydown", function(event) {
 
-
-                /* TODO */
                 /* Handle the key down */
                 switch(event.keyCode){
                     case 37:player.move(1);break
@@ -179,7 +191,6 @@
                     case 32:player.speedUp();break;
                     case 65:player.attack();break
                 }
-
              });
 
             /* Handle the keyup of arrow keys and spacebar */
