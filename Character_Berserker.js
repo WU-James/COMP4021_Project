@@ -12,7 +12,7 @@ const Character_Berserker =function(ctx,x,y,gameArea){
     sprite.setSequence(sequences.idleLeft)
         .setScale(2)
         .setShadowScale({ x: 0.75, y: 0.20 })
-        .useSheet("img/Char_Berserker.png")
+        .useSheet("img/char_berserker.png")
 
     let direction=0;
     let horizontal_direction=3;

@@ -12,7 +12,7 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
     sprite.setSequence(sequences.idleRight)
         .setScale(2)
         .setShadowScale({ x: 0.75, y: 0.20 })
-        .useSheet("img/Char_Swordsman.png")
+        .useSheet("img/char_swordsman.png")
 
     let direction=0;
     let horizontal_direction=3;

@@ -68,7 +68,8 @@
 <script src="Character_Swordsman.js"></script>
 <script src="Character_Berserker.js"></script>
 <script src="Attack.js"></script>
-<script src="Heart.js"></script>
+<script src="Item_Heart.js"></script>
+<script src="Item_Chest.js"></script>
 <script>
     $(document).ready(function() {
         /* Get the canvas and 2D context */
@@ -85,19 +86,21 @@
 
         /* Create the sprites in the game */
         const player = Character_Swordsman(context, 427, 240, gameArea); // The player
-        //const attack = Attack(context, 427, 350, "green");        // The gem
+
         [x,y]=gameArea.getPoints().topLeft;
         [a,b]=gameArea.getPoints().topRight;
         [c,d]=gameArea.getPoints().bottomRight;
         [e,h]=gameArea.getPoints().bottomLeft;
 
-        // const heart=[
-        //     Heart(context, x, y, gameArea),
-        //     Heart(context, a, b, gameArea),
-        //     Heart(context, c, d, gameArea),
-        //     Heart(context, e, h, gameArea),
+        /* create items in the game */
+        const chest = Item_Chest(context, 427, 350, gameArea);
+        //const attack = Attack(context, 427, 350, "green");        // The gem
+        //const heart=[
+        //     Item_Heart(context, x, y, gameArea),
+        //     Item_Heart(context, a, b, gameArea),
+        //     Item_Heart(context, c, d, gameArea),
+        //     Item_Heart(context, e, h, gameArea),
         // ];
-
 
         /* The main processing of the game */
         function doFrame(now) {
@@ -109,7 +112,6 @@
             $("#time-remaining").text(timeRemaining);
 
 
-            /* TODO */
             /* Handle the game over situation here */
             // if(timeRemaining<=0)
             // {
@@ -124,13 +126,12 @@
             /* Update the sprites */
             //attack.update(now);
             player.update(now);
-
+            chest.update(now);
             // heart[0].update(now);
             // heart[1].update(now);
             // heart[2].update(now);
             // heart[3].update(now);
 
-            /* TODO */
             /* Randomize the gem and collect the gem here */
             // if(gem.getAge(now)>gemMaxAge)
             // {
@@ -152,6 +153,7 @@
             /* Draw the sprites */
             //attack.draw();
             player.draw();
+            chest.draw();
             // heart[0].draw();
             // heart[1].draw();
             // heart[2].draw();
@@ -180,16 +182,9 @@
 
              });
 
-
-
-
-
-
             /* Handle the keyup of arrow keys and spacebar */
             $(document).on("keyup", function(event) {
 
-
-                /* TODO */
                 /* Handle the key up */
                 switch(event.keyCode){
                     case 37:player.stop(1);break;
@@ -202,7 +197,7 @@
                 }
 
             });
-            //
+
             // gem.randomize(gameArea);
             // /* Start the game */
             requestAnimationFrame(doFrame);
