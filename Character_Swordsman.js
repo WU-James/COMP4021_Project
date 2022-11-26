@@ -1,18 +1,18 @@
-const Player2=function(ctx,x,y,gameArea){
+const Character_Swordsman=function(ctx,x,y,gameArea){
     const sequences={
-        idleRight:{x:0, y:6, width:32.18661,height:25,count:5,timing:300,loop:true},
-        moveToRight:{x:0, y:38, width:32.18661,height:25,count:8,timing:200,loop:true},
-        attackRight:{x:0,y:67,width:32.18661,height:27,count:7,timing:70,loop:true},
-        idleLeft:{x:2, y:163, width:31.05,height:25,count:5,timing:300,loop:true},
-        moveToLeft:{x:0, y:194, width:31.7,height:25,count:8,timing:200,loop:true},
-        attackLeft:{x:0,y:225,width:32.18661,height:27,count:7,timing:70,loop:true},
+        idleRight:{x:0, y:18, width:48,height:25,count:6,timing:400,loop:true},
+        moveToRight:{x:0, y:65, width:48,height:25,count:6,timing:200,loop:true},
+        attackRight:{x:0,y:110,width:48,height:30,count:4,timing:60,loop:true},
+        idleLeft:{x:288, y:18, width:48,height:25,count:6,timing:400,loop:true},
+        moveToLeft:{x:288, y:65, width:48,height:25,count:6,timing:200,loop:true},
+        attackLeft:{x:384,y:110,width:48,height:30,count:4,timing:60,loop:true},
     };
 
     const sprite=Sprite(ctx,x,y);
-    sprite.setSequence(sequences.idleLeft)
+    sprite.setSequence(sequences.idleRight)
         .setScale(2)
         .setShadowScale({ x: 0.75, y: 0.20 })
-        .useSheet("img/player2.png")
+        .useSheet("img/Char_Swordsman.png")
 
     let direction=0;
     let horizontal_direction=3;
@@ -24,44 +24,44 @@ const Player2=function(ctx,x,y,gameArea){
     // - `4` - moving down
     const move = function(dir) {
         if (dir >= 1 && dir <= 4 && dir !== direction) {
-            if(dir===1) {
-                sprite.setSequence(sequences.moveToLeft);
+              if(dir===1) {
+                  sprite.setSequence(sequences.moveToLeft);
+              }
+              else if(dir===2){
+                  if(horizontal_direction===1)
+                  {
+                      sprite.setSequence(sequences.moveToLeft);
+                  }
+                  else if(horizontal_direction===3){
+                      sprite.setSequence(sequences.moveToRight);
+                  }
+              }
+              else if(dir===3)
+              {
+                  sprite.setSequence(sequences.moveToRight);
+              }
+              else if(dir===4)
+              {
+                  if(horizontal_direction===1)
+                  {
+                      sprite.setSequence(sequences.moveToLeft);
+                  }
+                  else if(horizontal_direction===3)
+                  {
+                      sprite.setSequence(sequences.moveToRight);
+                  }
+              }
+
             }
-            else if(dir===2){
-                if(horizontal_direction===1)
-                {
-                    sprite.setSequence(sequences.moveToLeft);
-                }
-                else if(horizontal_direction===3){
-                    sprite.setSequence(sequences.moveToRight);
-                }
+            direction = dir;
+            if(dir===1){
+                horizontal_direction=dir;
             }
             else if(dir===3)
             {
-                sprite.setSequence(sequences.moveToRight);
+                horizontal_direction=dir;
             }
-            else if(dir===4)
-            {
-                if(horizontal_direction===1)
-                {
-                    sprite.setSequence(sequences.moveToLeft);
-                }
-                else if(horizontal_direction===3)
-                {
-                    sprite.setSequence(sequences.moveToRight);
-                }
-            }
-
-        }
-        direction = dir;
-        if(dir===1){
-            horizontal_direction=dir;
-        }
-        else if(dir===3)
-        {
-            horizontal_direction=dir;
-        }
-    };
+        };
 
     const stop = function(dir) {
         if (direction === dir) {
@@ -70,11 +70,11 @@ const Player2=function(ctx,x,y,gameArea){
                 case 2:
                 {
                     if(horizontal_direction===1){
-                        sprite.setSequence(sequences.idleLeft);
+                    sprite.setSequence(sequences.idleLeft);
                     }
-                    else if(horizontal_direction===3){
-                        sprite.setSequence(sequences.moveToRight);
-                    }
+                else if(horizontal_direction===3){
+                    sprite.setSequence(sequences.moveToRight);
+                     }
                     break;
                 }
                 case 3: sprite.setSequence(sequences.idleRight); break;

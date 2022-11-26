@@ -21,7 +21,7 @@
             height: 480px;
         }
         canvas {
-            background: url(background.png);
+            background: url(img/bg_forest2.png);
             background-size: cover;
         }
         #game-start, #game-over {
@@ -60,14 +60,13 @@
         </text>
     </svg>
 
-
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="bounding_box.js"></script>
 <script src="sprite.js"></script>
-<script src="player.js"></script>
-<script src="player2.js"></script>
+<script src="Character_Swordsman.js"></script>
+<script src="Character_Berserker.js"></script>
 <script src="Attack.js"></script>
 <script src="Heart.js"></script>
 <script>
@@ -75,8 +74,6 @@
         /* Get the canvas and 2D context */
         const cv = $("canvas").get(0);
         const context = cv.getContext("2d");
-
-
 
         const totalGameTime = 20;   // Total game time in seconds
         const gemMaxAge = 3000;     // The maximum age of the gems in milliseconds
@@ -86,20 +83,20 @@
         /* Create the game area */
         const gameArea = BoundingBox(context, 165, 60, 420, 800);
 
-
         /* Create the sprites in the game */
-        const player = Player1(context, 427, 240, gameArea); // The player
-        const attack = Attack(context, 427, 350, "green");        // The gem
+        const player = Character_Swordsman(context, 427, 240, gameArea); // The player
+        //const attack = Attack(context, 427, 350, "green");        // The gem
         [x,y]=gameArea.getPoints().topLeft;
         [a,b]=gameArea.getPoints().topRight;
         [c,d]=gameArea.getPoints().bottomRight;
         [e,h]=gameArea.getPoints().bottomLeft;
-        const heart=[
-            Heart(context, x, y, gameArea),
-            Heart(context, a, b, gameArea),
-            Heart(context, c, d, gameArea),
-            Heart(context, e, h, gameArea),
-        ];
+
+        // const heart=[
+        //     Heart(context, x, y, gameArea),
+        //     Heart(context, a, b, gameArea),
+        //     Heart(context, c, d, gameArea),
+        //     Heart(context, e, h, gameArea),
+        // ];
 
 
         /* The main processing of the game */
@@ -125,12 +122,13 @@
             // }
 
             /* Update the sprites */
-            attack.update(now);
+            //attack.update(now);
             player.update(now);
-            heart[0].update(now);
-            heart[1].update(now);
-            heart[2].update(now);
-            heart[3].update(now);
+
+            // heart[0].update(now);
+            // heart[1].update(now);
+            // heart[2].update(now);
+            // heart[3].update(now);
 
             /* TODO */
             /* Randomize the gem and collect the gem here */
@@ -152,12 +150,12 @@
             context.clearRect(0, 0, cv.width, cv.height);
 
             /* Draw the sprites */
-            attack.draw();
+            //attack.draw();
             player.draw();
-            heart[0].draw();
-            heart[1].draw();
-            heart[2].draw();
-            heart[3].draw();
+            // heart[0].draw();
+            // heart[1].draw();
+            // heart[2].draw();
+            // heart[3].draw();
 
             /* Process the next frame */
             requestAnimationFrame(doFrame);
@@ -179,8 +177,6 @@
                     case 32:player.speedUp();break;
                     case 65:player.attack();break
                 }
-
-
 
              });
 

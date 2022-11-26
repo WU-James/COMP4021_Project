@@ -8,7 +8,6 @@ const Attack = function(ctx, x, y) {
     // This is the sprite sequences of the gem of four colours
     // `green`, `red`, `yellow` and `purple`.
     const sequences = {
-
         purple: { x: 112, y: 0, width: 16, height: 16, count: 3, timing: 500, loop: true }
     };
 
