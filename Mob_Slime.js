@@ -16,15 +16,16 @@ const Mob_Slime=function(ctx,x,y,gameArea){
         .setShadowScale({ x: 0, y: 0 })
         .useSheet("img/mob_slime.png")
 
-    let direction=0;
+    let direction = 0;
     let horizontal_direction=3;
-    let speed=150;
+    let speed=50;
     // - `0` - not moving  - `1` - moving to the left
     // - `2` - moving up - `3` - moving to the right - `4` - moving down
 
     const move = function(dir) {
         if (dir >= 1 && dir <= 4 && dir !== direction) {
             if(dir===1) {
+                horizontal_direction=dir;
                 sprite.setSequence(sequences.moveToLeft);
             }
             else if(dir===2){
@@ -38,6 +39,7 @@ const Mob_Slime=function(ctx,x,y,gameArea){
             }
             else if(dir===3)
             {
+                horizontal_direction=dir;
                 sprite.setSequence(sequences.moveToRight);
             }
             else if(dir===4)
@@ -51,16 +53,8 @@ const Mob_Slime=function(ctx,x,y,gameArea){
                     sprite.setSequence(sequences.moveToRight);
                 }
             }
-
         }
         direction = dir;
-        if(dir===1){
-            horizontal_direction=dir;
-        }
-        else if(dir===3)
-        {
-            horizontal_direction=dir;
-        }
     };
 
     const stop = function(dir) {
@@ -92,38 +86,11 @@ const Mob_Slime=function(ctx,x,y,gameArea){
             direction = 0;
         }
     };
-/*
-    const attack=function(){
-        if(horizontal_direction===1) {
-            sprite.setSequence(sequences.attackLeft);
-        }
-        else if(horizontal_direction===3)
-        {
-            sprite.setSequence(sequences.attackRight);
-        }
-    }
-    const attackdone=function(){
-        if(horizontal_direction===1){
-            sprite.setSequence(sequences.idleLeft)
-        }
-        else if(horizontal_direction===3) {
-            sprite.setSequence(sequences.idleRight);
-        }
-    }
 
-    const speedUp = function() {
-        speed = 250;
-    };
-
-    const slowDown = function() {
-        speed = 150;
-    };
-*/
     const update = function(time) {
         /* Update the player if the player is moving */
         if (direction !== 0) {
             let { x, y } = sprite.getXY();
-
             /* Move the player */
             switch (direction) {
                 case 1: x -= speed / 60; break;
@@ -136,7 +103,6 @@ const Mob_Slime=function(ctx,x,y,gameArea){
             if (gameArea.isPointInBox(x, y))
                 sprite.setXY(x, y);
         }
-
         /* Update the sprite object */
         sprite.update(time);
     };
@@ -151,8 +117,5 @@ const Mob_Slime=function(ctx,x,y,gameArea){
         //slowDown: slowDown,
         //attack:attack,
         //attackdone:attackdone,
-
     };
-
-
 };

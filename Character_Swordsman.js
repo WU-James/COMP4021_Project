@@ -11,7 +11,7 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
     const sprite=Sprite(ctx,x,y);
     sprite.setSequence(sequences.idleRight)
         .setScale(2)
-        .setShadowScale({ x: 0.75, y: 0.20 })
+        .setShadowScale({ x: 0, y: 0 })
         .useSheet("img/char_swordsman.png")
 
     let direction=0;
@@ -25,6 +25,7 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
     const move = function(dir) {
         if (dir >= 1 && dir <= 4 && dir !== direction) {
               if(dir===1) {
+                  horizontal_direction=dir;
                   sprite.setSequence(sequences.moveToLeft);
               }
               else if(dir===2){
@@ -38,6 +39,7 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
               }
               else if(dir===3)
               {
+                  horizontal_direction=dir;
                   sprite.setSequence(sequences.moveToRight);
               }
               else if(dir===4)
@@ -54,13 +56,6 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
 
             }
             direction = dir;
-            if(dir===1){
-                horizontal_direction=dir;
-            }
-            else if(dir===3)
-            {
-                horizontal_direction=dir;
-            }
         };
 
     const stop = function(dir) {

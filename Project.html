@@ -68,6 +68,8 @@
 <script src="Character_Swordsman.js"></script>
 <script src="Character_Berserker.js"></script>
 <script src="Mob_Slime.js"></script>
+<script src="Mob_Sprite.js"></script>
+<script src="Mob_Bat.js"></script>
 <script src="Attack.js"></script>
 <script src="Item_Heart.js"></script>
 <script src="Item_Chest.js"></script>
@@ -83,10 +85,10 @@
         let collectedGems = 0;      // The number of gems collected in the game
 
         /* Create the game area */
-        const gameArea = BoundingBox(context, 165, 60, 420, 800);
+        const gameArea = BoundingBox(context, 245, -20, 400, 880);
 
         /* Create the sprites in the game */
-        const player = Character_Swordsman(context, 427, 240, gameArea); // The player
+        const player = Character_Berserker(context, 427, 260, gameArea); // The player
 
         [x,y]=gameArea.getPoints().topLeft;
         [a,b]=gameArea.getPoints().topRight;
@@ -94,7 +96,29 @@
         [e,h]=gameArea.getPoints().bottomLeft;
 
         /* create mob in the game */
-        const slime = Mob_Slime(context, 800, 300, gameArea); // The player
+        // The slime x3
+        let mobs = [];
+        let mobNum = 0;
+        let mobID = 0;
+        const time = 1000;
+        function spawnMob(){
+            if(mobNum<=10){
+                let choice = Math.floor(Math.random() * 8);
+                if(choice === 0){
+                    mobs[mobID] =  Mob_Bat(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                }
+                else if(choice === 1){
+                    mobs[mobID] =  Mob_Sprite(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                }
+                else{
+                    mobs[mobID] = Mob_Slime(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                }
+                mobNum++;mobID++;
+            }
+            setTimeout(spawnMob,time);
+        }
+        setTimeout(spawnMob,time);
+
 
         /* create items in the game */
         const chest = Item_Chest(context, 427, 350, gameArea);
@@ -108,7 +132,7 @@
 
         /* The main processing of the game */
         function doFrame(now) {
-            if (gameStartTime == 0) gameStartTime = now;
+            if (gameStartTime === 0) gameStartTime = now;
 
             /* Update the time remaining */
             const gameTimeSoFar = now - gameStartTime;
@@ -130,16 +154,19 @@
             //attack.update(now);
             player.update(now);
             chest.update(now);
-            slime.update(now);
+            for(let i = 0; i<mobNum;i++){
+                mobs[i].update(now);
+            }
+
             // heart[0].update(now);
             // heart[1].update(now);
             // heart[2].update(now);
             // heart[3].update(now);
 
             /* Randomize the dir and move mob */
-            //const mobDir = Math.floor(Math.random() * 3)+1;
-            //slime.move(2);
-            //setTimeout(function(){ slime.move(0),2000);
+            //let mobDir = 0;
+            //slime.move(mobDir);
+
 
             // while(1){
             //     const mobDir = Math.floor(Math.random() * 3)+1;
@@ -165,9 +192,12 @@
 
             /* Draw the sprites */
             //attack.draw();
-            player.draw();
+
             chest.draw();
-            slime.draw();
+            player.draw();
+            for(let i = 0; i<mobNum;i++){
+                mobs[i].draw();
+            }
             // heart[0].draw();
             // heart[1].draw();
             // heart[2].draw();
@@ -179,39 +209,48 @@
 
         /* Handle the start of the game */
 
-            /* Handle the keydown of arrow keys and spacebar */
-            $(document).on("keydown", function(event) {
+        /* mob movement */
+        function movement(){
+            for(let i = 0; i<mobNum;i++){
+                let mobDir = Math.floor(Math.random() * 5);
+                mobs[i].move(mobDir);
+            }
+            setTimeout(movement,1000+Math.random() * 500);
+        }
+        setTimeout(movement,1000+Math.random() * 500);
 
-                /* Handle the key down */
-                switch(event.keyCode){
-                    case 37:player.move(1);break
-                    case 38:player.move(2);break;
-                    case 39:player.move(3);break;
-                    case 40:player.move(4);break;
-                    case 32:player.speedUp();break;
-                    case 65:player.attack();break
-                }
-             });
+        /* Handle the keydown of arrow keys and spacebar */
+        $(document).on("keydown", function(event) {
 
-            /* Handle the keyup of arrow keys and spacebar */
-            $(document).on("keyup", function(event) {
+            /* Handle the key down */
+            switch(event.keyCode){
+                case 37:player.move(1);break
+                case 38:player.move(2);break;
+                case 39:player.move(3);break;
+                case 40:player.move(4);break;
+                case 32:player.speedUp();break;
+                case 65:player.attack();break
+            }
+         });
 
-                /* Handle the key up */
-                switch(event.keyCode){
-                    case 37:player.stop(1);break;
-                    case 38:player.stop(2);break;
-                    case 39:player.stop(3);break;
-                    case 40:player.stop(4);break;
-                    case 32:player.slowDown();break;
-                    case 65:player.attackdone();break;
+        /* Handle the keyup of arrow keys and spacebar */
+        $(document).on("keyup", function(event) {
+            /* Handle the key up */
+            switch(event.keyCode){
+                case 37:player.stop(1);break;
+                case 38:player.stop(2);break;
+                case 39:player.stop(3);break;
+                case 40:player.stop(4);break;
+                case 32:player.slowDown();break;
+                case 65:player.attackdone();break;
 
-                }
+            }
 
-            });
+        });
 
-            // gem.randomize(gameArea);
-            // /* Start the game */
-            requestAnimationFrame(doFrame);
+        // gem.randomize(gameArea);
+        // /* Start the game */
+        requestAnimationFrame(doFrame);
 
 
     });

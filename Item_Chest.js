@@ -5,7 +5,7 @@ const Item_Chest=function(ctx, x, y, gameArea){
     const sprite = Sprite(ctx, x, y);
     sprite.setSequence(sequences.one)
         .setScale(2)
-        .setShadowScale({ x: 0.75, y: 0.2 })
+        .setShadowScale({ x: 0, y: 0 })
         .useSheet("img/item_chest.png");
 
     return {
