@@ -1,13 +1,7 @@
 const Mob_Bat=function(ctx,x,y,gameArea){
     const sequences={
         idleLeft:{x:0, y:0, width:96,height:80,count:4,timing:80,loop:true},
-        // idleLeft:{x:321, y:0, width:32,height:32,count:4,timing:300,loop:true},
-        //
-        // moveToRight:{x:0, y:33, width:32,height:32,count:6,timing:60,loop:true},
-        // moveToLeft:{x:257, y:33, width:32,height:32,count:6,timing:60,loop:true},
-        //
-        // attackRight:{x:0,y:97,width:32,height:32,count:3,timing:80,loop:true},
-        // attackLeft:{x:353,y:97,width:32,height:32,count:3,timing:80,loop:true},
+        idleRight:{x:0, y:161, width:96,height:80,count:4,timing:80,loop:true},
     };
 
     const sprite=Sprite(ctx,x,y);
@@ -23,72 +17,71 @@ const Mob_Bat=function(ctx,x,y,gameArea){
     // - `2` - moving up - `3` - moving to the right - `4` - moving down
 
     const move = function(dir) {
-        sprite.setSequence(sequences.idleLeft);
-        // if (dir >= 1 && dir <= 4 && dir !== direction) {
-        //
-        //     if(dir===1) {
-        //         horizontal_direction=dir;
-        //         sprite.setSequence(sequences.moveToLeft);
-        //     }
-        //     else if(dir===2){
-        //         if(horizontal_direction===1)
-        //         {
-        //             sprite.setSequence(sequences.moveToLeft);
-        //         }
-        //         else if(horizontal_direction===3){
-        //             sprite.setSequence(sequences.moveToRight);
-        //         }
-        //     }
-        //     else if(dir===3)
-        //     {
-        //         horizontal_direction=dir;
-        //         sprite.setSequence(sequences.moveToRight);
-        //     }
-        //     else if(dir===4)
-        //     {
-        //         if(horizontal_direction===1)
-        //         {
-        //             sprite.setSequence(sequences.moveToLeft);
-        //         }
-        //         else if(horizontal_direction===3)
-        //         {
-        //             sprite.setSequence(sequences.moveToRight);
-        //         }
-        //     }
-        //
-        // }
+        //sprite.setSequence(sequences.idleLeft);
+        if (dir >= 1 && dir <= 4 && dir !== direction) {
+            if(dir===1) {
+                horizontal_direction=dir;
+                sprite.setSequence(sequences.idleLeft);
+            }
+            else if(dir===2){
+                if(horizontal_direction===1)
+                {
+                    sprite.setSequence(sequences.idleLeft);
+                }
+                else if(horizontal_direction===3){
+                    sprite.setSequence(sequences.idleRight);
+                }
+            }
+            else if(dir===3)
+            {
+                horizontal_direction=dir;
+                sprite.setSequence(sequences.idleRight);
+            }
+            else if(dir===4)
+            {
+                if(horizontal_direction===1)
+                {
+                    sprite.setSequence(sequences.idleLeft);
+                }
+                else if(horizontal_direction===3)
+                {
+                    sprite.setSequence(sequences.idleRight);
+                }
+            }
+        }
         direction = dir;
     };
 
     const stop = function(dir) {
-        // if (direction === dir) {
-        //     switch (dir) {
-        //         case 1:{sprite.setSequence(sequences.idleLeft);break;}
-        //         case 2:
-        //         {
-        //             if(horizontal_direction===1){
-        //                 sprite.setSequence(sequences.idleLeft);
-        //             }
-        //             else if(horizontal_direction===3){
-        //                 sprite.setSequence(sequences.moveToRight);
-        //             }
-        //             break;
-        //         }
-        //         case 3: sprite.setSequence(sequences.idleRight); break;
-        //         case 4: {
-        //             if(horizontal_direction===1)
-        //             {
-        //                 sprite.setSequence(sequences.idleLeft);
-        //             }
-        //             else if(horizontal_direction===3)
-        //             {
-        //                 sprite.setSequence(sequences.idleRight);
-        //             }
-        //             break;}
-        //     }
-        sprite.setSequence(sequences.idleLeft);
-        direction = 0;
-
+        if (direction === dir) {
+            switch (dir) {
+                case 1: {
+                    sprite.setSequence(sequences.idleLeft);
+                    break;
+                }
+                case 2: {
+                    if (horizontal_direction === 1) {
+                        sprite.setSequence(sequences.idleLeft);
+                    } else if (horizontal_direction === 3) {
+                        sprite.setSequence(sequences.idleRight);
+                    }
+                    break;
+                }
+                case 3:
+                    sprite.setSequence(sequences.idleRight);
+                    break;
+                case 4: {
+                    if (horizontal_direction === 1) {
+                        sprite.setSequence(sequences.idleLeft);
+                    } else if (horizontal_direction === 3) {
+                        sprite.setSequence(sequences.idleRight);
+                    }
+                    break;
+                }
+            }
+            sprite.setSequence(sequences.idleLeft);
+            direction = 0;
+        }
     };
 
     const update = function(time) {
