@@ -123,12 +123,7 @@
         /* create items in the game */
         const chest = Item_Chest(context, 427, 350, gameArea);
         //const attack = Attack(context, 427, 350, "green");        // The gem
-        //const heart=[
-        //     Item_Heart(context, x, y, gameArea),
-        //     Item_Heart(context, a, b, gameArea),
-        //     Item_Heart(context, c, d, gameArea),
-        //     Item_Heart(context, e, h, gameArea),
-        // ];
+        const heart=Item_Heart(context, 2000, 30, gameArea);
 
         /* The main processing of the game */
         function doFrame(now) {
@@ -157,35 +152,20 @@
             for(let i = 0; i<mobNum;i++){
                 mobs[i].update(now);
             }
-
-            // heart[0].update(now);
-            // heart[1].update(now);
-            // heart[2].update(now);
-            // heart[3].update(now);
-
-            /* Randomize the dir and move mob */
-            //let mobDir = 0;
-            //slime.move(mobDir);
-
-
-            // while(1){
-            //     const mobDir = Math.floor(Math.random() * 3)+1;
-            //     slime.move(mobDir);
-                //setTimeout(function(){ slime.move(0) ;setTimeout(function(){break}),1000},2000);
-            // }
+            heart.update(now);
 
             /* Randomize the item and collect the item here */
             // if(gem.getAge(now)>gemMaxAge)
             // {
             //     gem.randomize(gameArea);
             // }
-            // const {x,y}=gem.getXY();
-            // const box=player.getBoundingBox();
-            // if(box.isPointInBox(x,y))
-            // {
-            //     gem.randomize(gameArea);
-            // }
-
+            const {x,y}=heart.getXY();
+            const box=player.getBoundingBox();
+            if(box.isPointInBox(x,y))
+            {
+                heart.hide();
+                //heart.randomize(gameArea);
+            }
 
             /* Clear the screen */
             context.clearRect(0, 0, cv.width, cv.height);
@@ -198,10 +178,7 @@
             for(let i = 0; i<mobNum;i++){
                 mobs[i].draw();
             }
-            // heart[0].draw();
-            // heart[1].draw();
-            // heart[2].draw();
-            // heart[3].draw();
+            heart.draw();
 
             /* Process the next frame */
             requestAnimationFrame(doFrame);
@@ -209,7 +186,7 @@
 
         /* Handle the start of the game */
 
-        /* mob movement */
+        /* Randomize the dir and move mob  */
         function movement(){
             for(let i = 0; i<mobNum;i++){
                 let mobDir = Math.floor(Math.random() * 5);
@@ -218,6 +195,19 @@
             setTimeout(movement,1000+Math.random() * 500);
         }
         setTimeout(movement,1000+Math.random() * 500);
+
+        /* spawn items */
+        function appear (){
+            heart.randomize(gameArea);
+            setTimeout(disappear,3000)
+
+            setTimeout(appear,7000);
+        }
+        function disappear(){
+            heart.setXY(2000,30);
+            heart.draw();
+        }
+        setTimeout(appear,7000);
 
         /* Handle the keydown of arrow keys and spacebar */
         $(document).on("keydown", function(event) {
@@ -248,12 +238,12 @@
 
         });
 
-        // gem.randomize(gameArea);
         // /* Start the game */
         requestAnimationFrame(doFrame);
 
 
     });
+
 </script>
 </body>
 </html>
