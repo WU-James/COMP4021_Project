@@ -100,21 +100,25 @@
         let mobs = [];
         let mobNum = 0;
         let mobID = 0;
-        const mobTime = 3000;
+        const mobTime = 1000;
         function spawnMob(){
             if(mobNum<=20){
                 let choice = Math.floor(Math.random() * 4);
                 if(choice === 0){
-                    mobs[mobID] =  Mob_Bat(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                    mobs[mobID] =  Mob_Bat(context, 700+Math.random()*100, 260+Math.random()*100, gameArea);
                     mobNum++;mobID++;
                 }
                 else if(choice === 1 ){
-                    mobs[mobID] =  Mob_Sprite(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                    mobs[mobID] =  Mob_Sprite(context, 700+Math.random()*100, 260+Math.random()*100, gameArea);
                     mobNum++;mobID++;
                 }
                 else{
-                    mobs[mobID] = Mob_Slime(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                    mobs[mobID] = Mob_Slime(context, 700+Math.random()*100, 260+Math.random()*100, gameArea);
                     //mobs[mobID] = Mob_Shinigami(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                    mobNum++;mobID++;
+                }
+                if(mobNum === 19){
+                    mobs[mobID] = Mob_Shinigami(context, 700+Math.random()*100, 260+Math.random()*100, gameArea);
                     mobNum++;mobID++;
                 }
             }
