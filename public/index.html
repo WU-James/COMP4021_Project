@@ -7,7 +7,7 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <div id="gamepage-container" class="col">
+    <div id="gamepage-container">
         <div id="header" class="row">
             <div id="user-panel" class="row">
                 <div class="field-content row shadow">
@@ -33,9 +33,15 @@
             <button id="signout-button" class="icon"><span class="material-icons">logout</span></button>
         </div>
 
-        <div id="game-area">
+        <div id="game-container">
+            <canvas width="854px" height="480px"></canvas>
         
-            
+            <svg xmlns="http://www.w3.org/2000/svg" id="counter">
+                <text x="10" y="35">
+                    TIME:<tspan id="time-remaining">20</tspan>
+                </text>
+            </svg>
+        
         </div>
     </div>
 
@@ -95,6 +101,25 @@
     <script src="scripts/ui.js"></script>
     <script src="scripts/registration.js"></script>
     <script src="scripts/authentication.js"></script>
+    <script src="scripts/Gamestart.js"></script>
+
+
+    <!-------------------------------------------------------->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="scripts/bounding_box.js"></script>
+    <script src="scripts/sprite.js"></script>
+    <script src="scripts/Character_Swordsman.js"></script>
+    <script src="scripts/Character_Berserker.js"></script>
+    <script src="scripts/Mob_Slime.js"></script>
+    <script src="scripts/Mob_Sprite.js"></script>
+    <script src="scripts/Mob_Bat.js"></script>
+    <script src="scripts/Mob_Shinigami.js"></script>
+    <script src="scripts/Attack.js"></script>
+    <script src="scripts/Item_Heart.js"></script>
+    <script src="scripts/Item_Chest.js"></script>
+    <script src="scripts/Item_Fire.js"></script>
+    <script src="scripts/Item_speed.js"></script>
+
     <script>
     $(document).ready(function() {
         // Initialize the UI

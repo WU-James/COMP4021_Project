@@ -121,11 +121,13 @@ const GameHeader = (function() {
     // This function shows the form with the user
     const show = function(user) {
         $("#header").show();
+        $("#game-container").show();
     };
 
     // This function hides the form
     const hide = function() {
         $("#header").hide();
+        $("#gamepage-container").hide();
     };
 
     // This function updates the user panel
@@ -161,10 +163,13 @@ const GameHeader = (function() {
                 timeout = setTimeout(countDown, 1000);
             else{
                 $("#timer").html("Game Start!");
+                Gamestart.start();
             }
         }
     
         timeout = setTimeout(countDown, 1000);
+
+
     }
 
     const end = function(){
