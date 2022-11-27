@@ -1,9 +1,21 @@
-const SignInForm = (function() {
+const Frontpage = (function() {
     // This function initializes the UI
     const initialize = function() {
         
         // Hide it
-        $("#signin-overlay").hide();
+        $("#frontpage-container").hide();
+
+        // Hightlight role image when selected
+        $("#role1-radio").on("click", ()=>{
+            $("#role1-img").css({"border-color": "grey","background-color": "#fde0c5"});
+            $("#role2-img").css({"border-color": "transparent","background-color": "transparent"});
+
+        })
+
+        $("#role2-radio").on("click", ()=>{
+            $("#role2-img").css({"border-color": "grey","background-color": "#fde0c5"});
+            $("#role1-img").css({"border-color": "transparent","background-color": "transparent"});
+        })
 
         // Submit event for the signin form
         $("#signin-form").on("submit", (e) => {
@@ -13,13 +25,26 @@ const SignInForm = (function() {
             // Get the input fields
             const username = $("#signin-username").val().trim();
             const password = $("#signin-password").val().trim();
+            const role1 = document.getElementById("role1-radio").checked;
+            const role2 = document.getElementById("role2-radio").checked;
+            let role = null;
+
+            if(!role1 && !role2){
+                $("#signin-message").text("Please choose a player.");
+                return;
+            }
+            else{
+                if(role1) role=1;
+                else role=2;
+            }
 
             // Send a signin request
-            Authentication.signin(username, password,
+            Authentication.signin(username, password, role,
                 () => {
                     hide();
-                    Header.update(Authentication.getUser());
-                    Header.show();
+                    GameHeader.setTitle("Waiting For Another User...");
+                    GameHeader.updateUsers(Authentication.getUser(), Authentication.getAnotherUser());
+                    GameHeader.show();
                     Socket.connect();
                 },
                 (error) => { $("#signin-message").text(error); }
@@ -57,21 +82,23 @@ const SignInForm = (function() {
 
     // This function shows the form
     const show = function() {
-        $("#signin-overlay").fadeIn(500);
+        $("#frontpage-container").fadeIn(500);
     };
 
     // This function hides the form
     const hide = function() {
+        $("#role1-img").css({"border-color": "transparent","background-color": "transparent"});
+        $("#role2-img").css({"border-color": "transparent","background-color": "transparent"});
         $("#signin-form").get(0).reset();
         $("#signin-message").text("");
         $("#register-message").text("");
-        $("#signin-overlay").fadeOut(500);
+        $("#frontpage-container").fadeOut(500);
     };
 
     return { initialize, show, hide };
 })();
 
-const Header = (function() {
+const GameHeader = (function() {
     // This function initializes the UI
     const initialize = function() {
         // Hide it
@@ -85,7 +112,7 @@ const Header = (function() {
                     Socket.disconnect();
 
                     hide();
-                    SignInForm.show();
+                    Frontpage.show();
                 }
             );
         });
@@ -102,13 +129,20 @@ const Header = (function() {
     };
 
     // This function updates the user panel
-    const update = function(user) {
-        $("#title").html("Waiting for another user...");
+    const updateUsers = function(user, anotherUser) {
         if (user) {
-            $("#user-panel .user-name").text(user.name);
+            const test = user.name;
+            $("#user-panel .user-name").html(user.name);
         }
         else {
-            $("#user-panel .user-name").text("");
+            $("#user-panel .user-name").html("");
+        }
+
+        if (anotherUser) {
+            $("#user-panel2 .user-name").html(anotherUser.name);
+        }
+        else {
+            $("#user-panel2 .user-name").html("?");
         }
     };
 
@@ -116,17 +150,17 @@ const Header = (function() {
     let timeout = null;
     // This function count down from 5 and start the game when there are 2 users
     const start = function(){
-        $("#title").html("5");
+        $("#timer").html("5");
 
         let timeRemaining = 5;
 
         function countDown() {
             timeRemaining = timeRemaining - 1;
-            $("#title").html(timeRemaining);
+            $("#timer").html(timeRemaining);
             if (timeRemaining > 0)
                 timeout = setTimeout(countDown, 1000);
             else{
-                $("#title").html("Game Start!");
+                $("#timer").html("Game Start!");
             }
         }
     
@@ -135,25 +169,19 @@ const Header = (function() {
 
     const end = function(){
         clearTimeout(timeout);
-        $("#title").html("You win!");
     }
 
+    const setTitle = function(text){
+        $("#timer").html(text);
+    }
 
-
-
-    return { initialize, show, hide, update, start, end };
+    return { initialize, show, hide, updateUsers, start, end, setTitle };
 })();
 
 
 const UI = (function() {
-    // This function gets the user display
-    const getUserDisplay = function(user) {
-        return $("<div class='field-content row shadow'></div>")
-            .append($("<span class='user-name'>" + user.name + "</span>"));
-    };
-
     // The components of the UI are put here
-    const components = [SignInForm, Header];
+    const components = [Frontpage, GameHeader];
 
     // This function initializes the UI
     const initialize = function() {
@@ -163,5 +191,5 @@ const UI = (function() {
         }
     };
 
-    return { getUserDisplay, initialize };
+    return { initialize };
 })();

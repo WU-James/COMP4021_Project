@@ -1,10 +1,19 @@
 const Authentication = (function() {
     // This stores the current signed-in user
     let user = null;
+    let another_user = null;
 
     // This function gets the signed-in user
     const getUser = function() {
         return user;
+    }
+
+    const getAnotherUser = function() {
+        return another_user;
+    }
+
+    const setAnotherUser = function(user) {
+        another_user = user;
     }
 
     // This function sends a sign-in request to the server
@@ -14,13 +23,13 @@ const Authentication = (function() {
     //                 request is successful in this form `onSuccess()`
     // * `onError`   - This is a callback function to be called when the
     //                 request fails in this form `onError(error)`
-    const signin = function(username, password, onSuccess, onError) {
+    const signin = function(username, password, role, onSuccess, onError) {
 
         //
         // A. Preparing the user data
         //
 
-        const data = JSON.stringify({username, password});
+        const data = JSON.stringify({username, password, role});
  
         //
         // B. Sending the AJAX request to the server
@@ -36,6 +45,7 @@ const Authentication = (function() {
         .then(json =>{
             if(json.status === "success"){
                 user = json.user;
+                another_user = json.another_user;
                 onSuccess();
             }
             else if (onError) onError(json.error);
@@ -75,6 +85,7 @@ const Authentication = (function() {
         .then(json => {
             if(json.status === "success"){
                 user = json.user;
+                another_user = json.another_user;
                 onSuccess();
             }
             else{
@@ -108,5 +119,5 @@ const Authentication = (function() {
         //if (onError) onError("This function is not yet implemented.");
     };
 
-    return { getUser, signin, validate, signout };
+    return { getUser, getAnotherUser, setAnotherUser, signin, validate, signout };
 })();

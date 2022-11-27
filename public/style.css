@@ -8,13 +8,14 @@
     --overlay-background: rgba(245, 158, 114, 0.8);
     --overlay-caption-color: #eb4a40;
     --overlay-content-background: linear-gradient(white, #fde0c5);
+    --instruction-box-background: linear-gradient(white, #fde0c5);
 
     --header-background: linear-gradient(to right, #eb4a40, #f59e72);
     --main-panel-background: linear-gradient(white, #fde0c5);
     --online-users-panel-background: linear-gradient(to right, #fde0c5, #facba6);
     --chat-panel-background: none;
 
-    --title-color: white;
+    --timer-color: white;
     --caption-color: white;
 
     --font-color: black;
@@ -26,6 +27,7 @@
     --button-color: white;
     --button-background: #f2855d;
     --button-background-hover: #f8b58b;
+
 }
 * {
     font-family: "Abel", sans-serif;
@@ -52,16 +54,33 @@ body {
 /* Flexbox related */
 .row, .col {
     display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 10px;
     padding: 20px;
+    align-items: center;
+    justify-content: center;
 }
 .col { flex-direction: column; }
 .spacer-0 { width: 0; height: 0; }
 .spacer-1 { width: 5px; height: 5px; }
 .spacer-2 { width: 10px; height: 10px; }
 .spacer-grow { flex-grow: 1; }
+
+
+#instruction-box{
+    width: 50%;
+    align-self: stretch;
+    justify-content: flex-start;
+}
+#form-box{
+    width: 50%;
+    align-self: stretch;
+}
+#signin-form{
+    align-self: stretch;
+}
+#register-form{
+    align-self: stretch;
+}
 
 /* Overlay */
 .overlay {
@@ -142,6 +161,7 @@ button.icon:active {
 }
 .field-content * {
     color: var(--field-color);
+    font-weight: bold;
 }
 .field-content:hover {
     background: var(--field-background-hover);
@@ -151,7 +171,7 @@ button.icon:active {
 }
 
 /* Top level container */
-#container {
+#gamepage-container {
     align-items: stretch;
     gap: 0px;
     width: 100%;
@@ -165,18 +185,18 @@ button.icon:active {
     background: var(--header-background);
     padding: 0 20px;
 }
-#title {
+#timer {
     font-family: Abel, sans-serif;
-    font-size: 300%;
+    font-size: 200%;
     text-transform: uppercase;
-    color: var(--title-color);
+    color: var(--timer-color);
     user-select: none;
 }
-#title .material-icons {
-    color: var(--title-color);
+#timer .material-icons {
+    color: var(--timer-color);
     font-size: 36px;
 }
-#user-panel {
+#user-panel, #user-panel2{
     padding: 0;
 }
 #signin-user {
@@ -235,12 +255,7 @@ button.icon:active {
 }
 
 /* Signin overlay */
-#signin-form {
-    width: 270px;
-    align-self: stretch;
-}
 #register-form {
-    width: 380px;
     background: var(--register-form-background);
     padding: 20px;
 }
@@ -253,4 +268,25 @@ button.icon:active {
 
 #typing-info {
     font-style: italic;
+}
+
+#instruction-box {
+    background: var(--instruction-box-background);;
+}
+
+#role-radio {
+    gap: 0px;
+    padding: 0px;
+}
+
+#role1-radio, #role2-radio {
+    display:none;
+}
+
+#role1-img, #role2-img {
+    border: 1px;
+    border-style: solid;
+    border-color: transparent;
+    margin-left: 5px;
+    margin-right: 5px;
 }

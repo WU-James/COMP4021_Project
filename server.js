@@ -28,6 +28,13 @@ function containWordCharsOnly(text) {
     return /^\w+$/.test(text);
 }
 
+// online user list
+let onlineUsers = {};
+
+
+
+
+
 // Handle the /register endpoint
 app.post("/register", (req, res) => {
     // Get the JSON data from the body
@@ -80,7 +87,7 @@ app.post("/register", (req, res) => {
 // Handle the /signin endpoint
 app.post("/signin", (req, res) => {
     // Get the JSON data from the body
-    const { username, password } = req.body;
+    const { username, password, role } = req.body;
 
     //
     // D. Reading the users.json file
@@ -101,17 +108,34 @@ app.post("/signin", (req, res) => {
         return;
     }
 
-    
 
     //
     // G. Sending a success response with the user account
     //
-    user_data = {username: username, name:db[username].name};
-    req.session.user = user_data;
-    res.json({status: "success", user: user_data});
 
-    // Delete when appropriate
-    //res.json({ status: "error", error: "This endpoint is not yet implemented." });
+
+    // Firstly, add user to online user list & session
+    const name = db[username].name;
+    onlineUsers[username] = {name};
+    req.session.user = {username, name};
+
+    // Check whether there is another user. If yes, return another user's info
+    let another_user = null;
+
+    if (Object.keys(onlineUsers).length == 2){
+        for(const key in onlineUsers){
+            if(key !== username){
+                another_user = {username:key, ...onlineUsers[key]};
+                break;
+            }
+        }
+    }
+
+    
+    // Send response
+    const user = {username, name};
+    res.json({status:"success", user, another_user});
+
 });
 
 // Handle the /validate endpoint
@@ -120,20 +144,34 @@ app.get("/validate", (req, res) => {
     //
     // B. Getting req.session.user
     //
+    const user = req.session.user;
 
-    if(req.session.user){
-        res.json({status:"success", user:req.session.user});
+    //
+    // D. Sending a success response with the user account
+    //
+
+
+    // Check whether there is another user. If yes, return another user's info
+    let another_user = null;
+
+    if (Object.keys(onlineUsers).length == 2){
+        for(const key in onlineUsers){
+            if(key !== username){
+                another_user = {username:key, ...onlineUsers[key]};
+                break;
+            }
+        }
+    }
+
+
+    // Send respons
+    if(user){
+        res.json({status:"success", user, another_user});
     }
     else{
         res.json({status: "error"});
     }
 
-    //
-    // D. Sending a success response with the user account
-    //
- 
-    // Delete when appropriate
-    //res.json({ status: "error", error: "This endpoint is not yet implemented." });
 });
 
 // Handle the /signout endpoint
@@ -149,8 +187,6 @@ app.get("/signout", (req, res) => {
     //
     res.json({status:"success"});
  
-    // Delete when appropriate
-    //res.json({ status: "error", error: "This endpoint is not yet implemented." });
 });
 
 
@@ -168,22 +204,16 @@ io.use((socket, next) => {
     chatSession(socket.request, {}, next);
 });
 
-// online user list
-let onlineUsers = {};
+
 
 
 io.on("connection", (socket) => {
+    
 
-    // Add a new user to the online user list
-    if(socket.request.session.user){
-        const {username, name} = socket.request.session.user;
-        onlineUsers[username] = {name};
-    }
-
-    // If the current user number is 2, start
+    // If the current user number is 2, start. Broadcast to update enemy (another user) info.
     const num = Object.keys(onlineUsers).length;
     if(num === 2){
-        io.emit("start");
+        io.emit("start", JSON.stringify(onlineUsers, null, "  "));
     }
 
     socket.on("disconnect", () => {
@@ -191,16 +221,7 @@ io.on("connection", (socket) => {
         const {username, name} = socket.request.session.user;
         delete onlineUsers[username];
         io.emit("end");
-    })
-
-    // socket.on("getNumUser", () => {
-    //     const num = Object.keys(onlineUsers).length;
-    //     if(num === 2){
-    //         io.emit("Start");
-    //     }
-    // })
-
-    
+    })   
 
     
 })

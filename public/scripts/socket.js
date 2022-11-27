@@ -16,12 +16,26 @@ const Socket = (function() {
             
         });
 
-        socket.on("start", () => {
-            Header.start();
+        socket.on("start", (onlineUsers) => {
+            GameHeader.start();
+
+            // Set another user's info in Authentication
+            onlineUsers = JSON.parse(onlineUsers);
+            const user = Authentication.getUser();
+            for (const key in onlineUsers){
+                if (key !== user.username){
+                    Authentication.setAnotherUser(onlineUsers[key]);
+                }
+            }
+
+            // Update header
+            GameHeader.updateUsers(user, Authentication.getAnotherUser());
         })
 
         socket.on("end", () =>{
-            Header.end();
+            GameHeader.end();
+            GameHeader.setTitle("You Win!")
+            GameHeader.updateUsers(Authentication.getUser(),null);
         })
 
     };
@@ -31,7 +45,6 @@ const Socket = (function() {
         socket.disconnect();
         socket = null;
     };
-
 
 
 

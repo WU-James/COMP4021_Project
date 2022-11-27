@@ -7,34 +7,67 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <div id="container" class="col">
+    <div id="gamepage-container" class="col">
         <div id="header" class="row">
-            <div id="title">Waiting for Another User...
+            <div id="user-panel" class="row">
+                <div class="field-content row shadow">
+                    <span class="user-name">-</span>
+                    <span class="score"> 0 </span>
+                </div>
             </div>
 
             <div class="spacer-grow"></div>
 
-            <div id="user-panel" class="row">
-                <div class="field-content row shadow">
-                    <span class="user-name">-</span>
-                </div>
-                <button id="signout-button" class="icon"><span class="material-icons">logout</span></button>
+            <div id="timer">Waiting for Another User...
             </div>
+
+            <div class="spacer-grow"></div>
+
+            <div id="user-panel2" class="row">
+                <div class="field-content row shadow">
+                    <span class="score"> 0 </span>
+                    <span class="user-name">?</span>
+                </div>
+            </div>
+
+            <button id="signout-button" class="icon"><span class="material-icons">logout</span></button>
         </div>
 
-        <div id="game-area" class="row">
+        <div id="game-area">
         
             
         </div>
     </div>
 
-    <div id="signin-overlay" class="overlay row">
-        <div class="content shadow row">
+    <div id="frontpage-container" class="overlay row">
+        <div id="instruction-box" class = "col shadow">
+            <div class="spacer-2"></div>
+            <div id = "instruction-title" class = "caption">
+                User Guide
+            </div>
+            <div id = "instruction">
+                <p>Instruction here...................</p>
+                <p>1.</p>
+                <p>2.</p>
+                <p>3.</p>
+
+            </div>
+        </div>
+        <div id="form-box" class="content shadow col" >
             <form id="signin-form" class="col">
-                <div class="caption">SIGN IN WITH YOUR ACCOUNT</div>
+                <div class="caption">SIGN IN</div>
                 <div class="spacer-0"></div>
                 <input id="signin-username" placeholder="Enter your username"></input>
                 <input id="signin-password" type="password" placeholder="Enter your password"></input>
+
+                <div class="caption"> Select Your Palyer</div>
+                <div id="role-radio" class = "row">
+                    <input id="role1-radio" type="radio" name="role" value="role1"/>
+                    <label id="role1-img" for="role1-radio"><img src = "img/role1.png" style="width:70px; height:70px;"></label>
+                    <input id="role2-radio" type="radio" name="role" value="role2" />
+                    <label id="role2-img" for="role2-radio"><img src = "img/role2.png" style="width:70px; height:70px;"></label>
+                </div>
+                
                 <div class="spacer-0"></div>
                 <button type="submit">Sign In</button>
                 <div id="signin-message" class="warning center"></div>
@@ -44,7 +77,7 @@
             <div class="spacer-0"></div>
 
             <form id="register-form" class="col">
-                <div class="caption">OR, REGISTER IF YOU DO NOT HAVE ONE</div>
+                <div class="caption">REGISTER</div>
                 <div class="spacer-0"></div>
                 <input id="register-username" maxlength="10" placeholder="Enter your username"></input>
                 <input id="register-name" maxlength="16" placeholder="Enter your name"></input>
@@ -70,12 +103,13 @@
         // Validate the signin
         Authentication.validate(
             () => {
-                SignInForm.hide();
-                Header.update(Authentication.getUser());
-                Header.show();
+                Frontpage.hide();
+                GameHeader.setTitle("Waiting For Another User...");
+                GameHeader.updateUsers(Authentication.getUser(), Authentication.getAnotherUser());
+                GameHeader.show();
                 Socket.connect();
             },
-            () => { SignInForm.show(); }
+            () => { Frontpage.show(); }
         );
     });
     </script>
