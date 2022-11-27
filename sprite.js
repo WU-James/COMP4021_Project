@@ -48,6 +48,12 @@ const Sprite = function(ctx, x, y) {
     const getXY = function() {
         return {x, y};
     };
+    const getX=function(){
+        return x;
+    }
+    const getY=function(){
+        return y;
+    }
 
     // This function sets the sprite position.
     // - `xvalue` - The new x position
@@ -208,6 +214,8 @@ const Sprite = function(ctx, x, y) {
         getBoundingBox: getBoundingBox,
         isReady: isReady,
         draw: draw,
-        update: update
+        update: update,
+        getX:getX,
+        getY:getY
     };
 };

@@ -74,6 +74,7 @@
 <script src="Attack.js"></script>
 <script src="Item_Heart.js"></script>
 <script src="Item_Chest.js"></script>
+<script src="Item_Fire.js"></script>
 <script>
     $(document).ready(function() {
         /* Get the canvas and 2D context */
@@ -81,7 +82,8 @@
         const context = cv.getContext("2d");
 
         const totalGameTime = 20;   // Total game time in seconds
-        const gemMaxAge = 3000;     // The maximum age of the gems in milliseconds
+        const itemMaxAge = 3000;     // The maximum age of the gems in milliseconds
+        const trapMaxAge=4000;
         let gameStartTime = 0;      // The timestamp when the game starts
         let collectedGems = 0;      // The number of gems collected in the game
 
@@ -95,6 +97,12 @@
         [a,b]=gameArea.getPoints().topRight;
         [c,d]=gameArea.getPoints().bottomRight;
         [e,h]=gameArea.getPoints().bottomLeft;
+
+        const sounds = {
+
+            collect: new Audio("music/collect.mp3"),
+
+        };
 
         /* create mob in the game */
         let mobs = [];
@@ -130,32 +138,33 @@
         /* create items in the game */
         const chest = Item_Chest(context, 427, 350, gameArea);
         //const attack = Attack(context, 427, 350, "green");        // The gem
-        const heart=Item_Heart(context, 2000, 30, gameArea);
+
 
         let items = [];
-        let itemNum = 0;
         let itemID = 0;
-        const itemTime = 3000;
+        let itemNub=0;
+        const itemTime = 6000;
         function spawnItem(){
-            if(mobNum<=20){
-                let choice = Math.floor(Math.random() * 4);
+                let choice =Math.floor(Math.random() * 2);
                 if(choice === 0){
-                    mobs[mobID] =  Mob_Bat(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
-                    mobNum++;mobID++;
+                    items[itemID] =  Item_Heart(context, Math.random()*800, 260+Math.random()*150, gameArea);
+
+                    itemNub++;itemID++;
                 }
-                else if(choice === 1 ){
-                    mobs[mobID] =  Mob_Sprite(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
-                    mobNum++;mobID++;
+                 else if(choice === 1){
+                    items[itemID] =  Item_Fire(context, Math.random()*800, 260+Math.random()*150, gameArea);
+                    itemNub++;itemID++;
+
                 }
-                else{
-                    mobs[mobID] = Mob_Slime(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
-                    mobs[mobID] = Mob_Shinigami(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
-                    mobNum++;mobID++;
-                }
-            }
-            setTimeout(spawnMob,mobTime);
+                // else{
+                //     items[itemID] = Mob_Slime(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                //     items[itemID] = Mob_Shinigami(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                //     itemNub++;itemID++;
+                // }
+
+            setTimeout(spawnItem,itemTime);
         }
-        setTimeout(spawnMob,mobTime);
+        setTimeout(spawnItem,itemTime);
 
         /* The main processing of the game */
         function doFrame(now) {
@@ -181,23 +190,65 @@
             //attack.update(now);
             player.update(now);
             chest.update(now);
-            for(let i = 0; i<mobNum;i++){
+            for(let i = 0; i<mobs.length;i++){
                 mobs[i].update(now);
             }
-            heart.update(now);
-
-            /* Randomize the item and collect the item here */
-            // if(gem.getAge(now)>gemMaxAge)
-            // {
-            //     gem.randomize(gameArea);
-            // }
-            const {x,y}=heart.getXY();
-            const box=player.getBoundingBox();
-            if(box.isPointInBox(x,y))
-            {
-                heart.hide();
-                //heart.randomize(gameArea);
+            for(let i = 0; i<itemNub;i++){
+                items[i].update(now);
             }
+
+
+
+            // Check
+            for (let i=0;i<items.length;i++) {
+                let x = items[i].getX();
+                let y = items[i].getY();
+                const box = player.getBoundingBox();
+                if (box.isPointInBox(x, y)) {
+
+                    if(items[i].name==="Heart")
+                    {
+                        sounds.collect.pause();
+                        sounds.collect.load();
+                        sounds.collect.play();
+                        player.increaseLife();
+
+                        items[i].hide()
+                    }
+                    else if(items[i].name==="Fire")
+                    {
+                       player.decreaseLife();
+                        items[i].hide()
+                    }
+
+
+                    //heart.randomize(gameArea);
+                }
+            }
+           //Dis
+            for (let i=0;i<items.length;i++) {
+                if(items[i].name==="Heart")
+                {
+                    if(items[i].getAge(now)>itemMaxAge)
+                    {
+                        items[i].hide();
+                    }
+                }
+                else if(items[i].name==="Fire")
+                {
+                    if(items[i].getAge(now)>trapMaxAge)
+                    {
+                        items[i].hide();
+                    }
+                }
+
+            }
+
+
+
+
+
+
 
             /* Clear the screen */
             context.clearRect(0, 0, cv.width, cv.height);
@@ -207,10 +258,14 @@
 
             chest.draw();
             player.draw();
-            for(let i = 0; i<mobNum;i++){
+            for(let i = 0; i<mobs.length;i++){
                 mobs[i].draw();
             }
-            heart.draw();
+            for(let i = 0; i<items.length;i++){
+                items[i].draw(now);
+            }
+
+
 
             /* Process the next frame */
             requestAnimationFrame(doFrame);
@@ -234,17 +289,8 @@
         setTimeout(movement,1000+Math.random() * 500);
 
         /* spawn items */
-        function appear (){
-            heart.randomize(gameArea);
-            setTimeout(disappear,3000)
 
-            setTimeout(appear,7000);
-        }
-        function disappear(){
-            heart.setXY(2000,30);
-            heart.draw();
-        }
-        setTimeout(appear,7000);
+
 
         /* Handle the keydown of arrow keys and spacebar */
         $(document).on("keydown", function(event) {

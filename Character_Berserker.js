@@ -15,8 +15,9 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         .useSheet("img/char_berserker.png")
 
     let direction=0;
+    let life=4;
     let horizontal_direction=3;
-    let speed=150;
+    let speed=100;
     // - `0` - not moving - `1` - moving to the left - `2` - moving up
     // - `3` - moving to the right - `4` - moving down
     const move = function(dir) {
@@ -130,6 +131,15 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         /* Update the sprite object */
         sprite.update(time);
     };
+    const increaseLife=function(){
+        life=life+1;
+        console.log(life);
+
+    };
+    const decreaseLife=function(){
+        life=life-1;
+        console.log(life);
+    };
 
     return {
 
@@ -142,6 +152,8 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         move:move,
         attack:attack,
         attackdone:attackdone,
+        increaseLife:increaseLife,
+        decreaseLife:decreaseLife
 
     };
 
