@@ -1,6 +1,6 @@
-const Item_Heart=function(ctx, x, y){
+const Item_speed=function(ctx, x, y){
     const sequences={
-        one:  { x: 0, y:16, width: 16, height: 16, count: 8, timing: 200, loop: true },
+        one:  { x: 144, y:48, width: 16, height: 16, count: 1, timing: 200, loop: true },
     };
 
     const sprite = Sprite(ctx, x, y);
@@ -10,7 +10,7 @@ const Item_Heart=function(ctx, x, y){
         .useSheet("img/object_sprites.png");
 
     let birthTime = performance.now();
-    let name="Heart";
+    let name="Speed";
 
     // This function sets the color of the gem.
     // - `color` - The colour of the gem which can be

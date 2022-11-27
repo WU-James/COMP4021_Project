@@ -9,9 +9,9 @@ const Character_Berserker =function(ctx,x,y,gameArea){
     };
 
     const sprite=Sprite(ctx,x,y);
-    sprite.setSequence(sequences.idleLeft)
-        .setScale(2)
-        .setShadowScale({ x: 0, y: 0 })
+    sprite.setSequence(sequences.idleRight)
+        .setScale(2.3)
+        .setShadowScale({ x: 0.5, y: 0.18 })
         .useSheet("img/char_berserker.png")
 
     let direction=0;
@@ -133,13 +133,16 @@ const Character_Berserker =function(ctx,x,y,gameArea){
     };
     const increaseLife=function(){
         life=life+1;
-        console.log(life);
+
 
     };
     const decreaseLife=function(){
         life=life-1;
-        console.log(life);
+
     };
+    const increaseSpeed=function(){
+        speed=speed+10;
+    }
 
     return {
 
@@ -153,7 +156,8 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         attack:attack,
         attackdone:attackdone,
         increaseLife:increaseLife,
-        decreaseLife:decreaseLife
+        decreaseLife:decreaseLife,
+        increaseSpeed:increaseSpeed
 
     };
 

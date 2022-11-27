@@ -142,6 +142,9 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         life=life-1;
         console.log(life);
     }
+    const increaseSpeed=function(){
+        speed=speed+100;
+    }
 
     return {
 
@@ -155,7 +158,8 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         attack:attack,
         attackdone:attackdone,
         increaseLife:increaseLife,
-        decreaseLife:decreaseLife
+        decreaseLife:decreaseLife,
+        increaseSpeed:increaseSpeed
 
     };
 

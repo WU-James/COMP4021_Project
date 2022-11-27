@@ -75,6 +75,7 @@
 <script src="Item_Heart.js"></script>
 <script src="Item_Chest.js"></script>
 <script src="Item_Fire.js"></script>
+<script src="Item_speed.js"></script>
 <script>
     $(document).ready(function() {
         /* Get the canvas and 2D context */
@@ -91,8 +92,9 @@
         const gameArea = BoundingBox(context, 245, -20, 400, 880);
 
         /* Create the sprites in the game */
-        const player = Character_Swordsman(context, 427, 260, gameArea); // The player
 
+        const player = Character_Berserker(context, 200, 260, gameArea); // The player
+        const player2= Character_Swordsman(context,200,380,gameArea);
         [x,y]=gameArea.getPoints().topLeft;
         [a,b]=gameArea.getPoints().topRight;
         [c,d]=gameArea.getPoints().bottomRight;
@@ -108,7 +110,7 @@
         let mobs = [];
         let mobNum = 0;
         let mobID = 0;
-        const mobTime = 1000;
+        const mobTime = Math.random()*7000;
         function spawnMob(){
             if(mobNum<=20){
                 let choice = Math.floor(Math.random() * 4);
@@ -143,9 +145,9 @@
         let items = [];
         let itemID = 0;
         let itemNub=0;
-        const itemTime = 6000;
+        const itemTime = Math.random()*9000;
         function spawnItem(){
-                let choice =Math.floor(Math.random() * 2);
+                let choice =Math.floor(Math.random() * 3);
                 if(choice === 0){
                     items[itemID] =  Item_Heart(context, Math.random()*800, 260+Math.random()*150, gameArea);
 
@@ -153,6 +155,11 @@
                 }
                  else if(choice === 1){
                     items[itemID] =  Item_Fire(context, Math.random()*800, 260+Math.random()*150, gameArea);
+                    itemNub++;itemID++;
+
+                }
+                else if(choice === 2){
+                    items[itemID] =  Item_speed(context, Math.random()*800, 260+Math.random()*150, gameArea);
                     itemNub++;itemID++;
 
                 }
@@ -190,6 +197,7 @@
             //attack.update(now);
             player.update(now);
             chest.update(now);
+            player2.update(now);
             for(let i = 0; i<mobs.length;i++){
                 mobs[i].update(now);
             }
@@ -213,12 +221,17 @@
                         sounds.collect.play();
                         player.increaseLife();
 
-                        items[i].hide()
+                        items[i].hide();
                     }
                     else if(items[i].name==="Fire")
                     {
                        player.decreaseLife();
-                        items[i].hide()
+                        items[i].hide();
+                    }
+                    else if(items[i].name==="Speed")
+                    {
+                        player.increaseSpeed();
+                        items[i].hide();
                     }
 
 
@@ -241,6 +254,10 @@
                         items[i].hide();
                     }
                 }
+                else if(items[i].getAge(now)>itemMaxAge)
+                {
+                    items[i].hide();
+                }
 
             }
 
@@ -258,6 +275,7 @@
 
             chest.draw();
             player.draw();
+            player2.draw();
             for(let i = 0; i<mobs.length;i++){
                 mobs[i].draw();
             }
@@ -301,8 +319,12 @@
                 case 38:player.move(2);break;
                 case 39:player.move(3);break;
                 case 40:player.move(4);break;
-                case 32:player.speedUp();break;
-                case 65:player.attack();break
+                case 32:player.attack();break;
+                case 65:player2.move(1);break;
+                case 87:player2.move(2);break;
+                case 68:player2.move(3);break;
+                case 83:player2.move(4);break;
+                case 75:player2.attack();break;
             }
          });
 
@@ -314,8 +336,12 @@
                 case 38:player.stop(2);break;
                 case 39:player.stop(3);break;
                 case 40:player.stop(4);break;
-                case 32:player.slowDown();break;
-                case 65:player.attackdone();break;
+                case 32:player.attackdone();break;
+                case 65:player2.stop(1);break;
+                case 87:player2.stop(2);break;
+                case 68:player2.stop(3);break;
+                case 83:player2.stop(4);break;
+                case 75:player2.attackdone();break;
 
             }
 
