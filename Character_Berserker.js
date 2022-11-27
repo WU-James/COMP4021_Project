@@ -1,11 +1,11 @@
 const Character_Berserker =function(ctx,x,y,gameArea){
     const sequences={
-        idleRight:{x:0, y:6, width:32.18661,height:25,count:5,timing:300,loop:true},
-        moveToRight:{x:0, y:38, width:32.18661,height:25,count:8,timing:200,loop:true},
-        attackRight:{x:0,y:67,width:32.18661,height:27,count:7,timing:70,loop:true},
-        idleLeft:{x:2, y:163, width:31.05,height:25,count:5,timing:300,loop:true},
-        moveToLeft:{x:0, y:194, width:31.7,height:25,count:8,timing:200,loop:true},
-        attackLeft:{x:0,y:225,width:32.18661,height:27,count:7,timing:70,loop:true},
+        idleRight:{x:0, y:6, width:32.18661,height:25,count:5,timing:200,loop:true},
+        moveToRight:{x:0, y:38, width:32.18661,height:25,count:8,timing:60,loop:true},
+        attackRight:{x:0,y:67,width:32.18661,height:27,count:7,timing:60,loop:true},
+        idleLeft:{x:2, y:163, width:31.05,height:25,count:5,timing:200,loop:true},
+        moveToLeft:{x:0, y:194, width:31.7,height:25,count:8,timing:60,loop:true},
+        attackLeft:{x:0,y:225,width:32.18661,height:27,count:7,timing:60,loop:true},
     };
 
     const sprite=Sprite(ctx,x,y);
@@ -17,11 +17,8 @@ const Character_Berserker =function(ctx,x,y,gameArea){
     let direction=0;
     let horizontal_direction=3;
     let speed=150;
-    // - `0` - not moving
-    // - `1` - moving to the left
-    // - `2` - moving up
-    // - `3` - moving to the right
-    // - `4` - moving down
+    // - `0` - not moving - `1` - moving to the left - `2` - moving up
+    // - `3` - moving to the right - `4` - moving down
     const move = function(dir) {
         if (dir >= 1 && dir <= 4 && dir !== direction) {
             if(dir===1) {
@@ -53,7 +50,6 @@ const Character_Berserker =function(ctx,x,y,gameArea){
                     sprite.setSequence(sequences.moveToRight);
                 }
             }
-
         }
         direction = dir;
     };
@@ -105,7 +101,6 @@ const Character_Berserker =function(ctx,x,y,gameArea){
             sprite.setSequence(sequences.idleRight);
         }
     }
-
 
     const speedUp = function() {
         speed = 250;

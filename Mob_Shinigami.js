@@ -1,22 +1,22 @@
-const Mob_Bat=function(ctx,x,y,gameArea){
+const Mob_Shinigami=function(ctx, x, y, gameArea){
     const sequences={
-        idleLeft:{x:0, y:0, width:96,height:52,count:4,timing:80,loop:true},
-        idleRight:{x:0, y:161, width:96,height:52,count:4,timing:80,loop:true},
+        idleRight:{x:0, y:0, width:100,height:100,count:4,timing:300,loop:true},
+        idleLeft:{x:0, y:301, width:100,height:100,count:4,timing:300,loop:true},
     };
 
     const sprite=Sprite(ctx,x,y);
     sprite.setSequence(sequences.idleLeft)
-        .setScale(2)
-        .setShadowScale({ x: 0.13, y: 0.05 })
-        .useSheet("img/mob_bat.png")
+        .setScale(3)
+        .setShadowScale({ x: 0.3, y: 0.02 })
+        .useSheet("img/mob_shinigami.png")
 
     let direction = 0;
     let horizontal_direction=3;
-    let speed=30;
+    let speed=20;
     // - `0` - not moving  - `1` - moving to the left
     // - `2` - moving up - `3` - moving to the right - `4` - moving down
 
-    const move = function(dir) {
+    const move = function(dir){
         //sprite.setSequence(sequences.idleLeft);
         if (dir >= 1 && dir <= 4 && dir !== direction) {
             if(dir===1) {
@@ -83,7 +83,33 @@ const Mob_Bat=function(ctx,x,y,gameArea){
             direction = 0;
         }
     };
+    /*
+        const attack=function(){
+            if(horizontal_direction===1) {
+                sprite.setSequence(sequences.attackLeft);
+            }
+            else if(horizontal_direction===3)
+            {
+                sprite.setSequence(sequences.attackRight);
+            }
+        }
+        const attackdone=function(){
+            if(horizontal_direction===1){
+                sprite.setSequence(sequences.idleLeft)
+            }
+            else if(horizontal_direction===3) {
+                sprite.setSequence(sequences.idleRight);
+            }
+        }
 
+        const speedUp = function() {
+            speed = 250;
+        };
+
+        const slowDown = function() {
+            speed = 150;
+        };
+    */
     const update = function(time) {
         /* Update the player if the player is moving */
         if (direction !== 0) {
@@ -101,6 +127,7 @@ const Mob_Bat=function(ctx,x,y,gameArea){
             if (gameArea.isPointInBox(x, y))
                 sprite.setXY(x, y);
         }
+
         /* Update the sprite object */
         sprite.update(time);
     };
@@ -115,5 +142,6 @@ const Mob_Bat=function(ctx,x,y,gameArea){
         //slowDown: slowDown,
         //attack:attack,
         //attackdone:attackdone,
+
     };
 };

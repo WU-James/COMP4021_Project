@@ -1,10 +1,10 @@
 const Character_Swordsman=function(ctx,x,y,gameArea){
     const sequences={
         idleRight:{x:0, y:18, width:48,height:25,count:6,timing:400,loop:true},
-        moveToRight:{x:0, y:65, width:48,height:25,count:6,timing:200,loop:true},
+        moveToRight:{x:0, y:65, width:48,height:25,count:6,timing:60,loop:true},
         attackRight:{x:0,y:110,width:48,height:30,count:4,timing:60,loop:true},
         idleLeft:{x:288, y:18, width:48,height:25,count:6,timing:400,loop:true},
-        moveToLeft:{x:288, y:65, width:48,height:25,count:6,timing:200,loop:true},
+        moveToLeft:{x:288, y:65, width:48,height:25,count:6,timing:60,loop:true},
         attackLeft:{x:384,y:110,width:48,height:30,count:4,timing:60,loop:true},
     };
 
@@ -17,11 +17,8 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
     let direction=0;
     let horizontal_direction=3;
     let speed=150;
-    // - `0` - not moving
-    // - `1` - moving to the left
-    // - `2` - moving up
-    // - `3` - moving to the right
-    // - `4` - moving down
+    // - `0` - not moving - `1` - moving to the left - `2` - moving up
+    // - `3` - moving to the right - `4` - moving down
     const move = function(dir) {
         if (dir >= 1 && dir <= 4 && dir !== direction) {
               if(dir===1) {

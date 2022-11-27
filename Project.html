@@ -70,6 +70,7 @@
 <script src="Mob_Slime.js"></script>
 <script src="Mob_Sprite.js"></script>
 <script src="Mob_Bat.js"></script>
+<script src="Mob_Shinigami.js"></script>
 <script src="Attack.js"></script>
 <script src="Item_Heart.js"></script>
 <script src="Item_Chest.js"></script>
@@ -88,7 +89,7 @@
         const gameArea = BoundingBox(context, 245, -20, 400, 880);
 
         /* Create the sprites in the game */
-        const player = Character_Berserker(context, 427, 260, gameArea); // The player
+        const player = Character_Swordsman(context, 427, 260, gameArea); // The player
 
         [x,y]=gameArea.getPoints().topLeft;
         [a,b]=gameArea.getPoints().topRight;
@@ -96,24 +97,26 @@
         [e,h]=gameArea.getPoints().bottomLeft;
 
         /* create mob in the game */
-        // The slime x3
         let mobs = [];
         let mobNum = 0;
         let mobID = 0;
-        const time = 1000;
+        const time = 3000;
         function spawnMob(){
-            if(mobNum<=10){
+            if(mobNum<=20){
                 let choice = Math.floor(Math.random() * 8);
                 if(choice === 0){
                     mobs[mobID] =  Mob_Bat(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                    mobNum++;mobID++;
                 }
-                else if(choice === 1 || choice === 2 ){
+                else if(choice === 1 ){
                     mobs[mobID] =  Mob_Sprite(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                    mobNum++;mobID++;
                 }
                 else{
                     mobs[mobID] = Mob_Slime(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                    //mobs[mobID] = Mob_Shinigami(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                    mobNum++;mobID++;
                 }
-                mobNum++;mobID++;
             }
             setTimeout(spawnMob,time);
         }
@@ -189,8 +192,14 @@
         /* Randomize the dir and move mob  */
         function movement(){
             for(let i = 0; i<mobNum;i++){
-                let mobDir = Math.floor(Math.random() * 5);
-                mobs[i].move(mobDir);
+                let mobDir = Math.floor(Math.random() * 8);
+                    if(mobDir>=5){
+                        mobs[i].move(1);
+                    }
+                    else{
+                        mobs[i].move(mobDir);
+                    }
+
             }
             setTimeout(movement,1000+Math.random() * 500);
         }

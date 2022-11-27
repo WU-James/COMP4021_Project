@@ -1,13 +1,12 @@
 const Mob_Sprite=function(ctx, x, y, gameArea){
     const sequences={
-        idle:{x:0, y:0, width:50,height:50,count:4,timing:300,loop:true},
-
+        idle:{x:0, y:0, width:50,height:42,count:4,timing:300,loop:true},
     };
 
     const sprite=Sprite(ctx,x,y);
     sprite.setSequence(sequences.idle)
         .setScale(2)
-        .setShadowScale({ x: 0.2, y: 0.1 })
+        .setShadowScale({ x: 0.18, y: 0.05 })
         .useSheet("img/mob_sprite.png")
 
     let direction = 0;
