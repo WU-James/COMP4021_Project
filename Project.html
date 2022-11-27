@@ -100,10 +100,10 @@
         let mobs = [];
         let mobNum = 0;
         let mobID = 0;
-        const time = 3000;
+        const mobTime = 3000;
         function spawnMob(){
             if(mobNum<=20){
-                let choice = Math.floor(Math.random() * 8);
+                let choice = Math.floor(Math.random() * 4);
                 if(choice === 0){
                     mobs[mobID] =  Mob_Bat(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
                     mobNum++;mobID++;
@@ -118,15 +118,40 @@
                     mobNum++;mobID++;
                 }
             }
-            setTimeout(spawnMob,time);
+            setTimeout(spawnMob,mobTime);
         }
-        setTimeout(spawnMob,time);
+        setTimeout(spawnMob,mobTime);
 
 
         /* create items in the game */
         const chest = Item_Chest(context, 427, 350, gameArea);
         //const attack = Attack(context, 427, 350, "green");        // The gem
         const heart=Item_Heart(context, 2000, 30, gameArea);
+
+        let items = [];
+        let itemNum = 0;
+        let itemID = 0;
+        const itemTime = 3000;
+        function spawnItem(){
+            if(mobNum<=20){
+                let choice = Math.floor(Math.random() * 4);
+                if(choice === 0){
+                    mobs[mobID] =  Mob_Bat(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                    mobNum++;mobID++;
+                }
+                else if(choice === 1 ){
+                    mobs[mobID] =  Mob_Sprite(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                    mobNum++;mobID++;
+                }
+                else{
+                    mobs[mobID] = Mob_Slime(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                    mobs[mobID] = Mob_Shinigami(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                    mobNum++;mobID++;
+                }
+            }
+            setTimeout(spawnMob,mobTime);
+        }
+        setTimeout(spawnMob,mobTime);
 
         /* The main processing of the game */
         function doFrame(now) {
@@ -199,7 +224,6 @@
                     else{
                         mobs[i].move(mobDir);
                     }
-
             }
             setTimeout(movement,1000+Math.random() * 500);
         }

@@ -1,18 +1,25 @@
 const Mob_Shinigami=function(ctx, x, y, gameArea){
     const sequences={
-        idleRight:{x:0, y:0, width:100,height:100,count:4,timing:300,loop:true},
-        idleLeft:{x:0, y:301, width:100,height:100,count:4,timing:300,loop:true},
+        idleRight:{x:0, y:0, width:100,height:80,count:4,timing:300,loop:true},
+        idleLeft:{x:0, y:301, width:100,height:80,count:4,timing:300,loop:true},
+
+        //attackLeft:{x:0, y:401, width:100,height:80,count:4,timing:150,loop:true},
+        //attackLeft:{x:0, y:501, width:100,height:80,count:4,timing:150,loop:true},
+
+        //attackRight:{x:0, y:101, width:100,height:80,count:4,timing:150,loop:true},
+        //attackRight:{x:0, y:201, width:100,height:80,count:4,timing:150,loop:true},
+
     };
 
     const sprite=Sprite(ctx,x,y);
     sprite.setSequence(sequences.idleLeft)
-        .setScale(3)
+        .setScale(2.5)
         .setShadowScale({ x: 0.3, y: 0.02 })
         .useSheet("img/mob_shinigami.png")
 
     let direction = 0;
     let horizontal_direction=3;
-    let speed=20;
+    let speed=10;
     // - `0` - not moving  - `1` - moving to the left
     // - `2` - moving up - `3` - moving to the right - `4` - moving down
 
