@@ -2,12 +2,12 @@ const Mob_Slime=function(ctx,x,y,gameArea){
     const sequences={
         idleRight:{x:0, y:0, width:32,height:32,count:4,timing:300,loop:true},
         idleLeft:{x:321, y:0, width:32,height:32,count:4,timing:300,loop:true},
-
         moveToRight:{x:0, y:33, width:32,height:32,count:6,timing:60,loop:true},
         moveToLeft:{x:257, y:33, width:32,height:32,count:6,timing:60,loop:true},
-
         attackRight:{x:0,y:97,width:32,height:32,count:3,timing:80,loop:true},
         attackLeft:{x:353,y:97,width:32,height:32,count:3,timing:80,loop:true},
+        dieLeft:{x:289,y:129,width:32,height:32,count:5,timing:100,loop:false},
+        dieRight:{x:0,y:129,width:32,height:32,count:5,timing:100,loop:false},
     };
 
     const sprite=Sprite(ctx,x,y);
@@ -19,7 +19,6 @@ const Mob_Slime=function(ctx,x,y,gameArea){
     let direction = 0;
     let horizontal_direction=3;
     let speed=50;
-
     let life=3;
 
     // - `0` - not moving  - `1` - moving to the left
@@ -101,7 +100,6 @@ const Mob_Slime=function(ctx,x,y,gameArea){
                 case 3: x += speed / 60; break;
                 case 4: y += speed / 60; break;
             }
-
             /* Set the new position if it is within the game area */
             if (gameArea.isPointInBox(x, y))
                 sprite.setXY(x, y);
@@ -109,6 +107,13 @@ const Mob_Slime=function(ctx,x,y,gameArea){
         /* Update the sprite object */
         sprite.update(time);
     };
+
+    const hide=function(){
+        this.setXY(2000, 30);
+    };
+    const decreaseLife=function(){
+        life=life-1;
+    }
 
     return {
         stop: stop,
@@ -119,8 +124,8 @@ const Mob_Slime=function(ctx,x,y,gameArea){
         getX:sprite.getX,
         getY:sprite.getY,
         setXY:sprite.setXY,
-        life:life
-
+        life:life,
+        decreaseLife:decreaseLife,
         //speedUp: speedUp,
         //slowDown: slowDown,
         //attack:attack,

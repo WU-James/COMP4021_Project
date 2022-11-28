@@ -1,6 +1,8 @@
 const Mob_Sprite=function(ctx, x, y, gameArea){
     const sequences={
         idle:{x:0, y:0, width:50,height:42,count:4,timing:300,loop:true},
+        appear:{x:0, y:51, width:50,height:42,count:9,timing:125,loop:false},
+        die:{x:0, y:101, width:50,height:42,count:8,timing:130,loop:false},
     };
 
     const sprite=Sprite(ctx,x,y);
@@ -12,12 +14,10 @@ const Mob_Sprite=function(ctx, x, y, gameArea){
     let direction = 0;
     let horizontal_direction=3;
     let speed=20;
-
     let life=3;
 
     // - `0` - not moving  - `1` - moving to the left
     // - `2` - moving up - `3` - moving to the right - `4` - moving down
-
     const move = function(dir) {
         sprite.setSequence(sequences.idle);
         direction = dir;
@@ -49,7 +49,6 @@ const Mob_Sprite=function(ctx, x, y, gameArea){
         const speedUp = function() {
             speed = 250;
         };
-
         const slowDown = function() {
             speed = 150;
         };
@@ -58,7 +57,6 @@ const Mob_Sprite=function(ctx, x, y, gameArea){
         /* Update the player if the player is moving */
         if (direction !== 0) {
             let { x, y } = sprite.getXY();
-
             /* Move the player */
             switch (direction) {
                 case 1: x -= speed / 60; break;
@@ -66,15 +64,20 @@ const Mob_Sprite=function(ctx, x, y, gameArea){
                 case 3: x += speed / 60; break;
                 case 4: y += speed / 60; break;
             }
-
             /* Set the new position if it is within the game area */
             if (gameArea.isPointInBox(x, y))
                 sprite.setXY(x, y);
         }
-
         /* Update the sprite object */
         sprite.update(time);
     };
+
+    const hide=function(){
+        this.setXY(2000, 30);
+    };
+    const decreaseLife=function(){
+        life=life-1;
+    }
 
     return {
         stop: stop,
@@ -84,13 +87,11 @@ const Mob_Sprite=function(ctx, x, y, gameArea){
         move:move,
         getX:sprite.getX,
         getY:sprite.getY,
-        life:life
+        life:life,
+        decreaseLife:decreaseLife
         //speedUp: speedUp,
         //slowDown: slowDown,
         //attack:attack,
         //attackdone:attackdone,
-
     };
-
-
 };

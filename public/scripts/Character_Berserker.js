@@ -6,6 +6,8 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         idleLeft:{x:2, y:163, width:31.05,height:25,count:5,timing:200,loop:true},
         moveToLeft:{x:0, y:194, width:31.7,height:25,count:8,timing:60,loop:true},
         attackLeft:{x:0,y:225,width:32.18661,height:27,count:7,timing:60,loop:true},
+        dieRight:{x:0,y:133,width:32.18661,height:27,count:7,timing:200,loop:true},
+        dieLeft:{x:0,y:290,width:31.7,height:27,count:7,timing:200,loop:true},
     };
 
     const sprite=Sprite(ctx,x,y);
@@ -15,13 +17,12 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         .useSheet("img/char_berserker.png")
 
     let direction=0;
+    let name="Berserker";
     let life=4;
     let horizontal_direction=3;
-    let speed=120;
+    let speed=130;
     let power=2;
     let points=0;
-    let name="Berserker";
-
     // - `0` - not moving - `1` - moving to the left - `2` - moving up
     // - `3` - moving to the right - `4` - moving down
     const move = function(dir) {
@@ -131,82 +132,68 @@ const Character_Berserker =function(ctx,x,y,gameArea){
             if (gameArea.isPointInBox(x, y))
                 sprite.setXY(x, y);
         }
-
         /* Update the sprite object */
         sprite.update(time);
     };
+
+    /* life */
     const increaseLife=function(){
         life=life+1;
-
-
     };
     const decreaseLife=function(){
-        life=life-1;
-
+        if(life>0) {
+            life = life - 1;
+        }
     };
+    /* speed */
     const increaseSpeed=function(){
-
-        speed=speed+20;
+        speed = speed + 20;
     };
     const decreaseSpeed=function(){
-        speed=speed-10;
-        life=life-1;
-
+        if(speed>80) {
+            speed = speed - 10;
+        }
+        if(life>0) {
+            life = life - 1;
+        }
     };
+    /* power */
     const increasePower=function() {
         power = power + 1;
-
     };
     const decreasePower=function() {
-        power = power - 1;
-        life=life-1;
-
+        if(power>1) {
+            power = power - 1;
+        }
+        if(life>0) {
+            life = life - 1;
+        }
     };
-    const getAttackBox = function() {
-        /* Get the display size of the sprite */
-        const size = sprite.getDisplaySize();
-
-        /* Find the box coordinates */
-        const top = y - size.height / 2;
-        const left = x - size.width / 2;
-        const bottom = y + size.height / 2;
-        const right = x + size.width / 2;
-
-        return BoundingBox(ctx, top, left, bottom, right);
-    };
+    /* points */
     const increasePoints=function(){
         points=points+1;
-
-
-        speed=speed+10;
-
     }
 
     return {
-
         stop: stop,
-        speedUp: speedUp,
-        slowDown: slowDown,
-        getBoundingBox: sprite.getBoundingBox,
-
-        getAttackingBoxSword: sprite.getAttackingBoxSword,
-        getAttackingBox:sprite.getAttackingBox,
-
-        draw: sprite.draw,
         update: update,
         move:move,
+        speedUp: speedUp,
+        slowDown: slowDown,
         attack:attack,
         attackdone:attackdone,
+        getBoundingBox: sprite.getBoundingBox,
+        getAttackingBox:sprite.getAttackingBox,
+        getAttackingBoxSword:sprite.getAttackingBoxSword,
+        draw: sprite.draw,
+        name:name,
         increaseLife:increaseLife,
         decreaseLife:decreaseLife,
-
         increaseSpeed:increaseSpeed,
         decreaseSpeed:decreaseSpeed,
         increasePower:increasePower,
         decreasePower:decreasePower,
         increasePoints:increasePoints,
-        increaseSpeed:increaseSpeed
-
     };
 
 

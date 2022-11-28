@@ -110,7 +110,6 @@ const Sprite = function(ctx, x, y) {
         return BoundingBox(ctx, top, left, bottom, right);
     };
 
-
     const getAttackingBoxSword = function() {
         /* Get the display size of the sprite */
         const size = getDisplaySize();
@@ -120,7 +119,6 @@ const Sprite = function(ctx, x, y) {
         const left = x - size.width / 2;
         const bottom = y + size.height / 2+1;
         const right = x + (size.width / 2)+3;
-
 
         return BoundingBox(ctx, top, left, bottom, right);
     };
@@ -171,8 +169,6 @@ const Sprite = function(ctx, x, y) {
         /* Get the display size of the sprite */
         const size = getDisplaySize();
 
-
-        /* TODO */
         /* Replace the following code to draw the sprite correctly */
         ctx.imageSmoothingEnabled=false;
         ctx.drawImage(
@@ -185,10 +181,7 @@ const Sprite = function(ctx, x, y) {
             parseInt(y-size.height/2),
             size.width,
             size.height
-
-
         );
-
 
         /* Restore saved settings */
         ctx.restore();
@@ -209,8 +202,6 @@ const Sprite = function(ctx, x, y) {
     const update = function(time) {
         if (lastUpdate == 0) lastUpdate = time;
 
-
-        /* TODO */
         /* Move to the next sprite when the timing is right */
         if(time-lastUpdate>=sequence.timing)
         {
@@ -226,8 +217,6 @@ const Sprite = function(ctx, x, y) {
 
             lastUpdate=time;
         }
-
-
         return this;
     };
 
@@ -241,13 +230,12 @@ const Sprite = function(ctx, x, y) {
         setShadowScale: setShadowScale,
         getDisplaySize: getDisplaySize,
         getBoundingBox: getBoundingBox,
+        getAttackingBoxSword:getAttackingBoxSword,
+        getAttackingBox:getAttackingBox,
         isReady: isReady,
         draw: draw,
         update: update,
         getX:getX,
         getY:getY,
-        getAttackingBoxSword:getAttackingBoxSword,
-        getAttackingBox:getAttackingBox,
-
     };
 };

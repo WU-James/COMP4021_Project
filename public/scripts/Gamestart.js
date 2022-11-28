@@ -1,11 +1,7 @@
 const Gamestart = function(){
-
     let player = null;
     let player2 = null;
     let player_init_pos = {x1:0, y1:0, x2:0, y2:0}
-
-
-
 
     const start = function(){
         /* Get the canvas and 2D context */
@@ -13,19 +9,14 @@ const Gamestart = function(){
         const context = cv.getContext("2d");
 
         const totalGameTime = 20;   // Total game time in seconds
-
         const itemMaxAge = 3000;     // The maximum age of the items in milliseconds
         const trapMaxAge=4000;
         let gameStartTime = 0;      // The timestamp when the game starts
-
-
 
         /* Create the game area */
         const gameArea = BoundingBox(context, 245, -20, 400, 880);
 
         /* Create the sprites in the game */
-
-
         const Effect=AttackEffect(context,2000,30);
 
         // Create 2 players
@@ -38,9 +29,7 @@ const Gamestart = function(){
         [e,h]=gameArea.getPoints().bottomLeft;
 
         const sounds = {
-
             collect: new Audio("../music/collect.mp3"),
-
         };
 
         /* create mob in the game */
@@ -73,23 +62,15 @@ const Gamestart = function(){
         }
         setTimeout(spawnMob,mobTime);
 
-
         /* create items in the game */
-        const chest = Item_Chest(context, 427, 350, gameArea);
-
-
+        //const chest = Item_Chest(context, 427, 350, gameArea);
         //const attack = Attack(context, 427, 350, "green");        // The gem
-
-
-
         let items = [];
         let itemID = 0;
         let itemNub=0;
         const itemTime = Math.random()*9000;
         function spawnItem(){
-
                 let choice =Math.floor(Math.random() * 6);
-
                 if(choice === 0){
                     items[itemID] =  Item_Heart(context, Math.random()*800, 260+Math.random()*150, gameArea);
 
@@ -128,7 +109,6 @@ const Gamestart = function(){
                 //     items[itemID] = Mob_Shinigami(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
                 //     itemNub++;itemID++;
                 // }
-
             setTimeout(spawnItem,itemTime);
         }
         setTimeout(spawnItem,itemTime);
@@ -143,7 +123,6 @@ const Gamestart = function(){
             const timeRemaining = Math.ceil((totalGameTime * 1000 - gameTimeSoFar) / 1000);
             $("#time-remaining").text(timeRemaining);
 
-
             /* Handle the game over situation here */
             // if(timeRemaining<=0)
             // {
@@ -155,9 +134,8 @@ const Gamestart = function(){
             // }
 
             /* Update the sprites */
-
             player.update(now);
-            chest.update(now);
+            //chest.update(now);
             player2.update(now);
             Effect.update(now);
 
@@ -168,15 +146,12 @@ const Gamestart = function(){
                 items[i].update(now);
             }
 
-
-
             // Check
             for (let i=0;i<items.length;i++) {
                 let x = items[i].getX();
                 let y = items[i].getY();
                 const box = player.getBoundingBox();
                 if (box.isPointInBox(x, y)) {
-
                     if(items[i].name==="Heart")
                     {
                         sounds.collect.pause();
@@ -186,7 +161,6 @@ const Gamestart = function(){
 
                         items[i].hide();
                     }
-
                     else if(items[i].name==="Speed")
                     {
                         player.increaseSpeed();
@@ -223,7 +197,6 @@ const Gamestart = function(){
                         items[i].hide();
                     }
                 }
-
                 else if(items[i].name==="Speed")
                 {
                     if(items[i].getAge(now)>itemMaxAge)
@@ -268,10 +241,6 @@ const Gamestart = function(){
                 Effect.setXY(2000,300);
             }
 
-
-
-
-
             /* Clear the screen */
             context.clearRect(0, 0, cv.width, cv.height);
 
@@ -288,12 +257,9 @@ const Gamestart = function(){
                 items[i].draw(now);
             }
 
-
             /* Process the next frame */
             requestAnimationFrame(doFrame);
         };
-
-        /* Handle the start of the game */
 
         /* Randomize the dir and move mob  */
         function movement(){
@@ -310,16 +276,10 @@ const Gamestart = function(){
         }
         setTimeout(movement,1000+Math.random() * 500);
 
-
-
-
         /* Handle the keydown of arrow keys and spacebar */
         $(document).on("keydown", function(event) {
-
-
             // Inform server of player action
             Socket.playerAction(event.keyCode, "keydown");
-
             /* Handle the key down */
             switch(event.keyCode){
                 case 37:player.move(1);break;
@@ -355,9 +315,7 @@ const Gamestart = function(){
                             mobs[a].hide();
                         }
                     }
-
                 }
-
             }
          });
 
@@ -366,9 +324,6 @@ const Gamestart = function(){
 
             // Inform server of player action
             Socket.playerAction(event.keyCode, "keyup");
-
-
-
             /* Handle the key up */
             switch(event.keyCode){
                 case 37:player.stop(1);break;
@@ -376,15 +331,11 @@ const Gamestart = function(){
                 case 39:player.stop(3);break;
                 case 40:player.stop(4);break;
                 case 32:player.attackdone();break;
-
             }
-
         });
-
         // /* Start the game */
         requestAnimationFrame(doFrame);
     }
-
 
     const setPlayerAction = function(keyCode, keyStatus){
         if(keyStatus === "keydown"){
@@ -405,7 +356,6 @@ const Gamestart = function(){
                 case 32:player2.attackdone();break;
             }
         }
-        
     }
 
     const initPlayerPosition = function(x1, y1, x2, y2){
@@ -415,7 +365,5 @@ const Gamestart = function(){
         player_init_pos.y2 = y2;
     }
 
-
     return {start, setPlayerAction, initPlayerPosition}
-
 }();

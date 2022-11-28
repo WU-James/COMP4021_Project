@@ -12,10 +12,6 @@ const Item_attack=function(ctx, x, y){
     let birthTime = performance.now();
     let name="Attack";
 
-    // This function sets the color of the gem.
-    // - `color` - The colour of the gem which can be
-    // `"green"`, `"red"`, `"yellow"` or `"purple"`
-
     // This function gets the age (in millisecond) of the gem.
     // - `now` - The current timestamp
     const getAge = function(now) {
@@ -25,7 +21,6 @@ const Item_attack=function(ctx, x, y){
     // This function randomizes the gem colour and position.
     // - `area` - The area that the gem should be located in.
     const randomize = function(area) {
-
         /* Randomize the position */
         const {x, y} = area.randomPoint();
         sprite.setXY(x, y);
@@ -33,11 +28,7 @@ const Item_attack=function(ctx, x, y){
     };
     const hide=function(){
         this.setXY(2000, 30);
-
-
     }
-
-
 
     return {
         getXY: sprite.getXY,

@@ -5,8 +5,6 @@
 // - `color` - The colour of the gem
 const Attack = function(ctx, x, y) {
 
-    // This is the sprite sequences of the gem of four colours
-    // `green`, `red`, `yellow` and `purple`.
     const sequences = {
         purple: { x: 112, y: 0, width: 16, height: 16, count: 3, timing: 500, loop: true }
     };
@@ -23,11 +21,6 @@ const Attack = function(ctx, x, y) {
     // This is the birth time of the gem for finding its age.
     let birthTime = performance.now();
 
-    // This function sets the color of the gem.
-    // - `color` - The colour of the gem which can be
-    // `"green"`, `"red"`, `"yellow"` or `"purple"`
-
-
     // This function gets the age (in millisecond) of the gem.
     // - `now` - The current timestamp
     const getAge = function( now) {
@@ -37,7 +30,6 @@ const Attack = function(ctx, x, y) {
     // This function randomizes the gem colour and position.
     // - `area` - The area that the gem should be located in.
     const randomize = function(area) {
-
         /* Randomize the position */
         const {x, y} = area.randomPoint();
         sprite.setXY(x, y);

@@ -19,7 +19,6 @@ const Mob_Bat=function(ctx,x,y,gameArea){
     // - `2` - moving up - `3` - moving to the right - `4` - moving down
 
     const move = function(dir) {
-        //sprite.setSequence(sequences.idleLeft);
         if (dir >= 1 && dir <= 4 && dir !== direction) {
             if(dir===1) {
                 horizontal_direction=dir;
@@ -87,11 +86,10 @@ const Mob_Bat=function(ctx,x,y,gameArea){
     };
 
     const update = function(time) {
-        /* Update the player if the player is moving */
+        /* Update when moving */
         if (direction !== 0) {
             let { x, y } = sprite.getXY();
 
-            /* Move the player */
             switch (direction) {
                 case 1: x -= speed / 60; break;
                 case 2: y -= speed / 60; break;
@@ -107,20 +105,24 @@ const Mob_Bat=function(ctx,x,y,gameArea){
         sprite.update(time);
     };
 
+    const hide=function(){
+        this.setXY(2000, 30);
+    };
+    const decreaseLife=function(){
+        life=life-1;
+    }
+
     return {
         stop: stop,
         getBoundingBox: sprite.getBoundingBox,
         draw: sprite.draw,
         update: update,
         move:move,
-
+        hide:hide,
         getX:sprite.getX,
         getY:sprite.getY,
         setXY:sprite.setXY,
-        life:life
-        //speedUp: speedUp,
-        //slowDown: slowDown,
-        //attack:attack,
-        //attackdone:attackdone,
+        life:life,
+        decreaseLife:decreaseLife,
     };
 };

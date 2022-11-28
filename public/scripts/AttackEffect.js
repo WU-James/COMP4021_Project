@@ -1,8 +1,7 @@
 const AttackEffect=function(ctx, x, y){
     const sequences={
         damage:  { x: 0, y:0, width: 32, height: 32, count: 6, timing: 100, loop:true },
-
-
+        die:{ x: 0, y:0, width: 32, height: 32, count: 7, timing: 100, loop: true }
     };
 
     const sprite = Sprite(ctx, x, y);
@@ -13,10 +12,6 @@ const AttackEffect=function(ctx, x, y){
 
     let birthTime = performance.now();
     let name="Effect";
-
-    // This function sets the color of the gem.
-    // - `color` - The colour of the gem which can be
-    // `"green"`, `"red"`, `"yellow"` or `"purple"`
 
     // This function gets the age (in millisecond) of the gem.
     // - `now` - The current timestamp
