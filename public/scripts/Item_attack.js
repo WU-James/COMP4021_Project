@@ -7,7 +7,7 @@ const Item_attack=function(ctx, x, y){
     sprite.setSequence(sequences.one)
         .setScale(2)
         .setShadowScale({ x: 0, y: 0 })
-        .useSheet("img/Arrow_Double_Jump.png");
+        .useSheet("img/item_arrow.png");
 
     let birthTime = performance.now();
     let name="Attack";
