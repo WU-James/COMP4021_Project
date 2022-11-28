@@ -127,7 +127,9 @@ const GameHeader = (function() {
     // This function hides the form
     const hide = function() {
         $("#header").hide();
+
         $("#game-container").hide();
+
     };
 
     // This function updates the user panel

@@ -13,6 +13,7 @@ const Socket = (function() {
 
         // Wait for the socket to connect successfully
         socket.on("connect", () => {
+
             socket.on("start", (msg) => {
                 GameHeader.start();
                 
@@ -53,6 +54,7 @@ const Socket = (function() {
                 }
             })
         });
+
     };
 
     // This function disconnects the socket from the server
@@ -60,6 +62,7 @@ const Socket = (function() {
         socket.disconnect();
         socket = null;
     };
+
 
     // This function inform server of player action
     const playerAction = function(keyCode, keyStatus) {
@@ -70,6 +73,7 @@ const Socket = (function() {
 
 
     return { getSocket, connect, disconnect, playerAction };
+
 })();
 
 
