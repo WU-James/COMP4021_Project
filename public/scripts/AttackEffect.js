@@ -8,7 +8,7 @@ const AttackEffect=function(ctx, x, y){
     sprite.setSequence(sequences.damage)
         .setScale(2)
         .setShadowScale({ x: 0, y: 0 })
-        .useSheet("img/SpriteSheet.png");
+        .useSheet("img/item_smoke.png");
 
     let birthTime = performance.now();
     let name="Effect";

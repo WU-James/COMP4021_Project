@@ -7,7 +7,7 @@ const Item_ice=function(ctx, x, y){
     sprite.setSequence(sequences.one)
         .setScale(2)
         .setShadowScale({ x: 0, y: 0 })
-        .useSheet("img/SpriteSheetB.png");
+        .useSheet("img/item_ice.png");
 
     let birthTime = performance.now();
     let name="ICE";

@@ -7,7 +7,7 @@ const Item_Fan=function(ctx, x, y){
     sprite.setSequence(sequences.one)
         .setScale(2)
         .setShadowScale({ x: 0, y: 0 })
-        .useSheet("img/Fan.png");
+        .useSheet("img/item_fan.png");
 
     let birthTime = performance.now();
     let name="Fan";
