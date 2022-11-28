@@ -2,8 +2,8 @@ const Mob_Slime=function(ctx,x,y,gameArea){
     const sequences={
         idleRight:{x:0, y:0, width:32,height:32,count:4,timing:300,loop:true},
         idleLeft:{x:321, y:0, width:32,height:32,count:4,timing:300,loop:true},
-        moveToRight:{x:0, y:33, width:32,height:32,count:6,timing:60,loop:true},
-        moveToLeft:{x:257, y:33, width:32,height:32,count:6,timing:60,loop:true},
+        moveToRight:{x:0, y:63, width:32,height:32,count:7,timing:60,loop:true},
+        moveToLeft:{x:225, y:63, width:32,height:32,count:7,timing:60,loop:true},
         attackRight:{x:0,y:97,width:32,height:32,count:3,timing:80,loop:true},
         attackLeft:{x:353,y:97,width:32,height:32,count:3,timing:80,loop:true},
         dieLeft:{x:289,y:129,width:32,height:32,count:5,timing:100,loop:false},
