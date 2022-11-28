@@ -245,7 +245,7 @@ const Gamestart = function(){
             context.clearRect(0, 0, cv.width, cv.height);
 
             /* Draw the sprites */
-            chest.draw();
+            //chest.draw();
             player.draw();
             player2.draw();
             Effect.draw();

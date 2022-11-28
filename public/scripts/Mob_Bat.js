@@ -1,9 +1,9 @@
 const Mob_Bat=function(ctx,x,y,gameArea){
     const sequences={
         idleLeft:{x:0, y:0, width:96,height:52,count:4,timing:80,loop:true},
-        idleRight:{x:0, y:81, width:96,height:52,count:4,timing:80,loop:true},
-        dieLeft:{x:0, y:161, width:96,height:52,count:4,timing:80,loop:false},
-        dieRight:{x:0, y:241, width:96,height:52,count:4,timing:80,loop:false},
+        idleRight:{x:0, y:161, width:96,height:52,count:4,timing:80,loop:true},
+        dieLeft:{x:0, y:81, width:96,height:52,count:9,timing:90,loop:false},
+        dieRight:{x:0, y:241, width:96,height:52,count:9,timing:90,loop:false},
     };
 
     const sprite=Sprite(ctx,x,y);
