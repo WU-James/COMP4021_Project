@@ -1,14 +1,268 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f82dfba-b0c5-4eb5-b3dd-dbf56a58b5bc" name="Changes" comment="modify mob shinigami">
-      <change beforePath="$PROJECT_DIR$/COMP4021_Project/mob/fox-run-bothDir.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMP4021_Project/mob/kobold-idle-bothDir.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMP4021_Project/mob/slime-blue.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMP4021_Project/mob/slime-green.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMP4021_Project/mob/slime-orange.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMP4021_Project/mob/slime_bothDir.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMP4021_Project/mob/worm-run-idle-bothDir.png" beforeDir="false" />
+    <list default="true" id="5f82dfba-b0c5-4eb5-b3dd-dbf56a58b5bc" name="Changes" comment="add resources">
+      <change afterPath="$PROJECT_DIR$/.idea/GitHub.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/Character_Berserker.js" beforeDir="false" afterPath="$PROJECT_DIR$/COMP4021_Project_master/Character_Berserker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/Character_Swordsman.js" beforeDir="false" afterPath="$PROJECT_DIR$/COMP4021_Project_master/Character_Swordsman.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/Project.html" beforeDir="false" afterPath="$PROJECT_DIR$/COMP4021_Project_master/Project.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/img/char_swordsman.png" beforeDir="false" afterPath="$PROJECT_DIR$/COMP4021_Project_master/img/char_swordsman.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/Blue Witch.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/BunchOfRocks_Pack.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/Creature Free Pack.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/GodotProject.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/Meow Knight.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/Minifantasy_Dungeon_v2.0_Free_Version.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/Mutated_Bat.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/NinjaAdventure(SupporterEdition).zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/NinjaAdventure.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/TAP_anim_v2.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/Tiny Adventure Pack.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/Trap.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/Undead executioner.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/UI/generic-rpg-ui-inventario.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/UI/generic-rpg-ui-inventario01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/UI/generic-rpg-ui-inventario02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/UI/generic-rpg-ui-inventario03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/UI/generic-rpg-ui-inventario04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/UI/generic-rpg-ui-text-box.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/atlas.ase" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/atlas.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/chars/gabe/gabe-idle-run.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/chars/hat-guy/hat-guy.aseprite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/chars/hat-guy/hat-guy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/chars/mani/mani-idle-run.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/chars/sensei/sensei.aseprite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/chars/sensei/sensei.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/chars/vendor/generic-rpg-vendor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/mobs/boss_bee.aseprite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/mobs/boss_bee.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/mobs/fox-run-bothDir.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/mobs/fox-run.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/mobs/kobold-idle-bothDir.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/mobs/kobold-idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/mobs/slime-blue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/mobs/slime-green.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/mobs/slime-orange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/mobs/worm-run-idle-bothDir.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/mobs/worm-run-idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-barrel01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-barrel02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-barrel03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-board01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-board02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-board03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-board04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-bridge.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-crate01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-crate02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-crate03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-complete.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence-raw25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fence14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fish01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fish02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fish03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-fish04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-flower01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-flower02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-flower03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-flowers.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-grass01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-grass02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-house-inn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-loot01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-loot02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-loot03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-loot04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-loot05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-mini-lake.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-rock01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-rock02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-rock03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-rock04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-rock05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-rock06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-rod.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-trasure-open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-treasure-closed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-tree01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/props n decorations/generic-rpg-tree02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/soundtrack/Celestial.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/soundtrack/Foggy Woods.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/soundtrack/Nocturnal Mysteries.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/soundtrack/Red Carpet Wooden Floor.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/soundtrack/The Arrival (BATTLE II).mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/soundtrack/Windless Slopes.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-Slice.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile-waterfall01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile-waterfall02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile-waterfall03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile-waterfall04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile-waterfall05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile-waterfall06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile-waterfall07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile26.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile27.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile28.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile29.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile30.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile33.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile34.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile35.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile37.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile38.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile39.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile40.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile41.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile42.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile43.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile44.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile45.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile46.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile47.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile49.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile50.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile51.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile52.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile53.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile54.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile55.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile56.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile57.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile58.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile59.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile60.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile61.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile62.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile63.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile65.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile66.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile67.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile68.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile69.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile70.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_rpg-pack/tiles/generic-rpg-tile71.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/characters/player.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/characters/slime.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/objects/chest_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/objects/objects.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/particles/dust_particles_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/tilesets/decor_16x16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/tilesets/decor_8x8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/tilesets/fences.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/tilesets/floors/wooden.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/tilesets/grass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/tilesets/plains.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/tilesets/walls/walls.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/tilesets/walls/wooden_door.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/tilesets/walls/wooden_door_b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/_sprites/tilesets/water_decorations.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/bg_forest.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/char/Archaeologist Sprite Sheet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/char/Dwarf Sprite Sheet 1.3v.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/char/Dwarf Sprite Sheet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/char/Dwarf_Sprite_Sheet1.2v.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/char/GAP_i v1.0.0 - Hobbit.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/effect/Dark VFX 01 - 02.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/effect/fire_fx_v1.0.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/icons/HandDrawnIconPack.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/icons/RawFiles+ProcessedPsd+ProcessingGuide.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/icons/Shikashi's Fantasy Icons Pack v2.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/icons/Shikashi's Fantasy Icons Pack.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/jpg2png.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/map&amp;deco/Ghostpixxells_pixelfood.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/map&amp;deco/Modern_Interiors_Free_v2.2.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/map&amp;deco/TopDownHouse_DoorsAndWindows.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/map&amp;deco/TopDownHouse_FloorsAndWalls.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/map&amp;deco/TopDownHouse_FurnitureState1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/map&amp;deco/TopDownHouse_FurnitureState2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/map&amp;deco/TopDownHouse_SmallItems.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/map&amp;deco/bg_forest.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/map&amp;deco/chests_16x16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/map&amp;deco/forest_ v1.1.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/map&amp;deco/forest_ v1.2.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/mobs/Fox Sprite Sheet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/mobs/Tiny, Tiny Heroes - Animals.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/mobs/fox-run-bothDir.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/mobs/kobold-idle-bothDir.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/mobs/mob_bat.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/mobs/shinigami.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/mobs/slime-blue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/mobs/slime-green.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/mobs/slime-orange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/mobs/slime_bothDir.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/mobs/worm-run-idle-bothDir.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/otter_sprite_pack.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMP4021_Project_master/resources/skeleton_sword.zip" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +280,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/COMP4021_Project" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -37,17 +291,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Document/STUDYLEARN/4.1Year4Fall22-23/COMP4021/lab4&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Document/STUDYLEARN/4.1Year4Fall22-23/COMP4021/project/GitHub/COMP4021_Project_main",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Document\STUDYLEARN\4.1Year4Fall22-23\COMP4021\project\GitHub\COMP4021_Project\img" />
@@ -67,7 +321,10 @@
       <workItem from="1669277397444" duration="4850000" />
       <workItem from="1669376767722" duration="3314000" />
       <workItem from="1669447487727" duration="19973000" />
-      <workItem from="1669533499693" duration="9655000" />
+      <workItem from="1669533499693" duration="10629000" />
+      <workItem from="1669618768054" duration="349000" />
+      <workItem from="1669623861202" duration="2877000" />
+      <workItem from="1669626753863" duration="41000" />
     </task>
     <task id="LOCAL-00001" summary="modify player sheet">
       <created>1669278433787</created>
@@ -160,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669543041149</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="add resources">
+      <created>1669555077999</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1669555077999</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +484,7 @@
     <MESSAGE value="modify mob bat" />
     <MESSAGE value="create mob shinigami" />
     <MESSAGE value="modify mob shinigami" />
-    <option name="LAST_COMMIT_MESSAGE" value="modify mob shinigami" />
+    <MESSAGE value="add resources" />
+    <option name="LAST_COMMIT_MESSAGE" value="add resources" />
   </component>
 </project>
