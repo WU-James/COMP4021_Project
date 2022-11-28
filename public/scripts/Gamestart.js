@@ -1,13 +1,23 @@
 const Gamestart = function(){
+
+    let player = null;
+    let player2 = null;
+    let player_init_pos = {x1:0, y1:0, x2:0, y2:0}
+
+
+
+
     const start = function(){
         /* Get the canvas and 2D context */
         const cv = $("canvas").get(0);
         const context = cv.getContext("2d");
 
         const totalGameTime = 20;   // Total game time in seconds
+
         const itemMaxAge = 3000;     // The maximum age of the items in milliseconds
         const trapMaxAge=4000;
         let gameStartTime = 0;      // The timestamp when the game starts
+
 
 
         /* Create the game area */
@@ -15,9 +25,13 @@ const Gamestart = function(){
 
         /* Create the sprites in the game */
 
-        const player = Character_Berserker(context, 200, 260, gameArea); // The player
-        const player2= Character_Swordsman(context,200,380,gameArea);
+
         const Effect=AttackEffect(context,2000,30);
+
+        // Create 2 players
+        player = (Authentication.getUser().role === 1) ?  Character_Swordsman(context,player_init_pos.x1,player_init_pos.y1,gameArea) : Character_Berserker(context, player_init_pos.x1, player_init_pos.y1, gameArea); 
+        player2= (Authentication.getAnotherUser().role === 1) ?  Character_Swordsman(context,player_init_pos.x2,player_init_pos.y2,gameArea) : Character_Berserker(context, player_init_pos.x2, player_init_pos.y2, gameArea);
+
         [x,y]=gameArea.getPoints().topLeft;
         [a,b]=gameArea.getPoints().topRight;
         [c,d]=gameArea.getPoints().bottomRight;
@@ -62,23 +76,34 @@ const Gamestart = function(){
 
         /* create items in the game */
         const chest = Item_Chest(context, 427, 350, gameArea);
+
+
+        //const attack = Attack(context, 427, 350, "green");        // The gem
+
+
+
         let items = [];
         let itemID = 0;
         let itemNub=0;
         const itemTime = Math.random()*9000;
         function spawnItem(){
+
                 let choice =Math.floor(Math.random() * 6);
+
                 if(choice === 0){
                     items[itemID] =  Item_Heart(context, Math.random()*800, 260+Math.random()*150, gameArea);
 
                     itemNub++;itemID++;
                 }
+
                 else if(choice === 1){
                     items[itemID] =  Item_speed(context, Math.random()*800, 260+Math.random()*150, gameArea);
+
                     itemNub++;itemID++;
 
                 }
                 else if(choice === 2){
+
                     items[itemID] =  Item_attack(context, Math.random()*800, 260+Math.random()*150, gameArea);
                     itemNub++;itemID++;
 
@@ -130,10 +155,12 @@ const Gamestart = function(){
             // }
 
             /* Update the sprites */
+
             player.update(now);
             chest.update(now);
             player2.update(now);
             Effect.update(now);
+
             for(let i = 0; i<mobs.length;i++){
                 mobs[i].update(now);
             }
@@ -159,6 +186,7 @@ const Gamestart = function(){
 
                         items[i].hide();
                     }
+
                     else if(items[i].name==="Speed")
                     {
                         player.increaseSpeed();
@@ -195,6 +223,7 @@ const Gamestart = function(){
                         items[i].hide();
                     }
                 }
+
                 else if(items[i].name==="Speed")
                 {
                     if(items[i].getAge(now)>itemMaxAge)
@@ -209,6 +238,7 @@ const Gamestart = function(){
                         items[i].hide();
                     }
                 }
+
                 else if(items[i].name==="Fire")
                 {
                     if(items[i].getAge(now)>trapMaxAge)
@@ -216,6 +246,7 @@ const Gamestart = function(){
                         items[i].hide();
                     }
                 }
+
                 else if(items[i].name==="Fan")
                 {
                     if(items[i].getAge(now)>trapMaxAge)
@@ -240,6 +271,7 @@ const Gamestart = function(){
 
 
 
+
             /* Clear the screen */
             context.clearRect(0, 0, cv.width, cv.height);
 
@@ -248,12 +280,14 @@ const Gamestart = function(){
             player.draw();
             player2.draw();
             Effect.draw();
+
             for(let i = 0; i<mobs.length;i++){
                 mobs[i].draw();
             }
             for(let i = 0; i<items.length;i++){
                 items[i].draw(now);
             }
+
 
             /* Process the next frame */
             requestAnimationFrame(doFrame);
@@ -278,21 +312,21 @@ const Gamestart = function(){
 
 
 
+
         /* Handle the keydown of arrow keys and spacebar */
         $(document).on("keydown", function(event) {
 
+
+            // Inform server of player action
+            Socket.playerAction(event.keyCode, "keydown");
+
             /* Handle the key down */
             switch(event.keyCode){
-                case 37:player.move(1);break
+                case 37:player.move(1);break;
                 case 38:player.move(2);break;
                 case 39:player.move(3);break;
                 case 40:player.move(4);break;
                 case 32:player.attack();break;
-                case 65:player2.move(1);break;
-                case 87:player2.move(2);break;
-                case 68:player2.move(3);break;
-                case 83:player2.move(4);break;
-                case 75:player2.attack();break;
             }
             if(event.keyCode===32)
             {
@@ -323,11 +357,18 @@ const Gamestart = function(){
                     }
 
                 }
+
             }
          });
 
         /* Handle the keyup of arrow keys and spacebar */
         $(document).on("keyup", function(event) {
+
+            // Inform server of player action
+            Socket.playerAction(event.keyCode, "keyup");
+
+
+
             /* Handle the key up */
             switch(event.keyCode){
                 case 37:player.stop(1);break;
@@ -335,11 +376,6 @@ const Gamestart = function(){
                 case 39:player.stop(3);break;
                 case 40:player.stop(4);break;
                 case 32:player.attackdone();break;
-                case 65:player2.stop(1);break;
-                case 87:player2.stop(2);break;
-                case 68:player2.stop(3);break;
-                case 83:player2.stop(4);break;
-                case 75:player2.attackdone();break;
 
             }
 
@@ -349,5 +385,37 @@ const Gamestart = function(){
         requestAnimationFrame(doFrame);
     }
 
-    return {start}
+
+    const setPlayerAction = function(keyCode, keyStatus){
+        if(keyStatus === "keydown"){
+            switch(keyCode){
+                case 37:player2.move(1);break;
+                case 38:player2.move(2);break;
+                case 39:player2.move(3);break;
+                case 40:player2.move(4);break;
+                case 32:player2.attack();break;
+            }
+        }
+        else{
+            switch(keyCode){
+                case 37:player2.stop(1);break;
+                case 38:player2.stop(2);break;
+                case 39:player2.stop(3);break;
+                case 40:player2.stop(4);break;
+                case 32:player2.attackdone();break;
+            }
+        }
+        
+    }
+
+    const initPlayerPosition = function(x1, y1, x2, y2){
+        player_init_pos.x1 = x1;
+        player_init_pos.y1 = y1;
+        player_init_pos.x2 = x2;
+        player_init_pos.y2 = y2;
+    }
+
+
+    return {start, setPlayerAction, initPlayerPosition}
+
 }();

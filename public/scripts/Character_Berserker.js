@@ -21,6 +21,7 @@ const Character_Berserker =function(ctx,x,y,gameArea){
     let power=2;
     let points=0;
     let name="Berserker";
+
     // - `0` - not moving - `1` - moving to the left - `2` - moving up
     // - `3` - moving to the right - `4` - moving down
     const move = function(dir) {
@@ -144,6 +145,7 @@ const Character_Berserker =function(ctx,x,y,gameArea){
 
     };
     const increaseSpeed=function(){
+
         speed=speed+20;
     };
     const decreaseSpeed=function(){
@@ -175,6 +177,9 @@ const Character_Berserker =function(ctx,x,y,gameArea){
     const increasePoints=function(){
         points=points+1;
 
+
+        speed=speed+10;
+
     }
 
     return {
@@ -183,8 +188,10 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         speedUp: speedUp,
         slowDown: slowDown,
         getBoundingBox: sprite.getBoundingBox,
+
         getAttackingBoxSword: sprite.getAttackingBoxSword,
         getAttackingBox:sprite.getAttackingBox,
+
         draw: sprite.draw,
         update: update,
         move:move,
@@ -192,12 +199,13 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         attackdone:attackdone,
         increaseLife:increaseLife,
         decreaseLife:decreaseLife,
+
         increaseSpeed:increaseSpeed,
         decreaseSpeed:decreaseSpeed,
         increasePower:increasePower,
         decreasePower:decreasePower,
         increasePoints:increasePoints,
-
+        increaseSpeed:increaseSpeed
 
     };
 

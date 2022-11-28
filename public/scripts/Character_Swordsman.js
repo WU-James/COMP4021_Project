@@ -21,6 +21,7 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
     let power=1;
     let name="Sowrdsman"
     let points=0;
+
     // - `0` - not moving - `1` - moving to the left - `2` - moving up
     // - `3` - moving to the right - `4` - moving down
     const move = function(dir) {
@@ -140,6 +141,7 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         life=life+1;
         console.log(life);
 
+
     };
     const decreaseLife=function(){
         life=life-1;
@@ -165,6 +167,15 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
     const increasePoints=function(){
         points=points+1;
         console.log(points);
+
+    }
+    const decreaseLife=function(){
+        life=life-1;
+        console.log(life);
+    }
+    const increaseSpeed=function(){
+        speed=speed+100;
+
     }
 
     return {
@@ -173,6 +184,7 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         speedUp: speedUp,
         slowDown: slowDown,
         getBoundingBox: sprite.getBoundingBox,
+
         getAttackingBoxSword: sprite.getAttackingBoxSword,
         getAttackingBox:sprite.getAttackingBox,
         draw: sprite.draw,
@@ -182,11 +194,14 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         attackdone:attackdone,
         increaseLife:increaseLife,
         decreaseLife:decreaseLife,
+
         increaseSpeed:increaseSpeed,
         decreaseSpeed:decreaseSpeed,
         increasePower:increasePower,
         decreasePower:decreasePower,
         increasePoints:increasePoints,
+        increaseSpeed:increaseSpeed
+
 
     };
 
