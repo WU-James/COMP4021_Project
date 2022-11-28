@@ -19,6 +19,7 @@ const Mob_Slime=function(ctx,x,y,gameArea){
     let direction = 0;
     let horizontal_direction=3;
     let speed=50;
+    let life=3;
     // - `0` - not moving  - `1` - moving to the left
     // - `2` - moving up - `3` - moving to the right - `4` - moving down
 
@@ -113,6 +114,10 @@ const Mob_Slime=function(ctx,x,y,gameArea){
         draw: sprite.draw,
         update: update,
         move:move,
+        getX:sprite.getX,
+        getY:sprite.getY,
+        setXY:sprite.setXY,
+        life:life
         //speedUp: speedUp,
         //slowDown: slowDown,
         //attack:attack,
