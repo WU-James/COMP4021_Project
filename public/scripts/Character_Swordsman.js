@@ -6,8 +6,8 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         idleLeft:{x:288, y:18, width:48,height:25,count:6,timing:400,loop:true},
         moveToLeft:{x:288, y:65, width:48,height:25,count:6,timing:60,loop:true},
         attackLeft:{x:384,y:110,width:48,height:30,count:4,timing:60,loop:true},
-        dieLeft:{x:433,y:200,width:48,height:40,count:3,timing:600,loop:false},
-        dieRight:{x:0,y:200,width:48,height:40,count:3,timing:600,loop:false},
+        dieLeft:{x:433,y:200,width:48,height:40,count:4,timing:200,loop:false},
+        dieRight:{x:0,y:200,width:48,height:40,count:4,timing:200,loop:false},
         damageLeft:{x:433,y:200,width:48,height:40,count:2,timing:600,loop:false},
         damageRight:{x:0,y:200,width:48,height:40,count:2,timing:600,loop:false},
     };
@@ -190,17 +190,17 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         points=points+1;
     }
     const checkLife=function(){
-        if(life===0)
+        if(life<=0)
         {
             return true;
         }
-        return false;
+        else{
+            return false;
+        }
     }
 
     return {
         stop: stop,
-        speedUp: speedUp,
-        slowDown: slowDown,
         getBoundingBox: sprite.getBoundingBox,
         getAttackingBoxSword: sprite.getAttackingBoxSword,
         getAttackingBox:sprite.getAttackingBox,

@@ -237,7 +237,7 @@ const Gamestart = function(){
             if(player.checkLife()===true)
             {
                 player.Die();
-                return;
+
             }
 
             /* Clear the screen */

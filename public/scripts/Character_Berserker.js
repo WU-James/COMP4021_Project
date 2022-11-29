@@ -200,8 +200,6 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         stop: stop,
         update: update,
         move:move,
-        speedUp: speedUp,
-        slowDown: slowDown,
         attack:attack,
         attackdone:attackdone,
         getBoundingBox: sprite.getBoundingBox,
