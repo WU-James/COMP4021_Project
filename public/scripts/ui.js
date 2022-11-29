@@ -78,6 +78,7 @@ const Frontpage = (function() {
                 (error) => { $("#register-message").text(error); }
             );
         });
+
     };
 
     // This function shows the form

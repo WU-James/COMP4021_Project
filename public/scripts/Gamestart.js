@@ -3,6 +3,16 @@ const Gamestart = function(){
     let player2 = null;
     let player_init_pos = {x1:0, y1:0, x2:0, y2:0}
 
+    const sounds = {
+        startPage: new Audio("../music/music_start.ogg"),
+        gamePage: new Audio("../music/music_game.ogg"),
+        endPage: new Audio("../music/music_end.ogg"),
+        collect: new Audio("../music/sound_collect.wav"),
+        explosion: new Audio("../music/sound_explosion.wav"),
+        damage: new Audio("../music/sound_damage.wav"),
+        end: new Audio("../music/sound_gameover.wav"),
+    };
+
     const start = function(){
         /* Get the canvas and 2D context */
         const cv = $("canvas").get(0);
@@ -24,9 +34,11 @@ const Gamestart = function(){
         [c,d]=gameArea.getPoints().bottomRight;
         [e,h]=gameArea.getPoints().bottomLeft;
 
-        const sounds = {
-            collect: new Audio("../music/collect.mp3"),
-        };
+        sounds.gamePage.load();
+        //sounds.gamePage.play();
+        sounds.gamePage.loop=true;
+        sounds.gamePage.volume=0.05;
+        sounds.damage.volume=0.2;
 
         /* create mob in the game */
         let mobs = [];
@@ -114,6 +126,7 @@ const Gamestart = function(){
 
             if(timeRemaining===0)
             {
+                sounds.gamePage.pause();
                 return;
             }
 
@@ -146,7 +159,6 @@ const Gamestart = function(){
                 if (box.isPointInBox(x, y)) {
                     if(items[i].name==="Heart")
                     {
-                        sounds.collect.pause();
                         sounds.collect.load();
                         sounds.collect.play();
                         player.increaseLife();
@@ -156,14 +168,20 @@ const Gamestart = function(){
                     {
                         player.decreaseLife();
                         items[i].hide();
+                        sounds.damage.load();
+                        sounds.damage.play();
                     }
                     else if(items[i].name==="Speed")
                     {
+                        sounds.collect.load();
+                        sounds.collect.play();
                         player.increaseSpeed();
                         items[i].hide();
                     }
                     else if(items[i].name==="Attack")
                     {
+                        sounds.collect.load();
+                        sounds.collect.play();
                         player.increasePower();
                         items[i].hide();
                     }
@@ -171,11 +189,15 @@ const Gamestart = function(){
                     {
                         player.decreaseSpeed();
                         items[i].hide();
+                        sounds.damage.load();
+                        sounds.damage.play();
                     }
                     else if(items[i].name==="ICE")
                     {
                         player.decreasePower();
                         items[i].hide();
+                        sounds.damage.load();
+                        sounds.damage.play();
                     }
                 }
             }
@@ -300,6 +322,10 @@ const Gamestart = function(){
                             Effect.born();
                             player.increasePoints();
                             mobs[a].hide();
+                            sounds.explosion.load();
+                            sounds.explosion.play();
+                            sounds.explosion.loop=false;
+                            sounds.explosion.volume=0.4;
                         }
                     }
                     else if(player.name==="Berserker")
@@ -310,6 +336,10 @@ const Gamestart = function(){
                             Effect.born();
                             player.increasePoints();
                             mobs[a].hide();
+                            sounds.explosion.load();
+                            sounds.explosion.play();
+                            sounds.explosion.loop=false;
+                            sounds.explosion.volume=0.4;
                         }
                     }
                 }
