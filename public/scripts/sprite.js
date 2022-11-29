@@ -102,10 +102,10 @@ const Sprite = function(ctx, x, y) {
         const size = getDisplaySize();
 
         /* Find the box coordinates */
-        const top = y - size.height / 2;
-        const left = x - size.width / 2;
-        const bottom = y + size.height / 2;
-        const right = x + size.width / 2;
+        const top = y - size.height / 2+10;
+        const left = x - size.width / 2+10;
+        const bottom = y + size.height / 2-10;
+        const right = x + size.width / 2-10;
 
         return BoundingBox(ctx, top, left, bottom, right);
     };
@@ -129,9 +129,9 @@ const Sprite = function(ctx, x, y) {
 
         /* Find the box coordinates */
         const top = y - size.height / 2-3;
-        const left = x + size.width / 2;
-        const bottom = y + size.height / 2+1;
-        const right = x + (size.width / 2)+5;
+        const left = x - size.width / 2;
+        const bottom = y + size.height / 2+3;
+        const right = x + (size.width / 2)+8;
 
         return BoundingBox(ctx, top, left, bottom, right);
     };

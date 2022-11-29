@@ -8,7 +8,7 @@ const Gamestart = function(){
         const cv = $("canvas").get(0);
         const context = cv.getContext("2d");
 
-        const totalGameTime = 20;   // Total game time in seconds
+        const totalGameTime = 200;   // Total game time in seconds
         const itemMaxAge = 3000;     // The maximum age of the items in milliseconds
         const trapMaxAge=4000;
         let gameStartTime = 0;      // The timestamp when the game starts
