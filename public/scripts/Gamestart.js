@@ -1,8 +1,20 @@
 const Gamestart = function(){
+    /* Get the canvas and 2D context */
+    const cv = $("canvas").get(0);
+    const context = cv.getContext("2d");
+    const totalGameTime = 200;   // Total game time in seconds
+    const itemMaxAge = 3000;     // The maximum age of the items in milliseconds
+    const trapMaxAge=4000;
+    let gameStartTime = 0;      // The timestamp when the game starts
+
+    /* Create the game area */
+    let gameArea = null;
+    
+    /* create players in the game */
     let player = null;
     let player2 = null;
     let player_init_pos = {x1:0, y1:0, x2:0, y2:0}
-
+    
     const sounds = {
         startPage: new Audio("../music/music_start.ogg"),
         gamePage: new Audio("../music/music_game.ogg"),
@@ -13,18 +25,26 @@ const Gamestart = function(){
         end: new Audio("../music/sound_gameover.wav"),
     };
 
+
+    /* create mob in the game */
+    let mobs = [];
+    let mobNum = 0;
+    let mobID = 0;
+
+    /* create items in the game */
+    let items = [];
+    let itemID = 0;
+    let itemNub=0;
+
+   
+
+    
+
     const start = function(){
-        /* Get the canvas and 2D context */
-        const cv = $("canvas").get(0);
-        const context = cv.getContext("2d");
 
-        const totalGameTime = 200;   // Total game time in seconds
-        const itemMaxAge = 3000;     // The maximum age of the items in milliseconds
-        const trapMaxAge=4000;
-        let gameStartTime = 0;      // The timestamp when the game starts
 
-        /* Create the game area */
-        const gameArea = BoundingBox(context, 245, -20, 400, 880);
+        gameArea = BoundingBox(context, 245, -20, 400, 880);
+
 
         // Create 2 players
         player = (Authentication.getUser().role === 1) ?  Character_Swordsman(context,player_init_pos.x1,player_init_pos.y1,gameArea) : Character_Berserker(context, player_init_pos.x1, player_init_pos.y1, gameArea); 
@@ -34,86 +54,19 @@ const Gamestart = function(){
         [c,d]=gameArea.getPoints().bottomRight;
         [e,h]=gameArea.getPoints().bottomLeft;
 
+
+
+        //Create Effect
+        const Effect=AttackEffect(context,2000,30);
+        const beEffect=beAttackEffect(context,2000,30);
+
         sounds.gamePage.load();
         //sounds.gamePage.play();
         sounds.gamePage.loop=true;
         sounds.gamePage.volume=0.05;
         sounds.damage.volume=0.2;
 
-        /* create mob in the game */
-        let mobs = [];
-        let mobNum = 0;
-        let mobID = 0;
-        const mobTime = Math.random()*7000;
-        function spawnMob(){
-            if(mobNum<=20){
-                let choice = Math.floor(Math.random() * 4);
-                if(choice === 0){
-                    mobs[mobID] =  Mob_Bat(context, 700+Math.random()*100, 260+Math.random()*100, gameArea);
-                    mobNum++;mobID++;
-                }
-                else if(choice === 1 ){
-                    mobs[mobID] =  Mob_Sprite(context, 700+Math.random()*100, 260+Math.random()*100, gameArea);
-                    mobNum++;mobID++;
-                }
-                else{
-                    mobs[mobID] = Mob_Slime(context, 700+Math.random()*100, 260+Math.random()*100, gameArea);
-                    //mobs[mobID] = Mob_Shinigami(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
-                    mobNum++;mobID++;
-                }
-                if(mobNum === 19){
-                    mobs[mobID] = Mob_Shinigami(context, 700+Math.random()*100, 260+Math.random()*100, gameArea);
-                    mobNum++;mobID++;
-                }
-            }
-            setTimeout(spawnMob,mobTime);
-        }
-        setTimeout(spawnMob,mobTime);
-
-        /* create items in the game */
-        let items = [];
-        let itemID = 0;
-        let itemNub=0;
-        const itemTime = Math.random()*9000;
-        function spawnItem(){
-                let choice =Math.floor(Math.random() * 6);
-                if(choice === 0){
-                    items[itemID] =  Item_Heart(context, Math.random()*800, 260+Math.random()*150, gameArea);
-                    itemNub++;itemID++;
-                }
-                else if(choice === 1){
-                    items[itemID] =  Item_Fire(context, Math.random()*800, 260+Math.random()*150, gameArea);
-                    itemNub++;itemID++;
-                }
-                else if(choice === 2){
-                    items[itemID] =  Item_speed(context, Math.random()*800, 260+Math.random()*150, gameArea);
-                    itemNub++;itemID++;
-                }
-                else if(choice===3)
-                {
-                    items[itemID] =  Item_attack(context, Math.random()*800, 260+Math.random()*150, gameArea);
-                    itemNub++;itemID++;
-                }
-                else if(choice===4)
-                {
-                    items[itemID] =  Item_Fan(context, Math.random()*800, 260+Math.random()*150, gameArea);
-                    itemNub++;itemID++;
-                }
-                else if(choice === 5){
-                    items[itemID] =  Item_ice(context, Math.random()*800, 260+Math.random()*150, gameArea);
-                    itemNub++;itemID++;
-                }
-                // else{
-                //     items[itemID] = Mob_Slime(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
-                //     items[itemID] = Mob_Shinigami(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
-                //     itemNub++;itemID++;
-                // }
-            setTimeout(spawnItem,itemTime);
-        }
-        setTimeout(spawnItem,itemTime);
-
-        //Create Effect
-        const Effect=AttackEffect(context,2000,30);
+   
 
         /* The main processing of the game */
         function doFrame(now) {
@@ -126,6 +79,12 @@ const Gamestart = function(){
 
             if(timeRemaining===0)
             {
+                context.clearRect(0, 0, cv.width, cv.height);
+                return;
+            };
+            if(player.checkLife()===true)
+            {
+                context.clearRect(0, 0, cv.width, cv.height);
                 sounds.gamePage.pause();
                 return;
             }
@@ -144,6 +103,8 @@ const Gamestart = function(){
             player.update(now);
             player2.update(now);
             Effect.update(now);
+            beEffect.update(now);
+
             for(let i = 0; i<mobs.length;i++){
                 mobs[i].update(now);
             }
@@ -167,6 +128,11 @@ const Gamestart = function(){
                     else if(items[i].name==="Fire")
                     {
                         player.decreaseLife();
+
+                        player.Damage();
+                        beEffect.setXY(x,y);
+                        beEffect.born();
+
                         items[i].hide();
                         sounds.damage.load();
                         sounds.damage.play();
@@ -180,6 +146,7 @@ const Gamestart = function(){
                     }
                     else if(items[i].name==="Attack")
                     {
+
                         sounds.collect.load();
                         sounds.collect.play();
                         player.increasePower();
@@ -188,6 +155,9 @@ const Gamestart = function(){
                     else if(items[i].name==="Fan")
                     {
                         player.decreaseSpeed();
+                        player.Damage();
+                        beEffect.setXY(x,y);
+                        beEffect.born();
                         items[i].hide();
                         sounds.damage.load();
                         sounds.damage.play();
@@ -195,12 +165,31 @@ const Gamestart = function(){
                     else if(items[i].name==="ICE")
                     {
                         player.decreasePower();
+
+                        player.Damage();
+                        beEffect.setXY(x,y);
+                        beEffect.born();
                         items[i].hide();
                         sounds.damage.load();
                         sounds.damage.play();
                     }
                 }
             }
+            for (let i = 0; i < mobs.length; i++) {
+                let x = mobs[i].getX();
+                let y = mobs[i].getY();
+                const box = player.getABox();
+                if (box.isPointInBox(x, y)) {
+                        beEffect.setXY(x, y);
+                        beEffect.born();
+                        player.decreaseLife();
+                        player.Damage();
+                        mobs[i].hide();
+                        sounds.damage.load();
+                        sounds.damage.play();
+                }
+            }
+
            //Disappear
             for (let i=0;i<items.length;i++) {
                 if(items[i].name==="Heart")
@@ -255,12 +244,18 @@ const Gamestart = function(){
             {
                 Effect.setXY(2000,300);
             }
-            //check life
-            if(player.checkLife()===true)
-            {
-                player.Die();
 
+            if(beEffect.getAge(now)>430)
+            {
+                beEffect.setXY(2000,300);
             }
+            //check life
+            // if(player.checkLife()===true)
+            // {
+            //     player.Die();
+            // }
+
+
 
             /* Clear the screen */
             context.clearRect(0, 0, cv.width, cv.height);
@@ -270,6 +265,7 @@ const Gamestart = function(){
             player.draw();
             player2.draw();
             Effect.draw();
+            beEffect.draw();
 
             for(let i = 0; i<mobs.length;i++){
                 mobs[i].draw();
@@ -281,21 +277,6 @@ const Gamestart = function(){
             /* Process the next frame */
             requestAnimationFrame(doFrame);
         };
-
-        /* Randomize the dir and move mob  */
-        function movement(){
-            for(let i = 0; i<mobNum;i++){
-                let mobDir = Math.floor(Math.random() * 8);
-                    if(mobDir>=5){
-                        mobs[i].move(1);
-                    }
-                    else{
-                        mobs[i].move(mobDir);
-                    }
-            }
-            setTimeout(movement,1000+Math.random() * 500);
-        }
-        setTimeout(movement,1000+Math.random() * 500);
 
         /* Handle the keydown of arrow keys and spacebar */
         $(document).on("keydown", function(event) {
@@ -320,8 +301,16 @@ const Gamestart = function(){
                         if (box.isPointInBox(x, y)) {
                             Effect.setXY(x,y);
                             Effect.born();
-                            player.increasePoints();
-                            mobs[a].hide();
+
+                            if(mobs[a].name==="Shinigami")
+                            {
+                                player.increaseHighPoints();
+                            }
+                            else
+                            {
+                                player.increasePoints();
+                            }
+                            mobs[a].hide();                       
                             sounds.explosion.load();
                             sounds.explosion.play();
                             sounds.explosion.loop=false;
@@ -334,7 +323,15 @@ const Gamestart = function(){
                         if (box.isPointInBox(x, y)) {
                             Effect.setXY(x,y);
                             Effect.born();
-                            player.increasePoints();
+
+                            if(mobs[a].name==="Shinigami")
+                            {
+                                player.increaseHighPoints();
+                            }
+                            else
+                            {
+                                player.increasePoints();
+                            }
                             mobs[a].hide();
                             sounds.explosion.load();
                             sounds.explosion.play();
@@ -391,5 +388,80 @@ const Gamestart = function(){
         player_init_pos.y2 = y2;
     }
 
-    return {start, setPlayerAction, initPlayerPosition}
+
+    const setPlayerAttr = function(life, speed, power){
+        player2.setAttr(life, speed, power);
+    }
+
+    const spawnItem = function(choice, x, y){
+        if(choice === 0){
+            items[itemID] =  Item_Heart(context, x, y, gameArea);
+            itemNub++;itemID++;
+        }
+        else if(choice === 1){
+            items[itemID] =  Item_Fire(context, x, y, gameArea);
+            itemNub++;itemID++;
+        }
+        else if(choice === 2){
+            items[itemID] =  Item_speed(context, x, y, gameArea);
+            itemNub++;itemID++;
+        }
+        else if(choice===3)
+        {
+            items[itemID] =  Item_attack(context, x, y,gameArea);
+            itemNub++;itemID++;
+        }
+        else if(choice===4)
+        {
+            items[itemID] =  Item_Fan(context, x, y, gameArea);
+            itemNub++;itemID++;
+        }
+        else if(choice === 5){
+            items[itemID] =  Item_ice(context, x, y, gameArea);
+            itemNub++;itemID++;
+        }
+
+
+        // else{
+        //     items[itemID] = Mob_Slime(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+        //     items[itemID] = Mob_Shinigami(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+        //     itemNub++;itemID++;
+        // }
+    }
+
+    const spawnMob = function(choice, x, y){
+        if(mobNum<=20){
+            if(choice === 0){
+                mobs[mobID] =  Mob_Bat(context, x, y, gameArea);
+                mobNum++;mobID++;
+            }
+            else if(choice === 1 ){
+                mobs[mobID] =  Mob_Sprite(context, x, y, gameArea);
+                mobNum++;mobID++;
+            }
+            else{
+                mobs[mobID] = Mob_Slime(context, x, y, gameArea);
+                //mobs[mobID] = Mob_Shinigami(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                mobNum++;mobID++;
+            }
+            if(mobNum === 19){
+                mobs[mobID] = Mob_Shinigami(context, x, y, gameArea);
+                mobNum++;mobID++;
+            }
+        }
+    }
+
+    const setMobDir = function(dir){
+        for(let i = 0; i<mobNum;i++){
+                if(dir[i]>=5){
+                    mobs[i].move(1);
+                }
+                else{
+                    mobs[i].move(dir[i]);
+                }
+        }
+    }
+
+    return {start, setPlayerAction, initPlayerPosition, setPlayerAttr, spawnItem, spawnMob, setMobDir}
+
 }();

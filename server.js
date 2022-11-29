@@ -226,12 +226,20 @@ io.on("connection", (socket) => {
         let pos = {};
         for (const key in onlineUsers){
             pos[key] = {x:Math.floor(Math.random() * 500 + 200), y:Math.floor(Math.random() * 100 + 280)};
-           //pos[key].x = Math.floor(Math.random() * 854);
-            //pos[key].y = Math.floor(Math.random() * 480);
         }
         const msg = {onlineUsers, pos}
 
+        // Start the game
         io.emit("start", JSON.stringify(msg, null, "  "));
+
+
+        // Create item
+        setTimeout(() => {
+            createItem();
+            createMob();
+            setMobDir();
+        }, 6000);
+
 
     }
 
@@ -240,15 +248,80 @@ io.on("connection", (socket) => {
         const {username, name} = socket.request.session.user;
         delete onlineUsers[username];
         io.emit("end");
+        createItemTimeout = null;
+        createMobTimeout = null;
+        setMobDirTimeout = null;
     })   
 
+
+    // Set player action frame (move, attack)
 
     socket.on("playerAction", (msg) => {
         io.emit("setPlayerAction", msg);
     })
 
+
+    // Set player attribute (life, speed, power)
+    socket.on("playerAttr", (msg) => {
+        io.emit("setPlayerAttr", msg);
+    })
+
+    // Update player score
+    socket.on("anotherScore", (msg)=>{
+        io.emit("setAnotherScore", msg);
+    })
+
+
     
 })
+
+
+
+// Create itme on a random time interval
+let createItemTimeout = null;
+const createItem = function (){
+    const itemTime = Math.random()*9000;
+    const choice = Math.floor(Math.random() * 6);
+    const x = Math.random()*800;
+    const y = 260+Math.random()*150;
+
+    msg = JSON.stringify({choice, x, y}, null, "  ");
+    io.emit("createItem", msg);
+
+    createItemTimeout = setTimeout(createItem,itemTime);
+}
+
+// Create mob on a random time interval
+let createMobTimeout = null;
+const createMob = function (){
+    const mobTime = Math.random()*7000;
+    const choice = Math.floor(Math.random() * 4);
+    const x = 700+Math.random()*100;
+    const y = 260+Math.random()*100;
+
+    msg = JSON.stringify({choice, x, y}, null, "  ");
+    io.emit("createMob", msg);
+
+    createMobTimeout = setTimeout(createMob,mobTime);
+}
+
+// Set mob direction on a random time interval
+let setMobDirTimeout = null;
+const setMobDir = function(){
+    const mobDirTime = 1000+Math.random() * 500;
+    let dir = [];
+    for (let i = 0; i < 20; i++){
+        dir.push(Math.floor(Math.random() * 8));
+    }
+
+    msg = JSON.stringify({dir}, null, "  ");
+    io.emit("setMobDir", msg);
+
+    setMobDirTimeout = setTimeout(setMobDir,mobDirTime);
+}
+
+
+
 
 
 

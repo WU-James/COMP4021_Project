@@ -15,6 +15,7 @@ const Mob_Sprite=function(ctx, x, y, gameArea){
     let horizontal_direction=3;
     let speed=20;
     let life=3;
+    let name="Sprite";
 
     // - `0` - not moving  - `1` - moving to the left
     // - `2` - moving up - `3` - moving to the right - `4` - moving down
@@ -91,6 +92,7 @@ const Mob_Sprite=function(ctx, x, y, gameArea){
         decreaseLife:decreaseLife,
         hide:hide,
         setXY:sprite.setXY,
+        name:name
         //speedUp: speedUp,
         //slowDown: slowDown,
         //attack:attack,

@@ -19,6 +19,7 @@ const Mob_Shinigami=function(ctx, x, y, gameArea){
     let horizontal_direction=3;
     let speed=10;
     let life=999;
+    let name="Shinigami";
 
     // - `0` - not moving  - `1` - moving to the left
     // - `2` - moving up - `3` - moving to the right - `4` - moving down
@@ -154,6 +155,7 @@ const Mob_Shinigami=function(ctx, x, y, gameArea){
         setXY:sprite.setXY,
         life:life,
         decreaseLife:decreaseLife,
+        name:name
         //speedUp: speedUp,
         //slowDown: slowDown,
         //attack:attack,
