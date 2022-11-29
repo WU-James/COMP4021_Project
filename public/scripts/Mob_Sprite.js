@@ -88,7 +88,9 @@ const Mob_Sprite=function(ctx, x, y, gameArea){
         getX:sprite.getX,
         getY:sprite.getY,
         life:life,
-        decreaseLife:decreaseLife
+        decreaseLife:decreaseLife,
+        hide:hide,
+        setXY:sprite.setXY,
         //speedUp: speedUp,
         //slowDown: slowDown,
         //attack:attack,

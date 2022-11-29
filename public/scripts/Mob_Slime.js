@@ -126,6 +126,7 @@ const Mob_Slime=function(ctx,x,y,gameArea){
         setXY:sprite.setXY,
         life:life,
         decreaseLife:decreaseLife,
+        hide:hide,
         //speedUp: speedUp,
         //slowDown: slowDown,
         //attack:attack,

@@ -7,7 +7,7 @@ const Mob_Bat=function(ctx,x,y,gameArea){
     };
 
     const sprite=Sprite(ctx,x,y);
-    sprite.setSequence(sequences.dieLeft)
+    sprite.setSequence(sequences.idleLeft)
         .setScale(2)
         .setShadowScale({ x: 0.13, y: 0.05 })
         .useSheet("img/mob_bat.png")
