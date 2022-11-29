@@ -195,6 +195,4 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         decreasePower:decreasePower,
         increasePoints:increasePoints,
     };
-
-
 };

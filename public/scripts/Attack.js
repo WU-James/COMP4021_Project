@@ -4,7 +4,6 @@
 // - `y` - The initial y position of the gem
 // - `color` - The colour of the gem
 const Attack = function(ctx, x, y) {
-
     const sequences = {
         purple: { x: 112, y: 0, width: 16, height: 16, count: 3, timing: 500, loop: true }
     };
@@ -39,7 +38,6 @@ const Attack = function(ctx, x, y) {
     return {
         getXY: sprite.getXY,
         setXY: sprite.setXY,
-
         getAge: getAge,
         getBoundingBox: sprite.getBoundingBox,
         randomize: randomize,

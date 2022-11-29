@@ -16,13 +16,9 @@ const Gamestart = function(){
         /* Create the game area */
         const gameArea = BoundingBox(context, 245, -20, 400, 880);
 
-        /* Create the sprites in the game */
-        const Effect=AttackEffect(context,2000,30);
-
         // Create 2 players
         player = (Authentication.getUser().role === 1) ?  Character_Swordsman(context,player_init_pos.x1,player_init_pos.y1,gameArea) : Character_Berserker(context, player_init_pos.x1, player_init_pos.y1, gameArea); 
         player2= (Authentication.getAnotherUser().role === 1) ?  Character_Swordsman(context,player_init_pos.x2,player_init_pos.y2,gameArea) : Character_Berserker(context, player_init_pos.x2, player_init_pos.y2, gameArea);
-
         [x,y]=gameArea.getPoints().topLeft;
         [a,b]=gameArea.getPoints().topRight;
         [c,d]=gameArea.getPoints().bottomRight;
@@ -63,8 +59,6 @@ const Gamestart = function(){
         setTimeout(spawnMob,mobTime);
 
         /* create items in the game */
-        //const chest = Item_Chest(context, 427, 350, gameArea);
-        //const attack = Attack(context, 427, 350, "green");        // The gem
         let items = [];
         let itemID = 0;
         let itemNub=0;
@@ -73,36 +67,29 @@ const Gamestart = function(){
                 let choice =Math.floor(Math.random() * 6);
                 if(choice === 0){
                     items[itemID] =  Item_Heart(context, Math.random()*800, 260+Math.random()*150, gameArea);
-
                     itemNub++;itemID++;
                 }
-
                 else if(choice === 1){
-                    items[itemID] =  Item_speed(context, Math.random()*800, 260+Math.random()*150, gameArea);
-
+                    items[itemID] =  Item_Fire(context, Math.random()*800, 260+Math.random()*150, gameArea);
                     itemNub++;itemID++;
-
                 }
                 else if(choice === 2){
-
-                    items[itemID] =  Item_attack(context, Math.random()*800, 260+Math.random()*150, gameArea);
+                    items[itemID] =  Item_speed(context, Math.random()*800, 260+Math.random()*150, gameArea);
                     itemNub++;itemID++;
-
                 }
                 else if(choice===3)
                 {
-                    items[itemID] =  Item_Fan(context, Math.random()*800, 260+Math.random()*150, gameArea);
+                    items[itemID] =  Item_attack(context, Math.random()*800, 260+Math.random()*150, gameArea);
                     itemNub++;itemID++;
                 }
                 else if(choice===4)
                 {
-                    items[itemID] =  Item_ice(context, Math.random()*800, 260+Math.random()*150, gameArea);
+                    items[itemID] =  Item_Fan(context, Math.random()*800, 260+Math.random()*150, gameArea);
                     itemNub++;itemID++;
                 }
                 else if(choice === 5){
-                    items[itemID] =  Item_Fire(context, Math.random()*800, 260+Math.random()*150, gameArea);
+                    items[itemID] =  Item_ice(context, Math.random()*800, 260+Math.random()*150, gameArea);
                     itemNub++;itemID++;
-
                 }
                 // else{
                 //     items[itemID] = Mob_Slime(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
@@ -113,6 +100,8 @@ const Gamestart = function(){
         }
         setTimeout(spawnItem,itemTime);
 
+        //Create Effect
+        const Effect=AttackEffect(context,2000,30);
 
         /* The main processing of the game */
         function doFrame(now) {
@@ -122,6 +111,11 @@ const Gamestart = function(){
             const gameTimeSoFar = now - gameStartTime;
             const timeRemaining = Math.ceil((totalGameTime * 1000 - gameTimeSoFar) / 1000);
             $("#time-remaining").text(timeRemaining);
+
+            if(timeRemaining===0)
+            {
+                return;
+            }
 
             /* Handle the game over situation here */
             // if(timeRemaining<=0)
@@ -135,10 +129,8 @@ const Gamestart = function(){
 
             /* Update the sprites */
             player.update(now);
-            //chest.update(now);
             player2.update(now);
             Effect.update(now);
-
             for(let i = 0; i<mobs.length;i++){
                 mobs[i].update(now);
             }
@@ -158,7 +150,11 @@ const Gamestart = function(){
                         sounds.collect.load();
                         sounds.collect.play();
                         player.increaseLife();
-
+                        items[i].hide();
+                    }
+                    else if(items[i].name==="Fire")
+                    {
+                        player.decreaseLife();
                         items[i].hide();
                     }
                     else if(items[i].name==="Speed")
@@ -169,11 +165,6 @@ const Gamestart = function(){
                     else if(items[i].name==="Attack")
                     {
                         player.increasePower();
-                        items[i].hide();
-                    }
-                    else if(items[i].name==="Fire")
-                    {
-                        player.decreaseLife();
                         items[i].hide();
                     }
                     else if(items[i].name==="Fan")
@@ -197,21 +188,6 @@ const Gamestart = function(){
                         items[i].hide();
                     }
                 }
-                else if(items[i].name==="Speed")
-                {
-                    if(items[i].getAge(now)>itemMaxAge)
-                    {
-                        items[i].hide();
-                    }
-                }
-                else if(items[i].name==="Attack")
-                {
-                    if(items[i].getAge(now)>itemMaxAge)
-                    {
-                        items[i].hide();
-                    }
-                }
-
                 else if(items[i].name==="Fire")
                 {
                     if(items[i].getAge(now)>trapMaxAge)
@@ -219,20 +195,37 @@ const Gamestart = function(){
                         items[i].hide();
                     }
                 }
-
-                else if(items[i].name==="Fan")
+                // else if(items[i].name==="Speed")
+                // {
+                //     if(items[i].getAge(now)>itemMaxAge)
+                //     {
+                //         items[i].hide();
+                //     }
+                // }
+                // else if(items[i].name==="Attack")
+                // {
+                //     if(items[i].getAge(now)>itemMaxAge)
+                //     {
+                //         items[i].hide();
+                //     }
+                // }
+                // else if(items[i].name==="Fan")
+                // {
+                //     if(items[i].getAge(now)>trapMaxAge)
+                //     {
+                //         items[i].hide();
+                //     }
+                // }
+                // else if(items[i].name==="ICE")
+                // {
+                //     if(items[i].getAge(now)>trapMaxAge)
+                //     {
+                //         items[i].hide();
+                //     }
+                // }
+                else if(items[i].getAge(now)>itemMaxAge)
                 {
-                    if(items[i].getAge(now)>trapMaxAge)
-                    {
-                        items[i].hide();
-                    }
-                }
-                else if(items[i].name==="ICE")
-                {
-                    if(items[i].getAge(now)>trapMaxAge)
-                    {
-                        items[i].hide();
-                    }
+                    items[i].hide();
                 }
             }
             //check effect
@@ -282,7 +275,7 @@ const Gamestart = function(){
             Socket.playerAction(event.keyCode, "keydown");
             /* Handle the key down */
             switch(event.keyCode){
-                case 37:player.move(1);break;
+                case 37:player.move(1);break
                 case 38:player.move(2);break;
                 case 39:player.move(3);break;
                 case 40:player.move(4);break;
@@ -302,7 +295,6 @@ const Gamestart = function(){
                             Effect.born();
                             player.increasePoints();
                             mobs[a].hide();
-
                         }
                     }
                     else if(player.name==="Berserker")
@@ -321,7 +313,6 @@ const Gamestart = function(){
 
         /* Handle the keyup of arrow keys and spacebar */
         $(document).on("keyup", function(event) {
-
             // Inform server of player action
             Socket.playerAction(event.keyCode, "keyup");
             /* Handle the key up */
