@@ -21,5 +21,13 @@
   "c": {
     "name": "c",
     "password": "$2b$10$npYHyRqupmD7LAxayubs/u0kLySI.6LHLasuD4p/lKD8/3D3kJw9G"
+  },
+  "aaa": {
+    "name": "aaa",
+    "password": "$2b$10$4dh7XMDGKtrfxsoL.i2zGe3a2KiyMSZHnpTa2zZMse1h6DZMMELLK"
+  },
+  "bbb": {
+    "name": "bbb",
+    "password": "$2b$10$UEGlxSrl00u4AdtjmI3qL.OY0EIZLtCanW8fhQt3SWKNZcQkk0rLa"
   }
 }

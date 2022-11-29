@@ -1,6 +1,6 @@
 const Item_Chest=function(ctx, x, y, gameArea){
     const sequences={
-        one:  { x: 0, y:0, width: 16, height: 16, count: 4, timing: 200, loop: true }
+        one:  { x: 0, y:0, width: 16, height: 16, count: 4, timing: 300, loop: false }
     };
     const sprite = Sprite(ctx, x, y);
     sprite.setSequence(sequences.one)

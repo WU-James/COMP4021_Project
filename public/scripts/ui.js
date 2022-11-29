@@ -127,7 +127,9 @@ const GameHeader = (function() {
     // This function hides the form
     const hide = function() {
         $("#header").hide();
+
         $("#game-container").hide();
+
     };
 
     // This function updates the user panel
@@ -183,7 +185,6 @@ const GameHeader = (function() {
     return { initialize, show, hide, updateUsers, start, end, setTitle };
 })();
 
-
 const UI = (function() {
     // The components of the UI are put here
     const components = [Frontpage, GameHeader];
@@ -198,3 +199,14 @@ const UI = (function() {
 
     return { initialize };
 })();
+
+const Endpage = (function() {
+    const initialize = function() {
+        $("#endpage-container").show();
+
+    };
+
+    return {initialize};
+
+})();
+

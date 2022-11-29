@@ -68,7 +68,9 @@ app.post("/register", (req, res) => {
     // G. Adding the new user account
     //
     hash = bcrypt.hashSync(password, 10);
+
     db[username] = {name, "password":hash};
+
 
     //
     // H. Saving the users.json file
@@ -116,8 +118,10 @@ app.post("/signin", (req, res) => {
 
     // Firstly, add user to online user list & session
     const name = db[username].name;
+
     onlineUsers[username] = {name, role};
     req.session.user = {username, name, role};
+
 
     // Check whether there is another user. If yes, return another user's info
     let another_user = null;
@@ -133,7 +137,9 @@ app.post("/signin", (req, res) => {
 
     
     // Send response
+
     const user = {username, name, role};
+
     res.json({status:"success", user, another_user});
 
 });
@@ -191,7 +197,9 @@ app.get("/signout", (req, res) => {
 
 
 //
+
 // ***** Socket Part *****
+
 //
 
 const { createServer } = require("http");
@@ -213,16 +221,22 @@ io.on("connection", (socket) => {
     // If the current user number is 2, start. Broadcast to update enemy (another user) info.
     const num = Object.keys(onlineUsers).length;
     if(num === 2){
+
         // Initialize 2 players position
         let pos = {};
         for (const key in onlineUsers){
             pos[key] = {x:Math.floor(Math.random() * 500 + 200), y:Math.floor(Math.random() * 100 + 280)};
-           //pos[key].x = Math.floor(Math.random() * 854);
-            //pos[key].y = Math.floor(Math.random() * 480);
         }
         const msg = {onlineUsers, pos}
 
+        // Start the game
         io.emit("start", JSON.stringify(msg, null, "  "));
+
+        // Create item
+        setTimeout(() => {
+            createItem();
+        }, 6000);
+
     }
 
     socket.on("disconnect", () => {
@@ -230,13 +244,37 @@ io.on("connection", (socket) => {
         const {username, name} = socket.request.session.user;
         delete onlineUsers[username];
         io.emit("end");
+        createItmeTimeOut = null;
     })   
 
+    // Set player action frame (move, attack)
     socket.on("playerAction", (msg) => {
         io.emit("setPlayerAction", msg);
     })
+
+    // Set player attribute (life, speed, power)
+    socket.on("playerAttr", (msg) => {
+        io.emit("setPlayerAttr", msg);
+    })
+
     
 })
+
+
+
+// Create itme on a random time interval
+let createItmeTimeOut = null;
+const createItem = function (){
+    const itemTime = Math.random()*9000;
+    const choice = Math.floor(Math.random() * 6);
+    const x = Math.random()*800;
+    const y = 260+Math.random()*150;
+
+    msg = JSON.stringify({choice, x, y}, null, "  ");
+    io.emit("createItem", msg);
+
+    createItmeTimeOut = setTimeout(createItem,itemTime);
+}
 
 
 

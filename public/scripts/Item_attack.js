@@ -1,16 +1,16 @@
-const Item_speed=function(ctx, x, y){
+const Item_attack=function(ctx, x, y){
     const sequences={
-        one:  { x: 144, y:48, width: 16, height: 16, count: 1, timing: 200, loop: true },
+        one:  { x: 0, y:0, width: 16, height: 16, count: 4, timing: 200, loop: true },
     };
 
     const sprite = Sprite(ctx, x, y);
     sprite.setSequence(sequences.one)
         .setScale(2)
         .setShadowScale({ x: 0, y: 0 })
-        .useSheet("img/object_sprites.png");
+        .useSheet("img/item_arrow.png");
 
     let birthTime = performance.now();
-    let name="Speed";
+    let name="Attack";
 
     // This function gets the age (in millisecond) of the gem.
     // - `now` - The current timestamp
@@ -26,7 +26,6 @@ const Item_speed=function(ctx, x, y){
         sprite.setXY(x, y);
         birthTime=performance.now()
     };
-
     const hide=function(){
         this.setXY(2000, 30);
     }

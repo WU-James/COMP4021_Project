@@ -3,12 +3,10 @@ const Mob_Shinigami=function(ctx, x, y, gameArea){
         idleRight:{x:0, y:0, width:100,height:80,count:4,timing:300,loop:true},
         idleLeft:{x:0, y:301, width:100,height:80,count:4,timing:300,loop:true},
 
-        //attackLeft:{x:0, y:401, width:100,height:80,count:4,timing:150,loop:true},
-        //attackLeft:{x:0, y:501, width:100,height:80,count:4,timing:150,loop:true},
-
-        //attackRight:{x:0, y:101, width:100,height:80,count:4,timing:150,loop:true},
-        //attackRight:{x:0, y:201, width:100,height:80,count:4,timing:150,loop:true},
-
+        attackLeft1:{x:0, y:401, width:100,height:80,count:4,timing:150,loop:true},
+        attackLeft2:{x:0, y:501, width:100,height:80,count:4,timing:150,loop:true},
+        attackRight1:{x:0, y:101, width:100,height:80,count:4,timing:150,loop:true},
+        attackRight2:{x:0, y:201, width:100,height:80,count:4,timing:150,loop:true},
     };
 
     const sprite=Sprite(ctx,x,y);
@@ -20,11 +18,12 @@ const Mob_Shinigami=function(ctx, x, y, gameArea){
     let direction = 0;
     let horizontal_direction=3;
     let speed=10;
+    let life=999;
+
     // - `0` - not moving  - `1` - moving to the left
     // - `2` - moving up - `3` - moving to the right - `4` - moving down
 
     const move = function(dir){
-        //sprite.setSequence(sequences.idleLeft);
         if (dir >= 1 && dir <= 4 && dir !== direction) {
             if(dir===1) {
                 horizontal_direction=dir;
@@ -121,7 +120,6 @@ const Mob_Shinigami=function(ctx, x, y, gameArea){
         /* Update the player if the player is moving */
         if (direction !== 0) {
             let { x, y } = sprite.getXY();
-
             /* Move the player */
             switch (direction) {
                 case 1: x -= speed / 60; break;
@@ -129,26 +127,36 @@ const Mob_Shinigami=function(ctx, x, y, gameArea){
                 case 3: x += speed / 60; break;
                 case 4: y += speed / 60; break;
             }
-
             /* Set the new position if it is within the game area */
             if (gameArea.isPointInBox(x, y))
                 sprite.setXY(x, y);
         }
-
         /* Update the sprite object */
         sprite.update(time);
     };
 
+    const hide=function(){
+        this.setXY(2000, 30);
+    };
+    const decreaseLife=function(){
+        life=life-1;
+    }
+
     return {
         stop: stop,
         getBoundingBox: sprite.getBoundingBox,
-        draw: sprite.draw,
-        update: update,
+        draw:sprite.draw,
+        update:update,
         move:move,
+        hide:hide,
+        getX:sprite.getX,
+        getY:sprite.getY,
+        setXY:sprite.setXY,
+        life:life,
+        decreaseLife:decreaseLife,
         //speedUp: speedUp,
         //slowDown: slowDown,
         //attack:attack,
         //attackdone:attackdone,
-
     };
 };

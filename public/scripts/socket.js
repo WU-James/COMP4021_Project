@@ -13,6 +13,7 @@ const Socket = (function() {
 
         // Wait for the socket to connect successfully
         socket.on("connect", () => {
+
             socket.on("start", (msg) => {
                 GameHeader.start();
                 
@@ -44,6 +45,7 @@ const Socket = (function() {
                 GameHeader.end();
                 GameHeader.setTitle("You Win!")
                 GameHeader.updateUsers(Authentication.getUser(),null);
+                Endpage.initialize();
             })
 
             socket.on("setPlayerAction", (msg)=>{
@@ -52,7 +54,23 @@ const Socket = (function() {
                     Gamestart.setPlayerAction(msg.keyCode, msg.keyStatus);
                 }
             })
+
+            socket.on("setPlayerAttr", (msg)=>{
+                msg = JSON.parse(msg);
+                if(msg.user.username !== Authentication.getUser().username){
+                    Gamestart.setPlayerAttr(msg.life, msg.speed, msg.power);
+                    console.log(msg.life);
+                    console.log(msg.speed);
+                    console.log(msg.power);
+                }
+            })
+
+            socket.on("createItem", (msg)=>{
+                msg = JSON.parse(msg);
+                Gamestart.spawnItem(msg.choice, msg.x, msg.y);
+            })
         });
+
     };
 
     // This function disconnects the socket from the server
@@ -61,6 +79,7 @@ const Socket = (function() {
         socket = null;
     };
 
+
     // This function inform server of player action
     const playerAction = function(keyCode, keyStatus) {
         const user = Authentication.getUser();
@@ -68,8 +87,18 @@ const Socket = (function() {
         socket.emit("playerAction", msg);
     }
 
+    // This function inform server of player attribute update
+    const playerAttr = function(life, speed, power){
+        const user = Authentication.getUser();
+        const msg = JSON.stringify({user, life, speed, power}, null, "  ");
+        socket.emit("playerAttr", msg);
+        console.log(life);
+        console.log(speed);
+        console.log(power);
+    }
 
-    return { getSocket, connect, disconnect, playerAction };
+    return { getSocket, connect, disconnect, playerAction, playerAttr };
+
 })();
 
 

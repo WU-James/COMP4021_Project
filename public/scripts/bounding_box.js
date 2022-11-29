@@ -89,5 +89,6 @@ const BoundingBox = function(ctx, top, left, bottom, right) {
         isPointInBox: isPointInBox,
         intersect: intersect,
         randomPoint: randomPoint
+        
     };
 };

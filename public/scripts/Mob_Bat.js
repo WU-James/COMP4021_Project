@@ -2,6 +2,8 @@ const Mob_Bat=function(ctx,x,y,gameArea){
     const sequences={
         idleLeft:{x:0, y:0, width:96,height:52,count:4,timing:80,loop:true},
         idleRight:{x:0, y:161, width:96,height:52,count:4,timing:80,loop:true},
+        dieLeft:{x:0, y:81, width:96,height:52,count:9,timing:90,loop:false},
+        dieRight:{x:0, y:241, width:96,height:52,count:9,timing:90,loop:false},
     };
 
     const sprite=Sprite(ctx,x,y);
@@ -13,11 +15,12 @@ const Mob_Bat=function(ctx,x,y,gameArea){
     let direction = 0;
     let horizontal_direction=3;
     let speed=30;
+    let life=1;
+
     // - `0` - not moving  - `1` - moving to the left
     // - `2` - moving up - `3` - moving to the right - `4` - moving down
 
     const move = function(dir) {
-        //sprite.setSequence(sequences.idleLeft);
         if (dir >= 1 && dir <= 4 && dir !== direction) {
             if(dir===1) {
                 horizontal_direction=dir;
@@ -85,11 +88,10 @@ const Mob_Bat=function(ctx,x,y,gameArea){
     };
 
     const update = function(time) {
-        /* Update the player if the player is moving */
+        /* Update when moving */
         if (direction !== 0) {
             let { x, y } = sprite.getXY();
 
-            /* Move the player */
             switch (direction) {
                 case 1: x -= speed / 60; break;
                 case 2: y -= speed / 60; break;
@@ -105,15 +107,24 @@ const Mob_Bat=function(ctx,x,y,gameArea){
         sprite.update(time);
     };
 
+    const hide=function(){
+        this.setXY(2000, 30);
+    };
+    const decreaseLife=function(){
+        life=life-1;
+    }
+
     return {
         stop: stop,
         getBoundingBox: sprite.getBoundingBox,
         draw: sprite.draw,
         update: update,
         move:move,
-        //speedUp: speedUp,
-        //slowDown: slowDown,
-        //attack:attack,
-        //attackdone:attackdone,
+        hide:hide,
+        getX:sprite.getX,
+        getY:sprite.getY,
+        setXY:sprite.setXY,
+        life:life,
+        decreaseLife:decreaseLife,
     };
 };
