@@ -8,6 +8,8 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         attackLeft:{x:0,y:225,width:32.18661,height:27,count:7,timing:35,loop:false},
         dieRight:{x:0,y:133,width:32.18661,height:27,count:7,timing:200,loop:false},
         dieLeft:{x:0,y:290,width:31.7,height:27,count:7,timing:200,loop:false},
+        damageRight:{x:0,y:133,width:32.18661,height:27,count:3,timing:200,loop:false},
+        damageLeft:{x:0,y:290,width:31.7,height:27,count:3,timing:200,loop:false},
     };
 
     const sprite=Sprite(ctx,x,y);
@@ -108,12 +110,26 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         }
     }
 
-    const speedUp = function() {
-        speed = 250;
+    const Die = function() {
+        if(horizontal_direction===1)
+        {
+            sprite.setSequence(sequences.dieLeft);
+        }
+        else if(horizontal_direction===3)
+        {
+            sprite.setSequence(sequences.dieRight);
+        }
     };
 
-    const slowDown = function() {
-        speed = 150;
+    const Damage = function() {
+        if(horizontal_direction===1)
+        {
+            sprite.setSequence(sequences.damageLeft);
+        }
+        else if(horizontal_direction===3)
+        {
+            sprite.setSequence(sequences.damageRight);
+        }
     };
     const update = function(time) {
         /* Update the player if the player is moving */
@@ -173,6 +189,12 @@ const Character_Berserker =function(ctx,x,y,gameArea){
     const increasePoints=function(){
         points=points+1;
     }
+    const checkLife=function(){
+        if(life<=0){
+            return true;
+        }
+        return false;
+    }
 
     return {
         stop: stop,
@@ -194,5 +216,8 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         increasePower:increasePower,
         decreasePower:decreasePower,
         increasePoints:increasePoints,
+        Damage:Damage,
+        Die:Die,
+        checkLife:checkLife
     };
 };

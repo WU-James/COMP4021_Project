@@ -233,6 +233,12 @@ const Gamestart = function(){
             {
                 Effect.setXY(2000,300);
             }
+            //check life
+            if(player.checkLife()===true)
+            {
+                player.Die();
+                return;
+            }
 
             /* Clear the screen */
             context.clearRect(0, 0, cv.width, cv.height);

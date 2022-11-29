@@ -45,6 +45,7 @@ const Socket = (function() {
                 GameHeader.end();
                 GameHeader.setTitle("You Win!")
                 GameHeader.updateUsers(Authentication.getUser(),null);
+                Endpage.initialize();
             })
 
             socket.on("setPlayerAction", (msg)=>{

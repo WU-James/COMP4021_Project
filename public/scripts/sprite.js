@@ -103,7 +103,7 @@ const Sprite = function(ctx, x, y) {
 
         /* Find the box coordinates */
         const top = y - size.height / 2+10;
-        const left = x - size.width / 2+10;
+        const left = x - size.width / 2+13;
         const bottom = y + size.height / 2-10;
         const right = x + size.width / 2-13;
 
