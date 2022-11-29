@@ -18,6 +18,7 @@ const Mob_Bat=function(ctx,x,y,gameArea){
     let life=1;
     let name="Bat";
 
+
     // - `0` - not moving  - `1` - moving to the left
     // - `2` - moving up - `3` - moving to the right - `4` - moving down
 

@@ -24,6 +24,7 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
     let horizontal_direction=3;
     let speed=140;
     let power=0;
+
     let points=0;
     // - `0` - not moving - `1` - moving to the left - `2` - moving up
     // - `3` - moving to the right - `4` - moving down
@@ -156,17 +157,22 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
     const increaseLife=function(){
         life=life+1;
         Socket.playerAttr(life, speed, power);
+
     }
     const decreaseLife=function(){
         if(life>0) {
             life = life - 1;
         }
+
         Socket.playerAttr(life, speed, power);
+
     }
     /* speed */
     const increaseSpeed=function(){
         speed=speed+20;
+
         Socket.playerAttr(life, speed, power);
+
     }
     const decreaseSpeed=function(){
         if(speed>80) {
@@ -187,6 +193,7 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         life=life-1;
         speed=speed-10;
         Socket.playerAttr(life, speed, power);
+
     };
     /* points */
     const increasePoints=function(){
@@ -202,6 +209,7 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         else{
             return false;
         }
+
     }
 
     const setAttr=function(l, s, p){
@@ -214,12 +222,14 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
     }
 
 
+
     return {
         stop: stop,
         getBoundingBox: sprite.getBoundingBox,
         getAttackingBoxSword: sprite.getAttackingBoxSword,
         getAttackingBox:sprite.getAttackingBox,
         getABox:sprite.getABox,
+
         draw: sprite.draw,
         update: update,
         move:move,
@@ -238,5 +248,6 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         checkLife:checkLife,
         setAttr:setAttr,
         increaseHighPoints:increaseHighPoints,
+
     };
 };

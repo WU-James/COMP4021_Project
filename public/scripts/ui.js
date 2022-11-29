@@ -78,6 +78,7 @@ const Frontpage = (function() {
                 (error) => { $("#register-message").text(error); }
             );
         });
+
     };
 
     // This function shows the form
@@ -190,6 +191,7 @@ const GameHeader = (function() {
         $("#user-panel2 .life").html("Life:"+life);
     }
 
+
     const setScore = function(scores){
         $("#user-panel .score").html("Score:"+scores);
     }
@@ -200,6 +202,7 @@ const GameHeader = (function() {
 
     return { initialize, show, hide, updateUsers, start, end, setTitle, updateLife, updateAnotherLife, setAnotherScore, setScore };
 })();
+
 
 const UI = (function() {
     // The components of the UI are put here
@@ -219,6 +222,43 @@ const UI = (function() {
 const Endpage = (function() {
     const initialize = function() {
         $("#endpage-container").show();
+
+
+        // Click event for the restart button
+        $("#restart-button").on("click", () => {
+            // Send a restart request
+            $("#endpage-container").hide();
+
+            Authentication.signin(this.username, this.password, this.role,
+                () => {
+                    hide();
+                    GameHeader.setTitle("Waiting For Another User...");
+                    GameHeader.updateUsers(Authentication.getUser(), Authentication.getAnotherUser());
+                    GameHeader.show();
+                    Socket.connect();
+                },
+                (error) => { $("#signin-message").text(error); }
+            );
+
+            GameHeader.setTitle("Waiting For Another User...");
+            GameHeader.updateUsers(Authentication.getUser(), Authentication.getAnotherUser());
+            $("#user-panel2 .user-name").html("?");
+            GameHeader.show();
+
+        });
+
+        // Click event for the signout button
+        $("#signoutout-button").on("click", () => {
+            // Send a signout request
+            Authentication.signout(
+                () => {
+                    Socket.disconnect();
+                    //hide();
+                    $("#endpage-container").hide();
+                    Frontpage.show();
+                }
+            );
+        });
 
     };
 

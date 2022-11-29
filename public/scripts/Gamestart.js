@@ -14,6 +14,17 @@ const Gamestart = function(){
     let player = null;
     let player2 = null;
     let player_init_pos = {x1:0, y1:0, x2:0, y2:0}
+    
+    const sounds = {
+        startPage: new Audio("../music/music_start.ogg"),
+        gamePage: new Audio("../music/music_game.ogg"),
+        endPage: new Audio("../music/music_end.ogg"),
+        collect: new Audio("../music/sound_collect.wav"),
+        explosion: new Audio("../music/sound_explosion.wav"),
+        damage: new Audio("../music/sound_damage.wav"),
+        end: new Audio("../music/sound_gameover.wav"),
+    };
+
 
     /* create mob in the game */
     let mobs = [];
@@ -25,14 +36,15 @@ const Gamestart = function(){
     let itemID = 0;
     let itemNub=0;
 
-    /* create sounds in the game */
-    const sounds = {
-        collect: new Audio("../music/collect.mp3"),
-    };
+   
+
     
 
     const start = function(){
+
+
         gameArea = BoundingBox(context, 245, -20, 400, 880);
+
 
         // Create 2 players
         player = (Authentication.getUser().role === 1) ?  Character_Swordsman(context,player_init_pos.x1,player_init_pos.y1,gameArea) : Character_Berserker(context, player_init_pos.x1, player_init_pos.y1, gameArea); 
@@ -43,9 +55,18 @@ const Gamestart = function(){
         [e,h]=gameArea.getPoints().bottomLeft;
 
 
+
         //Create Effect
         const Effect=AttackEffect(context,2000,30);
         const beEffect=beAttackEffect(context,2000,30);
+
+        sounds.gamePage.load();
+        //sounds.gamePage.play();
+        sounds.gamePage.loop=true;
+        sounds.gamePage.volume=0.05;
+        sounds.damage.volume=0.2;
+
+   
 
         /* The main processing of the game */
         function doFrame(now) {
@@ -64,6 +85,7 @@ const Gamestart = function(){
             if(player.checkLife()===true)
             {
                 context.clearRect(0, 0, cv.width, cv.height);
+                sounds.gamePage.pause();
                 return;
             }
 
@@ -82,6 +104,7 @@ const Gamestart = function(){
             player2.update(now);
             Effect.update(now);
             beEffect.update(now);
+
             for(let i = 0; i<mobs.length;i++){
                 mobs[i].update(now);
             }
@@ -97,7 +120,6 @@ const Gamestart = function(){
                 if (box.isPointInBox(x, y)) {
                     if(items[i].name==="Heart")
                     {
-                        sounds.collect.pause();
                         sounds.collect.load();
                         sounds.collect.play();
                         player.increaseLife();
@@ -106,18 +128,27 @@ const Gamestart = function(){
                     else if(items[i].name==="Fire")
                     {
                         player.decreaseLife();
+
                         player.Damage();
                         beEffect.setXY(x,y);
                         beEffect.born();
+
                         items[i].hide();
+                        sounds.damage.load();
+                        sounds.damage.play();
                     }
                     else if(items[i].name==="Speed")
                     {
+                        sounds.collect.load();
+                        sounds.collect.play();
                         player.increaseSpeed();
                         items[i].hide();
                     }
                     else if(items[i].name==="Attack")
                     {
+
+                        sounds.collect.load();
+                        sounds.collect.play();
                         player.increasePower();
                         items[i].hide();
                     }
@@ -128,14 +159,19 @@ const Gamestart = function(){
                         beEffect.setXY(x,y);
                         beEffect.born();
                         items[i].hide();
+                        sounds.damage.load();
+                        sounds.damage.play();
                     }
                     else if(items[i].name==="ICE")
                     {
                         player.decreasePower();
+
                         player.Damage();
                         beEffect.setXY(x,y);
                         beEffect.born();
                         items[i].hide();
+                        sounds.damage.load();
+                        sounds.damage.play();
                     }
                 }
             }
@@ -149,9 +185,11 @@ const Gamestart = function(){
                         player.decreaseLife();
                         player.Damage();
                         mobs[i].hide();
-            
-                    }
+                        sounds.damage.load();
+                        sounds.damage.play();
                 }
+            }
+
            //Disappear
             for (let i=0;i<items.length;i++) {
                 if(items[i].name==="Heart")
@@ -206,6 +244,7 @@ const Gamestart = function(){
             {
                 Effect.setXY(2000,300);
             }
+
             if(beEffect.getAge(now)>430)
             {
                 beEffect.setXY(2000,300);
@@ -214,8 +253,9 @@ const Gamestart = function(){
             // if(player.checkLife()===true)
             // {
             //     player.Die();
-
             // }
+
+
 
             /* Clear the screen */
             context.clearRect(0, 0, cv.width, cv.height);
@@ -226,6 +266,7 @@ const Gamestart = function(){
             player2.draw();
             Effect.draw();
             beEffect.draw();
+
             for(let i = 0; i<mobs.length;i++){
                 mobs[i].draw();
             }
@@ -236,7 +277,6 @@ const Gamestart = function(){
             /* Process the next frame */
             requestAnimationFrame(doFrame);
         };
-
 
         /* Handle the keydown of arrow keys and spacebar */
         $(document).on("keydown", function(event) {
@@ -261,6 +301,7 @@ const Gamestart = function(){
                         if (box.isPointInBox(x, y)) {
                             Effect.setXY(x,y);
                             Effect.born();
+
                             if(mobs[a].name==="Shinigami")
                             {
                                 player.increaseHighPoints();
@@ -269,7 +310,11 @@ const Gamestart = function(){
                             {
                                 player.increasePoints();
                             }
-                            mobs[a].hide();
+                            mobs[a].hide();                       
+                            sounds.explosion.load();
+                            sounds.explosion.play();
+                            sounds.explosion.loop=false;
+                            sounds.explosion.volume=0.4;
                         }
                     }
                     else if(player.name==="Berserker")
@@ -278,6 +323,7 @@ const Gamestart = function(){
                         if (box.isPointInBox(x, y)) {
                             Effect.setXY(x,y);
                             Effect.born();
+
                             if(mobs[a].name==="Shinigami")
                             {
                                 player.increaseHighPoints();
@@ -287,6 +333,10 @@ const Gamestart = function(){
                                 player.increasePoints();
                             }
                             mobs[a].hide();
+                            sounds.explosion.load();
+                            sounds.explosion.play();
+                            sounds.explosion.loop=false;
+                            sounds.explosion.volume=0.4;
                         }
                     }
                 }
@@ -337,6 +387,7 @@ const Gamestart = function(){
         player_init_pos.x2 = x2;
         player_init_pos.y2 = y2;
     }
+
 
     const setPlayerAttr = function(life, speed, power){
         player2.setAttr(life, speed, power);
@@ -412,4 +463,5 @@ const Gamestart = function(){
     }
 
     return {start, setPlayerAction, initPlayerPosition, setPlayerAttr, spawnItem, spawnMob, setMobDir}
+
 }();

@@ -109,6 +109,7 @@ const Sprite = function(ctx, x, y) {
 
         return BoundingBox(ctx, top, left, bottom, right);
     };
+
     const getABox = function() {
         /* Get the display size of the sprite */
         const size = getDisplaySize();
@@ -121,9 +122,7 @@ const Sprite = function(ctx, x, y) {
 
         return BoundingBox(ctx, top, left, bottom, right);
     };
-    
-    
-    
+
     const getAttackingBoxSword = function() {
         /* Get the display size of the sprite */
         const size = getDisplaySize();
@@ -133,7 +132,6 @@ const Sprite = function(ctx, x, y) {
         const left = x - size.width / 2;
         const bottom = y + size.height / 2+1;
         const right = x + (size.width / 2)+3;
-
         return BoundingBox(ctx, top, left, bottom, right);
     };
 
@@ -146,10 +144,8 @@ const Sprite = function(ctx, x, y) {
         const left = x - size.width / 2-3;
         const bottom = y + size.height / 2+3;
         const right = x + (size.width / 2)+10;
-
         return BoundingBox(ctx, top, left, bottom, right);
     };
-
 
     // This function draws shadow underneath the sprite.
     const drawShadow = function() {
@@ -252,5 +248,6 @@ const Sprite = function(ctx, x, y) {
         getX:getX,
         getY:getY,
         getABox:getABox
+
     };
 };

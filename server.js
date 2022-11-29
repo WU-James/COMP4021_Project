@@ -232,12 +232,14 @@ io.on("connection", (socket) => {
         // Start the game
         io.emit("start", JSON.stringify(msg, null, "  "));
 
+
         // Create item
         setTimeout(() => {
             createItem();
             createMob();
             setMobDir();
         }, 6000);
+
 
     }
 
@@ -251,10 +253,13 @@ io.on("connection", (socket) => {
         setMobDirTimeout = null;
     })   
 
+
     // Set player action frame (move, attack)
+
     socket.on("playerAction", (msg) => {
         io.emit("setPlayerAction", msg);
     })
+
 
     // Set player attribute (life, speed, power)
     socket.on("playerAttr", (msg) => {
@@ -265,6 +270,7 @@ io.on("connection", (socket) => {
     socket.on("anotherScore", (msg)=>{
         io.emit("setAnotherScore", msg);
     })
+
 
     
 })

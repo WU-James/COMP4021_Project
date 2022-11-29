@@ -29,5 +29,9 @@
   "bbb": {
     "name": "bbb",
     "password": "$2b$10$UEGlxSrl00u4AdtjmI3qL.OY0EIZLtCanW8fhQt3SWKNZcQkk0rLa"
+  },
+  "ccc": {
+    "name": "ccc",
+    "password": "$2b$10$Ux2.KjV5urBdwqIakPa2lO7Eao7xyvL7gkn9qm.YAWS07DcduiB/m"
   }
 }
