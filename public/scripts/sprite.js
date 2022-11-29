@@ -109,7 +109,21 @@ const Sprite = function(ctx, x, y) {
 
         return BoundingBox(ctx, top, left, bottom, right);
     };
+    const getABox = function() {
+        /* Get the display size of the sprite */
+        const size = getDisplaySize();
 
+        /* Find the box coordinates */
+        const top = y - size.height / 2-2;
+        const left = x - size.width / 2+1;
+        const bottom = y + size.height / 2+1/5;
+        const right = x + size.width / 2-1;
+
+        return BoundingBox(ctx, top, left, bottom, right);
+    };
+    
+    
+    
     const getAttackingBoxSword = function() {
         /* Get the display size of the sprite */
         const size = getDisplaySize();
@@ -129,9 +143,9 @@ const Sprite = function(ctx, x, y) {
 
         /* Find the box coordinates */
         const top = y - size.height / 2-3;
-        const left = x - size.width / 2;
+        const left = x - size.width / 2-3;
         const bottom = y + size.height / 2+3;
-        const right = x + (size.width / 2)+8;
+        const right = x + (size.width / 2)+10;
 
         return BoundingBox(ctx, top, left, bottom, right);
     };
@@ -237,5 +251,6 @@ const Sprite = function(ctx, x, y) {
         update: update,
         getX:getX,
         getY:getY,
+        getABox:getABox
     };
 };

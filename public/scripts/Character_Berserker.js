@@ -23,7 +23,7 @@ const Character_Berserker =function(ctx,x,y,gameArea){
     let life=4;
     let horizontal_direction=3;
     let speed=130;
-    let power=2;
+    let power=0;
     let points=0;
     // - `0` - not moving - `1` - moving to the left - `2` - moving up
     // - `3` - moving to the right - `4` - moving down
@@ -179,16 +179,13 @@ const Character_Berserker =function(ctx,x,y,gameArea){
     };
     /* power */
     const increasePower=function() {
-        power = power + 1;
+        life = life + 1;
+        speed=speed+10; 
         Socket.playerAttr(life, speed, power);
     };
     const decreasePower=function() {
-        if(power>1) {
-            power = power - 1;
-        }
-        if(life>0) {
-            life = life - 1;
-        }
+        speed=speed-10;
+        life=life-1;
         Socket.playerAttr(life, speed, power);
     };
     /* points */
@@ -210,6 +207,9 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         speed = s;
         power = p;
     }
+    const increaseHighPoints=function(){
+        points=points+5;
+    }
 
     return {
         stop: stop,
@@ -220,6 +220,7 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         getBoundingBox: sprite.getBoundingBox,
         getAttackingBox:sprite.getAttackingBox,
         getAttackingBoxSword:sprite.getAttackingBoxSword,
+        getABox:sprite.getABox,
         draw: sprite.draw,
         name:name,
         increaseLife:increaseLife,
@@ -232,6 +233,8 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         Damage:Damage,
         Die:Die,
         checkLife:checkLife,
-        setAttr:setAttr
+        setAttr:setAttr,
+        increaseHighPoints:increaseHighPoints,
+
     };
 };

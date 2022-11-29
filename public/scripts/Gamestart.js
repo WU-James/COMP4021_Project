@@ -45,6 +45,7 @@ const Gamestart = function(){
 
         //Create Effect
         const Effect=AttackEffect(context,2000,30);
+        const beEffect=beAttackEffect(context,2000,30);
 
         /* The main processing of the game */
         function doFrame(now) {
@@ -57,6 +58,12 @@ const Gamestart = function(){
 
             if(timeRemaining===0)
             {
+                context.clearRect(0, 0, cv.width, cv.height);
+                return;
+            };
+            if(player.checkLife()===true)
+            {
+                context.clearRect(0, 0, cv.width, cv.height);
                 return;
             }
 
@@ -74,6 +81,7 @@ const Gamestart = function(){
             player.update(now);
             player2.update(now);
             Effect.update(now);
+            beEffect.update(now);
             for(let i = 0; i<mobs.length;i++){
                 mobs[i].update(now);
             }
@@ -98,6 +106,9 @@ const Gamestart = function(){
                     else if(items[i].name==="Fire")
                     {
                         player.decreaseLife();
+                        player.Damage();
+                        beEffect.setXY(x,y);
+                        beEffect.born();
                         items[i].hide();
                     }
                     else if(items[i].name==="Speed")
@@ -113,15 +124,34 @@ const Gamestart = function(){
                     else if(items[i].name==="Fan")
                     {
                         player.decreaseSpeed();
+                        player.Damage();
+                        beEffect.setXY(x,y);
+                        beEffect.born();
                         items[i].hide();
                     }
                     else if(items[i].name==="ICE")
                     {
                         player.decreasePower();
+                        player.Damage();
+                        beEffect.setXY(x,y);
+                        beEffect.born();
                         items[i].hide();
                     }
                 }
             }
+            for (let i = 0; i < mobs.length; i++) {
+                let x = mobs[i].getX();
+                let y = mobs[i].getY();
+                const box = player.getABox();
+                if (box.isPointInBox(x, y)) {
+                        beEffect.setXY(x, y);
+                        beEffect.born();
+                        player.decreaseLife();
+                        player.Damage();
+                        mobs[i].hide();
+            
+                    }
+                }
            //Disappear
             for (let i=0;i<items.length;i++) {
                 if(items[i].name==="Heart")
@@ -176,12 +206,16 @@ const Gamestart = function(){
             {
                 Effect.setXY(2000,300);
             }
-            //check life
-            if(player.checkLife()===true)
+            if(beEffect.getAge(now)>430)
             {
-                player.Die();
-
+                beEffect.setXY(2000,300);
             }
+            //check life
+            // if(player.checkLife()===true)
+            // {
+            //     player.Die();
+
+            // }
 
             /* Clear the screen */
             context.clearRect(0, 0, cv.width, cv.height);
@@ -191,7 +225,7 @@ const Gamestart = function(){
             player.draw();
             player2.draw();
             Effect.draw();
-
+            beEffect.draw();
             for(let i = 0; i<mobs.length;i++){
                 mobs[i].draw();
             }
@@ -227,7 +261,14 @@ const Gamestart = function(){
                         if (box.isPointInBox(x, y)) {
                             Effect.setXY(x,y);
                             Effect.born();
-                            player.increasePoints();
+                            if(mobs[a].name==="Shinigami")
+                            {
+                                player.increaseHighPoints();
+                            }
+                            else
+                            {
+                                player.increasePoints();
+                            }
                             mobs[a].hide();
                         }
                     }
@@ -237,7 +278,14 @@ const Gamestart = function(){
                         if (box.isPointInBox(x, y)) {
                             Effect.setXY(x,y);
                             Effect.born();
-                            player.increasePoints();
+                            if(mobs[a].name==="Shinigami")
+                            {
+                                player.increaseHighPoints();
+                            }
+                            else
+                            {
+                                player.increasePoints();
+                            }
                             mobs[a].hide();
                         }
                     }
