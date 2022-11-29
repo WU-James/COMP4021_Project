@@ -49,16 +49,29 @@
     <div id="frontpage-container" class="overlay row">
         <div id="instruction-box" class = "col shadow">
             <div class="spacer-2"></div>
+            <div id = "description-title" class = "caption">
+                WELCOME!! :)
+            </div>
+            <div id = "description">
+                <p>This is a 1V1 2D pixel game.
+                    You will be teleported to a forest surrounded by dangerous creatures.
+                    Use your weapon to fight as many monsters as possible.
+                    Survive until the last second, good luck!
+                </p>
+            </div>
             <div id = "instruction-title" class = "caption">
-                User Guide
+                How To Play
             </div>
             <div id = "instruction">
-                <p>Instruction here...................</p>
-                <p>1.</p>
-                <p>2.</p>
-                <p>3.</p>
+                <p>1. New players can register for a new account; existing players can sign in with your account.</p>
+                <p>2. The game starts in 5s after both players are ready.</p>
+                <p>3. There are two characters: Swordsman and Berserker, use <strong>" ← ↑ → "</strong> to control the movement. </p>
+                <p>4. Hold your weapons tightly and use <strong>"space"</strong> to attack.  </p>
+                <p>5. You only have<strong> 3♥</strong>, keep an eye on useful items or threatening traps on the ground!</p>
+                <p></p>
 
             </div>
+
         </div>
         <div id="form-box" class="content shadow col" >
             <form id="signin-form" class="col">
@@ -98,20 +111,32 @@
     </div>
 
     <div id="endpage-container" class="overlay row">
-        <div id="instruction-box" class = "col shadow">
-            <div class="spacer-2"></div>
-            <div id = "instruction-title" class = "caption">
-                User Guide
+        <div id="ranking-box" class = "col shadow">
+            <div class="spacer-1"></div>
+            <div id = "ranking-title" class = "caption">
+                Ranking
             </div>
-            <div id = "instruction">
-                <p>Instruction here...................</p>
+            <div id = "ranking">
                 <p>1.</p>
                 <p>2.</p>
                 <p>3.</p>
-
+                <p></p>
             </div>
         </div>
+        <div class="spacer-2"></div>
+        <div id="restart-box" class = "col shadow">
+            <div class="spacer-1"></div>
+            <div id = "restart-title" class = "caption">
+                You Win
+            </div>
+            <div id = "restart">
+                <p>Your current score: </p>
+                <p>Your best score: </p>
+                <button type="restart">Restart</button>
+                <button type="sign out">Sign Out</button>
+            </div>
         </div>
+
     </div>
 
     <script src="/socket.io/socket.io.min.js"></script>

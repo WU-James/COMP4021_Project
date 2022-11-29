@@ -6,33 +6,35 @@
     --field-background-hover: #eee;
     --input-background: #eee;
     --overlay-background: rgba(187, 206, 239, 0.8);
-    --overlay-caption-color: #eb4a40;
-    --overlay-content-background: linear-gradient(white, #fde0c5);
-    --instruction-box-background: linear-gradient(white, #fde0c5);
+    --overlay-caption-color: rgba(0, 0, 0, 0.8);
+    --overlay-content-background: linear-gradient(white, rgb(255, 255, 255));
+    --instruction-box-background: linear-gradient(white, rgb(255, 255, 255));
+    --ranking-box-background: linear-gradient(white, rgb(255, 255, 255));
 
-    --header-background: linear-gradient(to right, #eb4a40, #f59e72);
+    --header-background: linear-gradient(to bottom, rgba(7, 26, 30, 0.8), rgba(7, 26, 30, 0.8));
     --main-panel-background: linear-gradient(white, #fde0c5);
-    --online-users-panel-background: linear-gradient(to right, #fde0c5, #facba6);
+    --online-users-panel-background: linear-gradient(to right, rgba(187, 206, 239, 0.8), rgba(169, 201, 255, 0.8));
     --chat-panel-background: none;
 
     --timer-color: white;
     --caption-color: white;
 
-    --font-color: black;
+    --font-color: rgba(54, 64, 82, 0.8);
     --date-color: gray;
 
-    --register-form-background: linear-gradient(#fde0c5, #facba6);
+    --register-form-background: linear-gradient(rgba(187, 206, 239, 0.8), rgba(187, 206, 239, 0.8));
     --warning-color: red;
 
     --button-color: white;
-    --button-background: #f2855d;
-    --button-background-hover: #f8b58b;
+    --button-background: rgba(54, 64, 82, 0.8);
+    --button-background-hover: rgba(169, 201, 255, 0.8);
 
 }
 * {
     font-family: "Abel", sans-serif;
     color: var(--font-color);
     box-sizing: border-box;
+    font-size: 95%;
 }
 
 /* Basic */
@@ -54,7 +56,7 @@ body {
 /* Flexbox related */
 .row, .col {
     display: flex;
-    gap: 10px;
+    column-gap: 10px;
     padding: 20px;
     align-items: center;
     justify-content: center;
@@ -71,12 +73,28 @@ body {
     align-self: stretch;
     justify-content: flex-start;
 }
+#ranking-box{
+    width: 100%;
+    height: 50%;
+    align-self: stretch;
+    justify-content: flex-start;
+    background: var(--ranking-box-background);
+    row-gap: 10px;
+}
+#restart-box{
+    width: 100%;
+    height: 50%;
+    align-self: stretch;
+    justify-content: flex-start;
+    background: var(--ranking-box-background);
+}
 #form-box{
     width: 50%;
     align-self: stretch;
 }
 #signin-form{
     align-self: stretch;
+    top:0;
 }
 #register-form{
     align-self: stretch;
@@ -90,8 +108,9 @@ body {
     background: var(--overlay-background);
 }
 .overlay .caption {
-    font-size: 120%;
+    font-size: 110%;
     color: var(--overlay-caption-color);
+    font-weight: bolder;
 }
 .overlay .content {
     background: var(--overlay-content-background);
@@ -103,20 +122,24 @@ body {
 
 /* Form related */
 form input, form select {
-    width: 100%;
+    width: 80%;
+    font-size: 80%;
+
 }
 input, select {
     font-size: 1rem;
     background: var(--input-background);
     border: none;
     border-radius: 20px;
-    padding: 10px 15px;
+    padding: 5px 8px;
+    margin:3px;
 }
 input::placeholder, select {
     color: gray;
 }
 button {
     font-weight: bold;
+    font-size: 90%;
     height: 40px;
     border: 1px solid black;
     color: var(--button-color);
@@ -140,7 +163,7 @@ button.icon {
     background: none;
     box-shadow: none;
     padding: 3px 5px;
-    padding-top: 5px;
+
 }
 button.icon * {
     color: white;
@@ -257,7 +280,7 @@ button.icon:active {
 /* Signin overlay */
 #register-form {
     background: var(--register-form-background);
-    padding: 20px;
+    padding: 10px;
 }
 
 /* Edit user overlay */
@@ -290,8 +313,6 @@ button.icon:active {
     margin-left: 5px;
     margin-right: 5px;
 }
-
-
 
 
 
