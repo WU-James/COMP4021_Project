@@ -191,19 +191,7 @@ const Character_Berserker =function(ctx,x,y,gameArea){
         life=life-1;
         Socket.playerAttr(life, speed, power);
     };
-    /* power */
-    const increasePower=function() {
-        power = power + 1;
-    };
-    const decreasePower=function() {
-        if(power>1) {
-            power = power - 1;
-        }
-        if(life>0) {
-            life = life - 1;
-        }
 
-    };
     /* points */
     const increasePoints=function(){
         points=points+1;
