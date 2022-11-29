@@ -17,6 +17,22 @@ const Socket = (function() {
             socket.on("start", (msg) => {
                 GameHeader.start();
                 
+                // Initialize life
+                // if(Authentication.getUser().role == 1){
+                //     $("#user-panel .life").html("Life:3");
+                // }
+                // else{
+                //     $("#user-panel .life").html("Life:4");
+                // }
+
+                // if(Authentication.getAnotherUser().role == 1){
+                //     $("#user-panel2 .life").html("Life:3");
+                // }
+                // else{
+                //     $("#user-panel2 .life").html("Life:4");
+                // }
+
+
                 // Set another user's info in Authentication
                 msg = JSON.parse(msg);
                 const user = Authentication.getUser();
@@ -59,6 +75,7 @@ const Socket = (function() {
                 msg = JSON.parse(msg);
                 if(msg.user.username !== Authentication.getUser().username){
                     Gamestart.setPlayerAttr(msg.life, msg.speed, msg.power);
+                    GameHeader.updateAnotherLife(msg.life);
                     console.log(msg.life);
                     console.log(msg.speed);
                     console.log(msg.power);
@@ -68,6 +85,23 @@ const Socket = (function() {
             socket.on("createItem", (msg)=>{
                 msg = JSON.parse(msg);
                 Gamestart.spawnItem(msg.choice, msg.x, msg.y);
+            })
+
+            socket.on("createMob", (msg)=>{
+                msg = JSON.parse(msg);
+                Gamestart.spawnMob(msg.choice, msg.x, msg.y);
+            })
+
+            socket.on("setMobDir", (msg) => {
+                msg = JSON.parse(msg);
+                Gamestart.setMobDir(msg.dir);
+            })
+
+            socket.on("setAnotherScore", (msg)=>{
+                msg = JSON.parse(msg);
+                if(msg.user.username !== Authentication.getUser().username){
+                    GameHeader.setAnotherScore(msg.points);
+                }
             })
         });
 
@@ -92,12 +126,20 @@ const Socket = (function() {
         const user = Authentication.getUser();
         const msg = JSON.stringify({user, life, speed, power}, null, "  ");
         socket.emit("playerAttr", msg);
+        GameHeader.updateLife(life);
+
         console.log(life);
         console.log(speed);
         console.log(power);
     }
 
-    return { getSocket, connect, disconnect, playerAction, playerAttr };
+    const anotherScore = function(points){
+        const user = Authentication.getUser();
+        const msg = JSON.stringify({user, points}, null, "  ");
+        socket.emit("anotherScore", msg);
+    }
+
+    return { getSocket, connect, disconnect, playerAction, playerAttr, anotherScore };
 
 })();
 

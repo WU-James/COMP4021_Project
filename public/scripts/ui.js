@@ -182,7 +182,23 @@ const GameHeader = (function() {
         $("#timer").html(text);
     }
 
-    return { initialize, show, hide, updateUsers, start, end, setTitle };
+    const updateLife = function(life){
+        $("#user-panel .life").html("Life:"+life);
+    }
+
+    const updateAnotherLife = function(life){
+        $("#user-panel2 .life").html("Life:"+life);
+    }
+
+    const setScore = function(scores){
+        $("#user-panel .score").html("Score:"+scores);
+    }
+    const setAnotherScore = function(scores){
+        $("#user-panel2 .score").html("Score:"+scores);
+    }
+    
+
+    return { initialize, show, hide, updateUsers, start, end, setTitle, updateLife, updateAnotherLife, setAnotherScore, setScore };
 })();
 
 const UI = (function() {

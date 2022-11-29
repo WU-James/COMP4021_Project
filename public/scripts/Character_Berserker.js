@@ -194,6 +194,9 @@ const Character_Berserker =function(ctx,x,y,gameArea){
     /* points */
     const increasePoints=function(){
         points=points+1;
+        console.log(points);
+        GameHeader.setScore(points);
+        Socket.anotherScore(points);
     }
     const checkLife=function(){
         if(life<=0){

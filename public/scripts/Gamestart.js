@@ -7,8 +7,9 @@ const Gamestart = function(){
     const trapMaxAge=4000;
     let gameStartTime = 0;      // The timestamp when the game starts
 
+    /* Create the game area */
+    let gameArea = null;
     
-
     /* create players in the game */
     let player = null;
     let player2 = null;
@@ -18,20 +19,17 @@ const Gamestart = function(){
     let mobs = [];
     let mobNum = 0;
     let mobID = 0;
-    const mobTime = Math.random()*7000;
 
     /* create items in the game */
     let items = [];
     let itemID = 0;
     let itemNub=0;
 
+    /* create sounds in the game */
     const sounds = {
         collect: new Audio("../music/collect.mp3"),
     };
     
-
-    /* Create the game area */
-    let gameArea = null;
 
     const start = function(){
         gameArea = BoundingBox(context, 245, -20, 400, 880);
@@ -43,32 +41,6 @@ const Gamestart = function(){
         [a,b]=gameArea.getPoints().topRight;
         [c,d]=gameArea.getPoints().bottomRight;
         [e,h]=gameArea.getPoints().bottomLeft;
-
-
-        function spawnMob(){
-            if(mobNum<=20){
-                let choice = Math.floor(Math.random() * 4);
-                if(choice === 0){
-                    mobs[mobID] =  Mob_Bat(context, 700+Math.random()*100, 260+Math.random()*100, gameArea);
-                    mobNum++;mobID++;
-                }
-                else if(choice === 1 ){
-                    mobs[mobID] =  Mob_Sprite(context, 700+Math.random()*100, 260+Math.random()*100, gameArea);
-                    mobNum++;mobID++;
-                }
-                else{
-                    mobs[mobID] = Mob_Slime(context, 700+Math.random()*100, 260+Math.random()*100, gameArea);
-                    //mobs[mobID] = Mob_Shinigami(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
-                    mobNum++;mobID++;
-                }
-                if(mobNum === 19){
-                    mobs[mobID] = Mob_Shinigami(context, 700+Math.random()*100, 260+Math.random()*100, gameArea);
-                    mobNum++;mobID++;
-                }
-            }
-            setTimeout(spawnMob,mobTime);
-        }
-        setTimeout(spawnMob,mobTime);
 
 
         //Create Effect
@@ -231,20 +203,6 @@ const Gamestart = function(){
             requestAnimationFrame(doFrame);
         };
 
-        /* Randomize the dir and move mob  */
-        function movement(){
-            for(let i = 0; i<mobNum;i++){
-                let mobDir = Math.floor(Math.random() * 8);
-                    if(mobDir>=5){
-                        mobs[i].move(1);
-                    }
-                    else{
-                        mobs[i].move(mobDir);
-                    }
-            }
-            setTimeout(movement,1000+Math.random() * 500);
-        }
-        setTimeout(movement,1000+Math.random() * 500);
 
         /* Handle the keydown of arrow keys and spacebar */
         $(document).on("keydown", function(event) {
@@ -370,7 +328,40 @@ const Gamestart = function(){
         //     items[itemID] = Mob_Shinigami(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
         //     itemNub++;itemID++;
         // }
-}
+    }
 
-    return {start, setPlayerAction, initPlayerPosition, setPlayerAttr, spawnItem}
+    const spawnMob = function(choice, x, y){
+        if(mobNum<=20){
+            if(choice === 0){
+                mobs[mobID] =  Mob_Bat(context, x, y, gameArea);
+                mobNum++;mobID++;
+            }
+            else if(choice === 1 ){
+                mobs[mobID] =  Mob_Sprite(context, x, y, gameArea);
+                mobNum++;mobID++;
+            }
+            else{
+                mobs[mobID] = Mob_Slime(context, x, y, gameArea);
+                //mobs[mobID] = Mob_Shinigami(context, 700+Math.random()*150, 260+Math.random()*150, gameArea);
+                mobNum++;mobID++;
+            }
+            if(mobNum === 19){
+                mobs[mobID] = Mob_Shinigami(context, x, y, gameArea);
+                mobNum++;mobID++;
+            }
+        }
+    }
+
+    const setMobDir = function(dir){
+        for(let i = 0; i<mobNum;i++){
+                if(dir[i]>=5){
+                    mobs[i].move(1);
+                }
+                else{
+                    mobs[i].move(dir[i]);
+                }
+        }
+    }
+
+    return {start, setPlayerAction, initPlayerPosition, setPlayerAttr, spawnItem, spawnMob, setMobDir}
 }();

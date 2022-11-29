@@ -235,6 +235,8 @@ io.on("connection", (socket) => {
         // Create item
         setTimeout(() => {
             createItem();
+            createMob();
+            setMobDir();
         }, 6000);
 
     }
@@ -244,7 +246,9 @@ io.on("connection", (socket) => {
         const {username, name} = socket.request.session.user;
         delete onlineUsers[username];
         io.emit("end");
-        createItmeTimeOut = null;
+        createItemTimeout = null;
+        createMobTimeout = null;
+        setMobDirTimeout = null;
     })   
 
     // Set player action frame (move, attack)
@@ -257,13 +261,18 @@ io.on("connection", (socket) => {
         io.emit("setPlayerAttr", msg);
     })
 
+    // Update player score
+    socket.on("anotherScore", (msg)=>{
+        io.emit("setAnotherScore", msg);
+    })
+
     
 })
 
 
 
 // Create itme on a random time interval
-let createItmeTimeOut = null;
+let createItemTimeout = null;
 const createItem = function (){
     const itemTime = Math.random()*9000;
     const choice = Math.floor(Math.random() * 6);
@@ -273,8 +282,40 @@ const createItem = function (){
     msg = JSON.stringify({choice, x, y}, null, "  ");
     io.emit("createItem", msg);
 
-    createItmeTimeOut = setTimeout(createItem,itemTime);
+    createItemTimeout = setTimeout(createItem,itemTime);
 }
+
+// Create mob on a random time interval
+let createMobTimeout = null;
+const createMob = function (){
+    const mobTime = Math.random()*7000;
+    const choice = Math.floor(Math.random() * 4);
+    const x = 700+Math.random()*100;
+    const y = 260+Math.random()*100;
+
+    msg = JSON.stringify({choice, x, y}, null, "  ");
+    io.emit("createMob", msg);
+
+    createMobTimeout = setTimeout(createMob,mobTime);
+}
+
+// Set mob direction on a random time interval
+let setMobDirTimeout = null;
+const setMobDir = function(){
+    const mobDirTime = 1000+Math.random() * 500;
+    let dir = [];
+    for (let i = 0; i < 20; i++){
+        dir.push(Math.floor(Math.random() * 8));
+    }
+
+    msg = JSON.stringify({dir}, null, "  ");
+    io.emit("setMobDir", msg);
+
+    setMobDirTimeout = setTimeout(setMobDir,mobDirTime);
+}
+
+
+
 
 
 

@@ -194,6 +194,8 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
     /* points */
     const increasePoints=function(){
         points=points+1;
+        GameHeader.setScore(points);
+        Socket.anotherScore(points);
     }
     const checkLife=function(){
         if(life<=0)
