@@ -2,10 +2,10 @@ const Character_Berserker =function(ctx,x,y,gameArea){
     const sequences={
         idleRight:{x:0, y:6, width:32.18661,height:25,count:5,timing:200,loop:true},
         moveToRight:{x:0, y:38, width:32.18661,height:25,count:8,timing:60,loop:true},
-        attackRight:{x:0,y:67,width:32.18661,height:27,count:7,timing:50,loop:false},
+        attackRight:{x:0,y:67,width:32.18661,height:27,count:7,timing:40,loop:false},
         idleLeft:{x:2, y:163, width:31.05,height:25,count:5,timing:200,loop:true},
         moveToLeft:{x:0, y:194, width:31.7,height:25,count:8,timing:60,loop:true},
-        attackLeft:{x:0,y:225,width:32.18661,height:27,count:7,timing:50,loop:false},
+        attackLeft:{x:0,y:225,width:32.18661,height:27,count:7,timing:40,loop:false},
         dieRight:{x:0,y:133,width:32.18661,height:27,count:7,timing:200,loop:false},
         dieLeft:{x:0,y:290,width:31.7,height:27,count:7,timing:200,loop:false},
     };

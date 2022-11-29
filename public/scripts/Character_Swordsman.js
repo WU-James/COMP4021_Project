@@ -17,7 +17,7 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         .useSheet("img/char_swordsman.png")
 
     let direction=0;
-    let name="Sowrdsman"
+    let name="Swordsman"
     let life=3;
     let horizontal_direction=3;
     let speed=140;

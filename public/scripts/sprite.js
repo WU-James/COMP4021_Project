@@ -131,7 +131,7 @@ const Sprite = function(ctx, x, y) {
         const top = y - size.height / 2-3;
         const left = x + size.width / 2;
         const bottom = y + size.height / 2+1;
-        const right = x + size.width / 2+5;
+        const right = x + (size.width / 2)+5;
 
         return BoundingBox(ctx, top, left, bottom, right);
     };

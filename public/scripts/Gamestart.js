@@ -289,7 +289,6 @@ const Gamestart = function(){
                     if(player.name==="Swordsman")
                     {
                         const box = player.getAttackingBoxSword();
-
                         if (box.isPointInBox(x, y)) {
                             Effect.setXY(x,y);
                             Effect.born();
