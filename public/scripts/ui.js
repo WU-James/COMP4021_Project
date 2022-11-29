@@ -204,6 +204,41 @@ const Endpage = (function() {
     const initialize = function() {
         $("#endpage-container").show();
 
+        // Click event for the restart button
+        $("#restart-button").on("click", () => {
+            // Send a restart request
+            $("#endpage-container").hide();
+
+            Authentication.signin(this.username, this.password, this.role,
+                () => {
+                    hide();
+                    GameHeader.setTitle("Waiting For Another User...");
+                    GameHeader.updateUsers(Authentication.getUser(), Authentication.getAnotherUser());
+                    GameHeader.show();
+                    Socket.connect();
+                },
+                (error) => { $("#signin-message").text(error); }
+            );
+
+            GameHeader.setTitle("Waiting For Another User...");
+            GameHeader.updateUsers(Authentication.getUser(), Authentication.getAnotherUser());
+            $("#user-panel2 .user-name").html("?");
+            GameHeader.show();
+
+        });
+
+        // Click event for the signout button
+        $("#signoutout-button").on("click", () => {
+            // Send a signout request
+            Authentication.signout(
+                () => {
+                    Socket.disconnect();
+                    //hide();
+                    $("#endpage-container").hide();
+                    Frontpage.show();
+                }
+            );
+        });
     };
 
     return {initialize};
