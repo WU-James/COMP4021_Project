@@ -233,6 +233,9 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         PlayNo=PlayNo+1;
     }
 
+
+
+
     return {
         stop: stop,
         getBoundingBox: sprite.getBoundingBox,

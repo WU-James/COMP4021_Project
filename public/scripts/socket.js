@@ -17,6 +17,21 @@ const Socket = (function() {
             socket.on("start", (msg) => {
                 GameHeader.start();
                 
+                // Initialize life
+                // if(Authentication.getUser().role == 1){
+                //     $("#user-panel .life").html("Life:3");
+                // }
+                // else{
+                //     $("#user-panel .life").html("Life:4");
+                // }
+
+                // if(Authentication.getAnotherUser().role == 1){
+                //     $("#user-panel2 .life").html("Life:3");
+                // }
+                // else{
+                //     $("#user-panel2 .life").html("Life:4");
+                // }
+
 
                 // Set another user's info in Authentication
                 msg = JSON.parse(msg);
@@ -27,22 +42,6 @@ const Socket = (function() {
                         Authentication.setAnotherUser(another_user);
                     }
                 }
-
-                //Initialize life
-                if(Authentication.getUser().role == 1){
-                    $("#user-panel .life").html("Life:3");
-                }
-                else{
-                    $("#user-panel .life").html("Life:4");
-                }
-
-                if(Authentication.getAnotherUser().role == 1){
-                    $("#user-panel2 .life").html("Life:3");
-                }
-                else{
-                    $("#user-panel2 .life").html("Life:4");
-                }
-
     
                 // Update header
                 GameHeader.updateUsers(user, Authentication.getAnotherUser());
@@ -105,35 +104,6 @@ const Socket = (function() {
                     GameHeader.setAnotherScore(msg.points);
                 }
             })
-
-            socket.on("setItemCollected", (msg)=>{
-                msg = JSON.parse(msg);
-                if(msg.user.username !== Authentication.getUser().username){
-                    Gamestart.setItemCollected(msg.i);
-                }
-            })
-
-            socket.on("setItemCollected", (msg)=>{
-                msg = JSON.parse(msg);
-                if(msg.user.username !== Authentication.getUser().username){
-                    Gamestart.setItemCollected(msg.i);
-                }
-            })
-
-            socket.on("setPlayerAttacked", (msg)=>{
-                msg = JSON.parse(msg);
-                if(msg.user.username !== Authentication.getUser().username){
-                    Gamestart.setPlayerAttacked(msg.i);
-                }
-            })
-
-            socket.on("setMobAttacked", (msg)=>{
-                msg = JSON.parse(msg);
-                if(msg.user.username !== Authentication.getUser().username){
-                    Gamestart.setMobAttacked(msg.i);
-                }
-            })
-
         });
 
     };
@@ -170,25 +140,7 @@ const Socket = (function() {
         socket.emit("anotherScore", msg);
     }
 
-    const itemCollected = function(i){
-        const user = Authentication.getUser();
-        const msg = JSON.stringify({user, i}, null, "  ");
-        socket.emit("itemCollected", msg);
-    }
-
-    const playerAttacked = function(i){
-        const user = Authentication.getUser();
-        const msg = JSON.stringify({user, i}, null, "  ");
-        socket.emit("playerAttacked", msg);
-    }
-
-    const mobAttacked = function(i){
-        const user = Authentication.getUser();
-        const msg = JSON.stringify({user, i}, null, "  ");
-        socket.emit("mobAttacked", msg);
-    }
-
-    return { getSocket, connect, disconnect, playerAction, playerAttr, anotherScore, itemCollected, playerAttacked, mobAttacked };
+    return { getSocket, connect, disconnect, playerAction, playerAttr, anotherScore };
 
 })();
 

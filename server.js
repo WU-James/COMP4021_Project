@@ -275,22 +275,7 @@ io.on("connection", (socket) => {
         io.emit("setAnotherScore", msg);
     })
 
-    //End
-    socket.on("end", (msg)=>{
-        io.emit("setEnd", msg);
-    })
 
-    socket.on("itemCollected", (msg)=>{
-        io.emit("setItemCollected", msg);
-    })
-
-    socket.on("playerAttacked", (msg)=>{
-        io.emit("setPlayerAttacked", msg);
-    })
-
-    socket.on("mobAttacked", (msg)=>{
-        io.emit("setMobAttacked", msg);
-    })
     
 })
 
