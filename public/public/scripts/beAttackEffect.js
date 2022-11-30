@@ -1,7 +1,8 @@
 const beAttackEffect=function(ctx, x, y){
     const sequences={
         damage:  { x: 0, y:0, width: 32, height: 32, count: 7, timing: 200, loop:true },
-        die:{ x: 0, y:0, width: 32, height: 32, count: 3, timing: 400, loop: true }
+        die:{ x: 0, y:0, width: 32, height: 32, count: 7, timing: 400, loop: true }
+
     };
 
     const sprite = Sprite(ctx, x, y);

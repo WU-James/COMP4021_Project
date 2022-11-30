@@ -67,23 +67,13 @@
             <div id = "instruction">
                 <p>1. New players can register for a new account; existing players can sign in with your account.</p>
                 <p>2. The game starts in 5s after both players are ready.</p>
-                <p>3. There are two characters: </p>
-                <p>Swordsman: faster, 3 ♥  ||  Berserker: slower, 4 ♥</p>
-                <p> </p>
-                <p> use <strong>" ← ↑ → "</strong> to control the movement. </p>
+                <p>3. There are two characters: Swordsman and Berserker, use <strong>" ← ↑ → "</strong> to control the movement. </p>
                 <p>4. Hold your weapons tightly and use <strong>"space"</strong> to attack.  </p>
-                <p>5. Keep an eye on useful items or threatening traps on the ground!</p>
-                <p> Heart: +1 ♥  ||  Shoes: +10 speed  ||  Arrow: +1♥ +10 speed</p>
-                <p> Fire: -1 ♥  ||  Fan: -1♥ -10 speed  ||  Ice: -1♥ -10 speed</p>
+                <p>5. You only have<strong> 3♥</strong>, keep an eye on useful items or threatening traps on the ground!</p>
                 <p></p>
+
             </div>
-            <div id = "instruction-title" class = "caption">
-                How To Win
-            </div>
-            <div id = "instruction">
-                <p><strong>Survive till the end and has the highest scores, or be the only one survives.</strong></p>
-                <p><strong></strong></p>
-            </div>
+
         </div>
         <div id="form-box" class="content shadow col" >
             <form id="signin-form" class="col">
@@ -130,11 +120,10 @@
                 Ranking
             </div>
             <div id = "ranking">
-                <p id = "ranking_1">1.</p>
-                <p id = "ranking_2">2.</p>
-                <p id = "ranking_3">3.</p>
-                <p id = "ranking_4">4.</p>
-                <p id = "ranking_5">5.</p>
+                <p>1.</p>
+                <p>2.</p>
+                <p>3.</p>
+                <p></p>
             </div>
         </div>
         <div class="spacer-2"></div>
@@ -144,8 +133,8 @@
                 You Win
             </div>
             <div id = "restart">
-                <p>Your number of victories: </p>
-                <p>Your winning percentage: </p>
+                <p>Your current score: </p>
+                <p>Your best score: </p>
                 <button id = "restart-button" type="restart">Restart</button>
                 <button id = "signoutout-button" type="sign out">Sign Out</button>
             </div>
@@ -153,17 +142,16 @@
     </div>
 
     <script src="/socket.io/socket.io.min.js"></script>
+    <script src="scripts/socket.js"></script>
     <script src="scripts/ui.js"></script>
     <script src="scripts/registration.js"></script>
     <script src="scripts/authentication.js"></script>
-    <script src="scripts/bounding_box.js"></script>
     <script src="scripts/Gamestart.js"></script>
-    <script src="scripts/socket.js"></script>
 
 
     <!-------------------------------------------------------->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-   
+    <script src="scripts/bounding_box.js"></script>
     <script src="scripts/sprite.js"></script>
     <script src="scripts/Character_Swordsman.js"></script>
     <script src="scripts/Character_Berserker.js"></script>
@@ -189,8 +177,6 @@
     $(document).ready(function() {
         // Initialize the UI
         UI.initialize();
-        Endpage.initialize();
-        //Endpage.hide();
 
         // Validate the signin
         Authentication.validate(

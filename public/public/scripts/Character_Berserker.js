@@ -1,68 +1,67 @@
-const Character_Swordsman=function(ctx,x,y,gameArea){
+const Character_Berserker =function(ctx,x,y,gameArea){
     const sequences={
-        idleRight:{x:0, y:18, width:48,height:25,count:6,timing:400,loop:true},
-        moveToRight:{x:0, y:65, width:48,height:25,count:6,timing:60,loop:true},
-        attackRight:{x:0,y:110,width:48,height:30,count:4,timing:60,loop:true},
-        idleLeft:{x:288, y:18, width:48,height:25,count:6,timing:400,loop:true},
-        moveToLeft:{x:288, y:65, width:48,height:25,count:6,timing:60,loop:true},
-        attackLeft:{x:384,y:110,width:48,height:30,count:4,timing:60,loop:true},
-        dieLeft:{x:433,y:200,width:48,height:40,count:4,timing:200,loop:false},
-        dieRight:{x:0,y:200,width:48,height:40,count:4,timing:200,loop:false},
-        damageLeft:{x:433,y:200,width:48,height:40,count:2,timing:600,loop:false},
-        damageRight:{x:0,y:200,width:48,height:40,count:2,timing:600,loop:false},
+        idleRight:{x:0, y:6, width:32.18661,height:25,count:5,timing:200,loop:true},
+        moveToRight:{x:0, y:38, width:32.18661,height:25,count:8,timing:60,loop:true},
+        attackRight:{x:0,y:67,width:32.18661,height:27,count:7,timing:35,loop:false},
+        idleLeft:{x:2, y:163, width:31.05,height:25,count:5,timing:200,loop:true},
+        moveToLeft:{x:0, y:194, width:31.7,height:25,count:8,timing:60,loop:true},
+        attackLeft:{x:0,y:225,width:32.18661,height:27,count:7,timing:35,loop:false},
+        dieRight:{x:0,y:133,width:32.18661,height:27,count:7,timing:200,loop:false},
+        dieLeft:{x:0,y:290,width:31.7,height:27,count:7,timing:200,loop:false},
+        damageRight:{x:0,y:133,width:32.18661,height:27,count:3,timing:200,loop:false},
+        damageLeft:{x:0,y:290,width:31.7,height:27,count:3,timing:200,loop:false},
     };
 
     const sprite=Sprite(ctx,x,y);
     sprite.setSequence(sequences.idleRight)
-        .setScale(2)
-        .setShadowScale({ x: 0, y: 0 })
-        .useSheet("img/char_swordsman.png")
+        .setScale(2.3)
+        .setShadowScale({ x: 0.5, y: 0.18 })
+        .useSheet("img/char_berserker.png")
 
     let direction=0;
-    let name="Swordsman"
-    let life=3;
+    let name="Berserker";
+    let life=4;
     let horizontal_direction=3;
-    let speed=140;
+    let speed=130;
     let power=0;
-    let WinNo=0;
+
     let points=0;
-    let PlayNo=0;
     // - `0` - not moving - `1` - moving to the left - `2` - moving up
     // - `3` - moving to the right - `4` - moving down
     const move = function(dir) {
         if (dir >= 1 && dir <= 4 && dir !== direction) {
-              if(dir===1) {
-                  horizontal_direction=dir;
-                  sprite.setSequence(sequences.moveToLeft);
-              }
-              else if(dir===2){
-                  if(horizontal_direction===1)
-                  {
-                      sprite.setSequence(sequences.moveToLeft);
-                  }
-                  else if(horizontal_direction===3){
-                      sprite.setSequence(sequences.moveToRight);
-                  }
-              }
-              else if(dir===3)
-              {
-                  horizontal_direction=dir;
-                  sprite.setSequence(sequences.moveToRight);
-              }
-              else if(dir===4)
-              {
-                  if(horizontal_direction===1)
-                  {
-                      sprite.setSequence(sequences.moveToLeft);
-                  }
-                  else if(horizontal_direction===3)
-                  {
-                      sprite.setSequence(sequences.moveToRight);
-                  }
-              }
+            if(dir===1) {
+                horizontal_direction=dir;
+                sprite.setSequence(sequences.moveToLeft);
             }
-            direction = dir;
-        };
+            else if(dir===2){
+                if(horizontal_direction===1)
+                {
+                    sprite.setSequence(sequences.moveToLeft);
+                }
+                else if(horizontal_direction===3){
+                    sprite.setSequence(sequences.moveToRight);
+                }
+            }
+            else if(dir===3)
+            {
+                horizontal_direction=dir;
+                sprite.setSequence(sequences.moveToRight);
+            }
+            else if(dir===4)
+            {
+                if(horizontal_direction===1)
+                {
+                    sprite.setSequence(sequences.moveToLeft);
+                }
+                else if(horizontal_direction===3)
+                {
+                    sprite.setSequence(sequences.moveToRight);
+                }
+            }
+        }
+        direction = dir;
+    };
 
     const stop = function(dir) {
         if (direction === dir) {
@@ -71,11 +70,11 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
                 case 2:
                 {
                     if(horizontal_direction===1){
-                    sprite.setSequence(sequences.idleLeft);
+                        sprite.setSequence(sequences.idleLeft);
                     }
-                else if(horizontal_direction===3){
-                    sprite.setSequence(sequences.moveToRight);
-                     }
+                    else if(horizontal_direction===3){
+                        sprite.setSequence(sequences.moveToRight);
+                    }
                     break;
                 }
                 case 3: sprite.setSequence(sequences.idleRight); break;
@@ -133,7 +132,6 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
             sprite.setSequence(sequences.damageRight);
         }
     };
-
     const update = function(time) {
         /* Update the player if the player is moving */
         if (direction !== 0) {
@@ -146,6 +144,7 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
                 case 3: x += speed / 60; break;
                 case 4: y += speed / 60; break;
             }
+
             /* Set the new position if it is within the game area */
             if (gameArea.isPointInBox(x, y))
                 sprite.setXY(x, y);
@@ -159,22 +158,19 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         life=life+1;
         Socket.playerAttr(life, speed, power);
 
-    }
+    };
     const decreaseLife=function(){
         if(life>0) {
             life = life - 1;
         }
-
         Socket.playerAttr(life, speed, power);
-
-    }
+    };
     /* speed */
     const increaseSpeed=function(){
-        speed=speed+20;
-
+        speed = speed + 20;
         Socket.playerAttr(life, speed, power);
 
-    }
+    };
     const decreaseSpeed=function(){
         if(speed>80) {
             speed = speed - 10;
@@ -185,34 +181,30 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         Socket.playerAttr(life, speed, power);
     };
     /* power */
-    const increasePower=function(){
-        speed=speed+10;
-        life=life+1;
+    const increasePower=function() {
+        life = life + 1;
+        speed=speed+10; 
         Socket.playerAttr(life, speed, power);
     };
     const decreasePower=function() {
-        life=life-1;
         speed=speed-10;
+        life=life-1;
         Socket.playerAttr(life, speed, power);
-
     };
+
     /* points */
     const increasePoints=function(){
         points=points+1;
+        console.log(points);
         GameHeader.setScore(points);
         Socket.anotherScore(points);
     }
     const checkLife=function(){
-        if(life<=0)
-        {
+        if(life<=0){
             return true;
         }
-        else{
-            return false;
-        }
-
+        return false;
     }
-
     const setAttr=function(l, s, p){
         life = l;
         speed = s;
@@ -222,28 +214,18 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         points=points+5;
     }
 
-    const getPoints=function(){
-        return points;
-    }
-    const increaseWinNo=function(){
-        WinNo=WinNo+1;
-        PlayNo=PlayNo+1;
-    }
-    const increasePlayNo=function(){
-        PlayNo=PlayNo+1;
-    }
-
     return {
         stop: stop,
-        getBoundingBox: sprite.getBoundingBox,
-        getAttackingBoxSword: sprite.getAttackingBoxSword,
-        getAttackingBox:sprite.getAttackingBox,
-        getABox:sprite.getABox,
-        draw: sprite.draw,
         update: update,
         move:move,
         attack:attack,
         attackdone:attackdone,
+        getBoundingBox: sprite.getBoundingBox,
+        getAttackingBox:sprite.getAttackingBox,
+        getAttackingBoxSword:sprite.getAttackingBoxSword,
+        getABox:sprite.getABox,
+        draw: sprite.draw,
+        name:name,
         increaseLife:increaseLife,
         decreaseLife:decreaseLife,
         increaseSpeed:increaseSpeed,
@@ -251,14 +233,10 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         increasePower:increasePower,
         decreasePower:decreasePower,
         increasePoints:increasePoints,
-        name:name,
-        Die:Die,
         Damage:Damage,
+        Die:Die,
         checkLife:checkLife,
         setAttr:setAttr,
         increaseHighPoints:increaseHighPoints,
-        getPoints:getPoints,
-        increaseWinNo:increaseWinNo,
-        increasePlayNo:increasePlayNo,
     };
 };
