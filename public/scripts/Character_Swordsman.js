@@ -221,7 +221,9 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         points=points+5;
     }
 
-
+    const getPoints = function(){
+        return points;
+    }
 
     return {
         stop: stop,
@@ -248,6 +250,6 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         checkLife:checkLife,
         setAttr:setAttr,
         increaseHighPoints:increaseHighPoints,
-
+        getPoints: getPoints
     };
 };

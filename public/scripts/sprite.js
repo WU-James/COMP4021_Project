@@ -102,9 +102,9 @@ const Sprite = function(ctx, x, y) {
         const size = getDisplaySize();
 
         /* Find the box coordinates */
-        const top = y - size.height / 2+10;
+        const top = y - size.height / 2+13;
         const left = x - size.width / 2+13;
-        const bottom = y + size.height / 2-10;
+        const bottom = y + size.height / 2-13;
         const right = x + size.width / 2-13;
 
         return BoundingBox(ctx, top, left, bottom, right);
@@ -115,10 +115,10 @@ const Sprite = function(ctx, x, y) {
         const size = getDisplaySize();
 
         /* Find the box coordinates */
-        const top = y - size.height / 2-2;
-        const left = x - size.width / 2+1;
-        const bottom = y + size.height / 2+1/5;
-        const right = x + size.width / 2-1;
+        const top = y - size.height / 2+13;
+        const left = x - size.width / 2+13;
+        const bottom = y + size.height / 2-13;
+        const right = x + size.width / 2-13;
 
         return BoundingBox(ctx, top, left, bottom, right);
     };
@@ -128,10 +128,10 @@ const Sprite = function(ctx, x, y) {
         const size = getDisplaySize();
 
         /* Find the box coordinates */
-        const top = y - size.height / 2-2;
-        const left = x - size.width / 2;
-        const bottom = y + size.height / 2+1;
-        const right = x + (size.width / 2)+3;
+        const top = y - size.height / 2-13;
+        const left = x - size.width / 2-13;
+        const bottom = y + size.height / 2+13;
+        const right = x + (size.width / 2)+13;
         return BoundingBox(ctx, top, left, bottom, right);
     };
 
@@ -140,10 +140,10 @@ const Sprite = function(ctx, x, y) {
         const size = getDisplaySize();
 
         /* Find the box coordinates */
-        const top = y - size.height / 2-3;
-        const left = x - size.width / 2-3;
-        const bottom = y + size.height / 2+3;
-        const right = x + (size.width / 2)+10;
+        const top = y - size.height / 2-12;
+        const left = x - size.width / 2-12;
+        const bottom = y + size.height / 2+12;
+        const right = x + (size.width / 2)+12;
         return BoundingBox(ctx, top, left, bottom, right);
     };
 

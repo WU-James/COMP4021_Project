@@ -1,3 +1,5 @@
+
+
 const Gamestart = function(){
     /* Get the canvas and 2D context */
     const cv = $("canvas").get(0);
@@ -7,8 +9,9 @@ const Gamestart = function(){
     const trapMaxAge=4000;
     let gameStartTime = 0;      // The timestamp when the game starts
 
+
     /* Create the game area */
-    let gameArea = null;
+    let gameArea = BoundingBox(context, 245, -20, 400, 880);
     
     /* create players in the game */
     let player = null;
@@ -37,8 +40,9 @@ const Gamestart = function(){
     let itemNub=0;
 
    
-
-    
+    //Create Effect
+    let Effect = null;
+    let beEffect = null;
 
     const start = function(){
 
@@ -57,8 +61,8 @@ const Gamestart = function(){
 
 
         //Create Effect
-        const Effect=AttackEffect(context,2000,30);
-        const beEffect=beAttackEffect(context,2000,30);
+        Effect=AttackEffect(context,2000,30);
+        beEffect=beAttackEffect(context,2000,30);
 
         sounds.gamePage.load();
         //sounds.gamePage.play();
@@ -77,17 +81,7 @@ const Gamestart = function(){
             const timeRemaining = Math.ceil((totalGameTime * 1000 - gameTimeSoFar) / 1000);
             $("#time-remaining").text(timeRemaining);
 
-            if(timeRemaining===0)
-            {
-                context.clearRect(0, 0, cv.width, cv.height);
-                return;
-            };
-            if(player.checkLife()===true)
-            {
-                context.clearRect(0, 0, cv.width, cv.height);
-                sounds.gamePage.pause();
-                return;
-            }
+            
 
             /* Handle the game over situation here */
             // if(timeRemaining<=0)
@@ -118,8 +112,10 @@ const Gamestart = function(){
                 let y = items[i].getY();
                 const box = player.getBoundingBox();
                 if (box.isPointInBox(x, y)) {
+                    Socket.itemCollected(i);
                     if(items[i].name==="Heart")
                     {
+                        sounds.collect.pause()
                         sounds.collect.load();
                         sounds.collect.play();
                         player.increaseLife();
@@ -134,11 +130,13 @@ const Gamestart = function(){
                         beEffect.born();
 
                         items[i].hide();
+                        sounds.damage.pause();
                         sounds.damage.load();
                         sounds.damage.play();
                     }
                     else if(items[i].name==="Speed")
                     {
+                        sounds.collect.pause();
                         sounds.collect.load();
                         sounds.collect.play();
                         player.increaseSpeed();
@@ -146,7 +144,7 @@ const Gamestart = function(){
                     }
                     else if(items[i].name==="Attack")
                     {
-
+                        sounds.collect.pause()
                         sounds.collect.load();
                         sounds.collect.play();
                         player.increasePower();
@@ -159,6 +157,7 @@ const Gamestart = function(){
                         beEffect.setXY(x,y);
                         beEffect.born();
                         items[i].hide();
+                        sounds.damage.pause()
                         sounds.damage.load();
                         sounds.damage.play();
                     }
@@ -170,21 +169,26 @@ const Gamestart = function(){
                         beEffect.setXY(x,y);
                         beEffect.born();
                         items[i].hide();
+                        sounds.damage.pause()
                         sounds.damage.load();
                         sounds.damage.play();
                     }
                 }
             }
+
             for (let i = 0; i < mobs.length; i++) {
                 let x = mobs[i].getX();
                 let y = mobs[i].getY();
                 const box = player.getABox();
                 if (box.isPointInBox(x, y)) {
+                        Socket.playerAttacked(i);
+
                         beEffect.setXY(x, y);
                         beEffect.born();
                         player.decreaseLife();
                         player.Damage();
                         mobs[i].hide();
+                        sounds.damage.pause()
                         sounds.damage.load();
                         sounds.damage.play();
                 }
@@ -299,6 +303,7 @@ const Gamestart = function(){
                     {
                         const box = player.getAttackingBoxSword();
                         if (box.isPointInBox(x, y)) {
+                            Socket.mobAttacked(a);
                             Effect.setXY(x,y);
                             Effect.born();
 
@@ -321,6 +326,7 @@ const Gamestart = function(){
                     {
                         const box = player.getAttackingBox();
                         if (box.isPointInBox(x, y)) {
+                            Socket.mobAttacked(a);
                             Effect.setXY(x,y);
                             Effect.born();
 
@@ -462,6 +468,68 @@ const Gamestart = function(){
         }
     }
 
-    return {start, setPlayerAction, initPlayerPosition, setPlayerAttr, spawnItem, spawnMob, setMobDir}
+    const setItemCollected = function(i){
+        let x = items[i].getX();
+        let y = items[i].getY();
+        if(items[i].name==="Heart")
+        {
+            items[i].hide();
+        }
+        else if(items[i].name==="Fire")
+        {
+            player2.Damage();
+            beEffect.setXY(x,y);
+            beEffect.born();
+
+            items[i].hide();
+
+        }
+        else if(items[i].name==="Speed")
+        {
+
+            items[i].hide();
+        }
+        else if(items[i].name==="Attack")
+        {
+
+
+            items[i].hide();
+        }
+        else if(items[i].name==="Fan")
+        {
+            player2.Damage();
+            beEffect.setXY(x,y);
+            beEffect.born();
+            items[i].hide();
+
+        }
+        else if(items[i].name==="ICE")
+        {
+            player2.Damage();
+            beEffect.setXY(x,y);
+            beEffect.born();
+            items[i].hide();
+        }
+    }
+
+    const setPlayerAttacked = function(i){
+        let x = mobs[i].getX();
+        let y = mobs[i].getY();
+        beEffect.setXY(x, y);
+        beEffect.born();
+        player2.Damage();
+        mobs[i].hide();
+    }
+
+    const setMobAttacked = function(i){
+        let x = mobs[i].getX();
+        let y = mobs[i].getY();
+
+        Effect.setXY(x,y);
+        Effect.born();
+        mobs[i].hide(); 
+    }
+
+    return {start, setPlayerAction, initPlayerPosition, setPlayerAttr, spawnItem, spawnMob, setMobDir, setItemCollected, setPlayerAttacked, setMobAttacked}
 
 }();
