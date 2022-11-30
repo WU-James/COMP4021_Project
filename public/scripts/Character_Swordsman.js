@@ -24,8 +24,9 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
     let horizontal_direction=3;
     let speed=140;
     let power=0;
-
+    let WinNo=0;
     let points=0;
+    let PlayNo=0;
     // - `0` - not moving - `1` - moving to the left - `2` - moving up
     // - `3` - moving to the right - `4` - moving down
     const move = function(dir) {
@@ -221,8 +222,15 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         points=points+5;
     }
 
-    const getPoints = function(){
+    const getPoints=function(){
         return points;
+    }
+    const increaseWinNo=function(){
+        WinNo=WinNo+1;
+        PlayNo=PlayNo+1;
+    }
+    const increasePlayNo=function(){
+        PlayNo=PlayNo+1;
     }
 
     return {
@@ -231,7 +239,6 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         getAttackingBoxSword: sprite.getAttackingBoxSword,
         getAttackingBox:sprite.getAttackingBox,
         getABox:sprite.getABox,
-
         draw: sprite.draw,
         update: update,
         move:move,
@@ -250,6 +257,8 @@ const Character_Swordsman=function(ctx,x,y,gameArea){
         checkLife:checkLife,
         setAttr:setAttr,
         increaseHighPoints:increaseHighPoints,
-        getPoints: getPoints
+        getPoints:getPoints,
+        increaseWinNo:increaseWinNo,
+        increasePlayNo:increasePlayNo,
     };
 };

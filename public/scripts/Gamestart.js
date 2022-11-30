@@ -70,8 +70,7 @@ const Gamestart = function(){
         sounds.gamePage.volume=0.05;
         sounds.damage.volume=0.2;
 
-   
-
+  
         /* The main processing of the game */
         function doFrame(now) {
             if (gameStartTime === 0) gameStartTime = now;
@@ -81,7 +80,68 @@ const Gamestart = function(){
             const timeRemaining = Math.ceil((totalGameTime * 1000 - gameTimeSoFar) / 1000);
             $("#time-remaining").text(timeRemaining);
 
-            
+
+            if(timeRemaining===0)
+            {
+                context.clearRect(0, 0, cv.width, cv.height);
+                sounds.gamePage.pause();
+                if(player.getPoints()>player2.getPoints())
+                {
+                    player.increaseWinNo();
+                    player2.increasePlayNo();
+                }
+                else if(player.getPoints()<player2.getPoints())
+                {
+                    player.increasePlayNo();
+                    player2.increaseWinNo();
+                }
+                else{
+                    player.increaseWinNo();
+                    player2.increaseWinNo();
+                }
+                mobs=[];
+                items=[];
+                mobID=0;
+                itemID=0;
+                mobNum=0;
+                itemNub=0;
+                player=null;
+                player2=null;
+                return;
+            }
+            else if(player.checkLife()===true)
+            {
+                context.clearRect(0, 0, cv.width, cv.height);
+                sounds.gamePage.pause();
+                player2.increaseWinNo();
+                player.increasePlayNo();
+                mobs=[];
+                items=[];
+                mobID=0;
+                itemID=0;
+                mobNum=0;
+                itemNub=0;
+                player=null;
+                player2=null;
+                return;
+            }
+            else if(player2.checkLife()===true)
+            {
+                context.clearRect(0,0,cv.width,cv.height);
+                sounds.gamePage.pause();
+                player.increaseWinNo();
+                player2.increasePlayNo();
+                mobs=[];
+                items=[];
+                mobID=0;
+                itemID=0;
+                mobNum=0;
+                itemNub=0;
+                player=null;
+                player2=null;
+                return;
+            }
+
 
             /* Handle the game over situation here */
             // if(timeRemaining<=0)
@@ -112,6 +172,7 @@ const Gamestart = function(){
                 let y = items[i].getY();
                 const box = player.getBoundingBox();
                 if (box.isPointInBox(x, y)) {
+
                     Socket.itemCollected(i);
                     if(items[i].name==="Heart")
                     {
@@ -144,7 +205,7 @@ const Gamestart = function(){
                     }
                     else if(items[i].name==="Attack")
                     {
-                        sounds.collect.pause()
+                        sounds.collect.pause();
                         sounds.collect.load();
                         sounds.collect.play();
                         player.increasePower();
@@ -157,7 +218,7 @@ const Gamestart = function(){
                         beEffect.setXY(x,y);
                         beEffect.born();
                         items[i].hide();
-                        sounds.damage.pause()
+                        sounds.damage.pause();
                         sounds.damage.load();
                         sounds.damage.play();
                     }
@@ -169,7 +230,7 @@ const Gamestart = function(){
                         beEffect.setXY(x,y);
                         beEffect.born();
                         items[i].hide();
-                        sounds.damage.pause()
+                        sounds.damage.pause();
                         sounds.damage.load();
                         sounds.damage.play();
                     }
@@ -188,7 +249,7 @@ const Gamestart = function(){
                         player.decreaseLife();
                         player.Damage();
                         mobs[i].hide();
-                        sounds.damage.pause()
+                        sounds.damage.pause();
                         sounds.damage.load();
                         sounds.damage.play();
                 }
@@ -315,7 +376,8 @@ const Gamestart = function(){
                             {
                                 player.increasePoints();
                             }
-                            mobs[a].hide();                       
+                            mobs[a].hide();
+                            sounds.explosion.pause();
                             sounds.explosion.load();
                             sounds.explosion.play();
                             sounds.explosion.loop=false;
@@ -339,6 +401,7 @@ const Gamestart = function(){
                                 player.increasePoints();
                             }
                             mobs[a].hide();
+                            sounds.explosion.pause();
                             sounds.explosion.load();
                             sounds.explosion.play();
                             sounds.explosion.loop=false;
@@ -383,6 +446,7 @@ const Gamestart = function(){
                 case 39:player2.stop(3);break;
                 case 40:player2.stop(4);break;
                 case 32:player2.attackdone();break;
+                case 79:player2.decreaseLife();break;
             }
         }
     }
@@ -457,15 +521,36 @@ const Gamestart = function(){
         }
     }
 
-    const setMobDir = function(dir){
-        for(let i = 0; i<mobNum;i++){
-                if(dir[i]>=5){
-                    mobs[i].move(1);
-                }
-                else{
-                    mobs[i].move(dir[i]);
-                }
+    const setMobDir = function(dir) {
+        for (let i = 0; i < mobNum; i++) {
+            if (dir[i] >= 5) {
+                mobs[i].move(1);
+            } else {
+                mobs[i].move(dir[i]);
+            }
         }
+    }
+    const checklogout=function(status){
+        context.clearRect(0, 0, cv.width, cv.height);
+        sounds.gamePage.pause();
+        if(status === "win"){
+            player.increaseWinNo();
+            player2.increasePlayNo();
+        }
+        else{
+            player2.increaseWinNo();
+            player.increasePlayNo();
+        }
+
+        mobs=[];
+        items=[];
+        mobID=0;
+        itemID=0;
+        mobNum=0;
+        itemNub=0;
+        player=null;
+        player2=null;
+        return;
     }
 
     const setItemCollected = function(i){
@@ -531,5 +616,6 @@ const Gamestart = function(){
     }
 
     return {start, setPlayerAction, initPlayerPosition, setPlayerAttr, spawnItem, spawnMob, setMobDir, setItemCollected, setPlayerAttacked, setMobAttacked}
+
 
 }();
