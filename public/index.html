@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Chatroom</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div id="gamepage-container">
+        <div id="header" class="row">
+            <div id="user-panel" class="row">
+                <div class="field-content row shadow">
+                    <span class="user-name">-</span>
+                    <span class="life"> Life:0 </span>
+                    <span class="score"> Score:0 </span>
+                </div>
+            </div>
+
+            <div class="spacer-grow"></div>
+
+            <div id="timer">Waiting for Another User...
+            </div>
+
+            <div class="spacer-grow"></div>
+
+            <div id="user-panel2" class="row">
+                <div class="field-content row shadow">
+                    <span class="score"> Score:0 </span>
+                    <span class="life"> Life:0 </span>
+                    <span class="user-name">?</span>
+                </div>
+            </div>
+
+            <button id="signout-button" class="icon"><span class="material-icons">logout</span></button>
+        </div>
+
+        <div id="game-container">
+            <canvas width="854px" height="480px"></canvas>
+        
+            <svg xmlns="http://www.w3.org/2000/svg" id="counter">
+                <text x="10" y="35">
+                    TIME:<tspan id="time-remaining">20</tspan>
+                </text>
+            </svg>
+        
+        </div>
+
+    </div>
+
+    <div id="frontpage-container" class="overlay row">
+        <div id="instruction-box" class = "col shadow">
+            <div class="spacer-2"></div>
+            <div id = "description-title" class = "caption">
+                WELCOME!! :)
+            </div>
+            <div id = "description">
+                <p>This is a 1V1 2D pixel game.
+                    You will be teleported to a forest surrounded by dangerous creatures.
+                    Use your weapon to fight as many monsters as possible.
+                    Survive until the last second, good luck!
+                </p>
+            </div>
+            <div id = "instruction-title" class = "caption">
+                How To Play
+            </div>
+            <div id = "instruction">
+                <p>1. New players can register for a new account; existing players can sign in with your account.</p>
+                <p>2. The game starts in 5s after both players are ready.</p>
+                <p>3. There are two characters: </p>
+                <p>Swordsman: faster, 3 ♥  ||  Berserker: slower, 4 ♥</p>
+                <p> </p>
+                <p> use <strong>" ← ↑ → "</strong> to control the movement. </p>
+                <p>4. Hold your weapons tightly and use <strong>"space"</strong> to attack.  </p>
+                <p>5. Keep an eye on useful items or threatening traps on the ground!</p>
+                <p> Heart: +1 ♥  ||  Shoes: +10 speed  ||  Arrow: +1♥ +10 speed</p>
+                <p> Fire: -1 ♥  ||  Fan: -1♥ -10 speed  ||  Ice: -1♥ -10 speed</p>
+                <p></p>
+            </div>
+            <div id = "instruction-title" class = "caption">
+                How To Win
+            </div>
+            <div id = "instruction">
+                <p><strong>Survive till the end and has the highest scores, or be the only one survives.</strong></p>
+                <p><strong></strong></p>
+            </div>
+        </div>
+        <div id="form-box" class="content shadow col" >
+            <form id="signin-form" class="col">
+                <div class="caption">SIGN IN</div>
+                <div class="spacer-0"></div>
+                <input id="signin-username" placeholder="Enter your username"></input>
+                <input id="signin-password" type="password" placeholder="Enter your password"></input>
+
+                <div class="caption"> Select Your Palyer</div>
+                <div id="role-radio" class = "row">
+                    <input id="role1-radio" type="radio" name="role" value="role1"/>
+                    <label id="role1-img" for="role1-radio"><img src = "img/role1.png" style="width:70px; height:70px;"></label>
+                    <input id="role2-radio" type="radio" name="role" value="role2" />
+                    <label id="role2-img" for="role2-radio"><img src = "img/role2.png" style="width:70px; height:70px;"></label>
+                </div>
+                
+                <div class="spacer-0"></div>
+                <button type="submit">Sign In</button>
+                <div id="signin-message" class="warning center"></div>
+                <div class="spacer-grow"></div>
+            </form>
+
+            <div class="spacer-0"></div>
+
+            <form id="register-form" class="col">
+                <div class="caption">REGISTER</div>
+                <div class="spacer-0"></div>
+                <input id="register-username" maxlength="10" placeholder="Enter your username"></input>
+                <input id="register-name" maxlength="16" placeholder="Enter your name"></input>
+                <input id="register-password" type="password" placeholder="Enter your password"></input>
+                <input id="register-confirm" type="password" placeholder="Enter your password again"></input>
+                <div class="spacer-0"></div>
+                <button type="submit">Register</button>
+                <div id="register-message" class="warning center"></div>
+            </form>
+        </div>
+    </div>
+
+    <div id="endpage-container" class="overlay row">
+
+        <div id="ranking-box" class = "col shadow">
+            <div class="spacer-1"></div>
+            <div id = "ranking-title" class = "caption">
+                Ranking
+            </div>
+            <div id = "ranking">
+                <p id = "ranking_1">1.</p>
+                <p id = "ranking_2">2.</p>
+                <p id = "ranking_3">3.</p>
+                <p id = "ranking_4">4.</p>
+                <p id = "ranking_5">5.</p>
+            </div>
+        </div>
+        <div class="spacer-2"></div>
+        <div id="restart-box" class = "col shadow">
+            <div class="spacer-1"></div>
+            <div id = "restart-title" class = "caption">
+                You Win
+            </div>
+            <div id = "restart">
+                <p>Your number of victories: </p>
+                <p>Your winning percentage: </p>
+                <button id = "restart-button" type="restart">Restart</button>
+                <button id = "signoutout-button" type="sign out">Sign Out</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.min.js"></script>
+    <script src="scripts/socket.js"></script>
+    <script src="scripts/ui.js"></script>
+    <script src="scripts/registration.js"></script>
+    <script src="scripts/authentication.js"></script>
+    <script src="scripts/Gamestart.js"></script>
+
+
+    <!-------------------------------------------------------->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="scripts/bounding_box.js"></script>
+    <script src="scripts/sprite.js"></script>
+    <script src="scripts/Character_Swordsman.js"></script>
+    <script src="scripts/Character_Berserker.js"></script>
+    <script src="scripts/Mob_Slime.js"></script>
+    <script src="scripts/Mob_Sprite.js"></script>
+    <script src="scripts/Mob_Bat.js"></script>
+    <script src="scripts/Mob_Shinigami.js"></script>
+    <script src="scripts/Attack.js"></script>
+    <script src="scripts/Item_Heart.js"></script>
+    <script src="scripts/Item_Chest.js"></script>
+    <script src="scripts/Item_Fire.js"></script>
+    <script src="scripts/Item_speed.js"></script>
+
+    <script src="scripts/Item_Fan.js"></script>
+    <script src="scripts/Item_attack.js"></script>
+    <script src="scripts/Item_ice.js"></script>
+    <script src="scripts/AttackEffect.js"></script>
+
+    <script src="scripts/beAttackEffect.js"></script>
+
+
+    <script>
+    $(document).ready(function() {
+        // Initialize the UI
+        UI.initialize();
+        Endpage.initialize();
+        //Endpage.hide();
+
+        // Validate the signin
+        Authentication.validate(
+            () => {
+                Frontpage.hide();
+                GameHeader.setTitle("Waiting For Another User...");
+                GameHeader.updateUsers(Authentication.getUser(), Authentication.getAnotherUser());
+                GameHeader.show();
+                Socket.connect();
+            },
+            () => { Frontpage.show(); }
+        );
+    });
+    </script>
+</body>
+</html>
