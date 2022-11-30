@@ -81,8 +81,8 @@
                 How To Win
             </div>
             <div id = "instruction">
-                <p><strong>1. Survive till the end and has the highest scores, or</strong></p>
-                <p><strong>2. Be the only player that survives.</strong></p>
+                <p><strong>Survive till the end and has the highest scores, or be the only one survives.</strong></p>
+                <p><strong></strong></p>
             </div>
         </div>
         <div id="form-box" class="content shadow col" >
@@ -130,10 +130,11 @@
                 Ranking
             </div>
             <div id = "ranking">
-                <p>1.</p>
-                <p>2.</p>
-                <p>3.</p>
-                <p></p>
+                <p id = "ranking_1">1.</p>
+                <p id = "ranking_2">2.</p>
+                <p id = "ranking_3">3.</p>
+                <p id = "ranking_4">4.</p>
+                <p id = "ranking_5">5.</p>
             </div>
         </div>
         <div class="spacer-2"></div>
@@ -143,8 +144,8 @@
                 You Win
             </div>
             <div id = "restart">
-                <p>Your current score: </p>
-                <p>Your best score: </p>
+                <p>Your number of victories: </p>
+                <p>Your winning percentage: </p>
                 <button id = "restart-button" type="restart">Restart</button>
                 <button id = "signoutout-button" type="sign out">Sign Out</button>
             </div>
@@ -187,6 +188,8 @@
     $(document).ready(function() {
         // Initialize the UI
         UI.initialize();
+        Endpage.initialize();
+        //Endpage.hide();
 
         // Validate the signin
         Authentication.validate(

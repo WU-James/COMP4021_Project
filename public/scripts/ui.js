@@ -221,8 +221,21 @@ const UI = (function() {
 
 const Endpage = (function() {
     const initialize = function() {
-        $("#endpage-container").show();
+        $("#endpage-container").hide();
 
+        fetch("/ranking")
+        .then(res => res.json())
+        .then(json => {
+            let array=[];
+            for(let i in json) {
+                array.push([json[i][0],json[i][1],json[i][3]]);
+            };
+            $("#ranking_1").html("<strong>1. Username: "+array[0][0]+"&nbsp;&nbsp;&nbsp; No. of Victories: "+array[0][1]+"&nbsp;&nbsp;&nbsp; Wining Percentage: "+array[0][2]+"%</strong>");
+            $("#ranking_2").html("<strong>2. Username: "+array[1][0]+"&nbsp;&nbsp;&nbsp; No. of Victories: "+array[1][1]+"&nbsp;&nbsp;&nbsp; Wining Percentage: "+array[1][2]+"%</strong>");
+            $("#ranking_3").html("<strong>3. Username: "+array[2][0]+"&nbsp;&nbsp;&nbsp; No. of Victories: "+array[2][1]+"&nbsp;&nbsp;&nbsp; Wining Percentage: "+array[2][2]+"%</strong>");
+            $("#ranking_4").html("<strong>4. Username: "+array[3][0]+"&nbsp;&nbsp;&nbsp; No. of Victories: "+array[3][1]+"&nbsp;&nbsp;&nbsp; Wining Percentage: "+array[3][2]+"%</strong>");
+            $("#ranking_5").html("<strong>5. Username: "+array[4][0]+"&nbsp;&nbsp;&nbsp; No. of Victories: "+array[4][1]+"&nbsp;&nbsp;&nbsp; Wining Percentage: "+array[4][2]+"%</strong>");
+        })
 
         // Click event for the restart button
         $("#restart-button").on("click", () => {
@@ -250,12 +263,14 @@ const Endpage = (function() {
         // Click event for the signout button
         $("#signoutout-button").on("click", () => {
             // Send a signout request
+            Gamestart.checklogout("lose");
             Authentication.signout(
                 () => {
                     Socket.disconnect();
                     //hide();
                     $("#endpage-container").hide();
                     Frontpage.show();
+
                 }
             );
         });

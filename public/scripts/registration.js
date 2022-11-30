@@ -35,10 +35,7 @@ const Registration = (function() {
         .catch((err) => {
             console.log("Error: " + err);
         });
-    
- 
-        // Delete when appropriate
-        //if (onError) onError("This function is not yet implemented.");
+
     };
 
     return { register };

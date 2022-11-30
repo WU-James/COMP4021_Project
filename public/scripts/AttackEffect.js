@@ -1,6 +1,6 @@
 const AttackEffect=function(ctx, x, y){
     const sequences={
-        damage:  { x: 0, y:0, width: 32, height: 32, count: 6, timing: 100, loop:true },
+        damage:  { x: 0, y:0, width: 32, height: 32, count: 7, timing: 100, loop:true },
         die:{ x: 0, y:0, width: 32, height: 32, count: 7, timing: 100, loop: true }
     };
 

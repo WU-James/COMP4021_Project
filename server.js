@@ -1,5 +1,4 @@
 const express = require("express");
-
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 const session = require("express-session");
@@ -30,10 +29,6 @@ function containWordCharsOnly(text) {
 
 // online user list
 let onlineUsers = {};
-
-
-
-
 
 // Handle the /register endpoint
 app.post("/register", (req, res) => {
@@ -69,8 +64,7 @@ app.post("/register", (req, res) => {
     //
     hash = bcrypt.hashSync(password, 10);
 
-    db[username] = {name, "password":hash};
-
+    db[username] = {name, "password":hash,"high":"0","winNo":"0","playNo":"0"};
 
     //
     // H. Saving the users.json file
@@ -82,8 +76,6 @@ app.post("/register", (req, res) => {
     //
     res.json({ status: "success" });
 
-    // Delete when appropriate
-    //res.json({ status: "error", error: "This endpoint is not yet implemented." });
 });
 
 // Handle the /signin endpoint
@@ -110,18 +102,11 @@ app.post("/signin", (req, res) => {
         return;
     }
 
-
-    //
-    // G. Sending a success response with the user account
-    //
-
-
     // Firstly, add user to online user list & session
     const name = db[username].name;
 
     onlineUsers[username] = {name, role};
     req.session.user = {username, name, role};
-
 
     // Check whether there is another user. If yes, return another user's info
     let another_user = null;
@@ -195,8 +180,27 @@ app.get("/signout", (req, res) => {
  
 });
 
+// Handle the /ranking endpoint
+app.get("/ranking", (req, res) => {
+    let db = JSON.parse(fs.readFileSync("data/users.json"));
+    let array = [];
+    for(let key in db) {
+        let winPer = (db[key].winNo/db[key].playNo*100).toFixed(2);
+        if(isNaN(winPer)){
+            array.push([key,db[key].winNo,db[key].playNo,0]);
+        }
+        else{
+            array.push([key,db[key].winNo,db[key].playNo,winPer]);
+        }
+    };
+    array = array.sort((a, b) => {
+        if (a[3] > b[3]) {
+            return -1;
+        }
+    });
+    res.json({1:array[0],2:array[1],3:array[2],4:array[3],5:array[4]});
+});
 
-//
 
 // ***** Socket Part *****
 
@@ -277,7 +281,7 @@ io.on("connection", (socket) => {
 
 
 
-// Create itme on a random time interval
+// Create item on a random time interval
 let createItemTimeout = null;
 const createItem = function (){
     const itemTime = Math.random()*9000;
