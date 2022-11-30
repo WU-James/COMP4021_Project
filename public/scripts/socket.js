@@ -63,7 +63,6 @@ const Socket = (function() {
                 GameHeader.setTitle("You Win!")
                 GameHeader.updateUsers(Authentication.getUser(),null);
                 Endpage.initialize();
-                Gamestart.checklogout("win");
             })
 
             socket.on("setPlayerAction", (msg)=>{
